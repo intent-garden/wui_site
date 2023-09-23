@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Interfaces - WUI</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">WUI</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Guide <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../common/">Common</a>
+</li>
+                                    
+<li >
+    <a href="../event/">Event</a>
+</li>
+                                    
+<li >
+    <a href="../graphic/">Graphic</a>
+</li>
+                                    
+<li class="active">
+    <a href="./">Interfaces</a>
+</li>
+                                    
+<li >
+    <a href="../theme/">Theme</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../about/licence/">Licence</a>
+</li>
+                                    
+<li >
+    <a href="../../about/contacts/">Contacts</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../graphic/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../theme/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#basic-interfaces">Basic interfaces</a></li>
+        <li class="main "><a href="#window">Window</a></li>
+            <li><a href="#init">init</a></li>
+            <li><a href="#destroy">destroy</a></li>
+            <li><a href="#add_control">add_control</a></li>
+            <li><a href="#remove_control">remove_control</a></li>
+            <li><a href="#redraw">redraw</a></li>
+            <li><a href="#subscribe">subscribe</a></li>
+            <li><a href="#unsubscribe">unsubscribe</a></li>
+            <li><a href="#system_context">system_context</a></li>
+        <li class="main "><a href="#control">Control</a></li>
+            <li><a href="#draw">draw</a></li>
+            <li><a href="#set_position">set_position</a></li>
+            <li><a href="#position">position</a></li>
+            <li><a href="#set_parent">set_parent</a></li>
+            <li><a href="#parent">parent</a></li>
+            <li><a href="#clear_parent">clear_parent</a></li>
+            <li><a href="#topmost">topmost</a></li>
+            <li><a href="#update_theme">update_theme</a></li>
+            <li><a href="#show">show</a></li>
+            <li><a href="#hide">hide</a></li>
+            <li><a href="#show_1">show</a></li>
+            <li><a href="#enable">enable</a></li>
+            <li><a href="#disable">disable</a></li>
+            <li><a href="#focused">focused</a></li>
+            <li><a href="#focused_1">focused</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="basic-interfaces">Basic interfaces</h1>
+<p>The framework is based on several basic interfaces, such as i_window, i_control.
+These interfaces contain methods that must be implemented by the window (in the case of i_window) and all controls (in the case of i_control). But each control (as well as the window implementation) also has additional specific methods.</p>
+<h1 id="window">Window</h1>
+<p>This interface is implemented by the window</p>
+<pre><code>class i_window
+{
+public:
+    virtual bool init(const std::string &amp;caption, const rect &amp;position, window_style style, std::function&lt;void(void)&gt; close_callback) = 0;
+    virtual void destroy() = 0;
+
+    virtual void add_control(std::shared_ptr&lt;i_control&gt; control, const rect &amp;position) = 0;
+    virtual void remove_control(std::shared_ptr&lt;i_control&gt; control) = 0;
+
+    virtual void bring_to_front(std::shared_ptr&lt;i_control&gt; control) = 0;
+    virtual void move_to_back(std::shared_ptr&lt;i_control&gt; control) = 0;
+
+    virtual void redraw(const rect &amp;position, bool clear = false) = 0;
+
+    virtual std::string subscribe(std::function&lt;void(const event&amp;)&gt; receive_callback, event_type event_types, std::shared_ptr&lt;i_control&gt; control = nullptr) = 0;
+    virtual void unsubscribe(const std::string &amp;subscriber_id) = 0;
+
+    virtual system_context &amp;context() = 0;
+
+protected:
+    ~i_window() {}
+};
+</code></pre>
+<h2 id="init">init</h2>
+<p>Initial window creation. This method should be called to create a separate (base) window, and can also be used to set child window parameters.</p>
+<ul>
+<li>caption - window title</li>
+<li>position - window dimensions and position. If left is set to -1 the window is centered horizontally, if top is set to -1 the window is centered vertically.</li>
+<li>style - combination of bit masks defining the appearance of the window</li>
+<li>close_callback - function called when the user closes the window, when <code>`destroy()</code> is called or when a child window is detached from the base window (by calling <code>remove_control()</code>).</li>
+</ul>
+<h2 id="destroy">destroy</h2>
+<p>Called when the window is to be destroyed</p>
+<h2 id="add_control">add_control</h2>
+<p>Adds a child control (including a child window) to the window.</p>
+<ul>
+<li>control - pointer to the control to be added</li>
+<li>position - position of the control on the window</li>
+</ul>
+<h2 id="remove_control">remove_control</h2>
+<p>Removes a child control from the window. If the child control is a window, it becomes independent (base).</p>
+<ul>
+<li>control - pointer to the control to be removed</li>
+</ul>
+<h2 id="redraw">redraw</h2>
+<p>Starts redrawing of a part of the window with the existing controls in this area.</p>
+<ul>
+<li>position - boundaries of the redrawn area</li>
+<li>clear should be set for example when deleting or moving a control.</li>
+</ul>
+<h2 id="subscribe">subscribe</h2>
+<p>Used to receive events from the window. The method returns a unique subscriber identifier which should be passed to <code>unsubscribe()</code> for unsubscribing.</p>
+<ul>
+<li>receive_callback - function that receives events</li>
+<li>event_types - bit mask indicating which events should be received</li>
+<li>control - if this field is set, only mouse events occurring over this control and keyboard events will be received if it has input focus.
+Otherwise, all events from the window will be received.</li>
+</ul>
+<h2 id="unsubscribe">unsubscribe</h2>
+<p>Used to unsubscribe from window events</p>
+<ul>
+<li>subscriber_id - unique identifier of the subscriber given by the <code>`subscribe</code> method.</li>
+</ul>
+<h2 id="system_context">system_context</h2>
+<p>Returns a reference to a structure containing platform-dependent entities. For example HWND window descriptor in Windows or xcb_connection in Linux.</p>
+<h1 id="control">Control</h1>
+<p>This interface must be implemented by all controls, as well as window, because it can also be a control (child window).</p>
+<pre><code>class i_control
+{
+public:
+    virtual void draw(graphic &amp;gr, const rect &amp;paint_rect) = 0;
+
+    virtual void set_position(const rect &amp;position, bool redraw = true) = 0;
+    virtual rect position() const = 0;
+
+    virtual void set_parent(std::shared_ptr&lt;window&gt; window_) = 0;
+    virtual std::weak_ptr&lt;window&gt; parent() const = 0;
+    virtual void clear_parent() = 0;
+
+    virtual void set_topmost(bool yes) = 0;
+    virtual bool topmost() const = 0;
+
+    virtual void update_theme_control_name(const std::string &amp;theme_control_name) = 0;
+    virtual void update_theme(std::shared_ptr&lt;i_theme&gt; theme_ = nullptr) = 0;
+
+    virtual void show() = 0;
+    virtual void hide() = 0;
+    virtual bool showed() const = 0;
+
+    virtual void enable() = 0;
+    virtual void disable() = 0;
+    virtual bool enabled() const = 0;
+
+    virtual bool focused() const = 0;  /// Returns true if the control is focused
+    virtual bool focusing() const = 0; /// Returns true if the control receives focus
+
+    friend class window;
+
+protected:
+    ~i_control() {}
+
+};
+</code></pre>
+<h2 id="draw">draw</h2>
+<p>The method is called by the window when it is necessary to redraw a control (for example, when calling window::redraw).</p>
+<ul>
+<li>gr - reference to the graphical context of the window, on which the control should draw itself.</li>
+<li>paint_rect - area to be redrawn. Usually ignored by simple controls</li>
+</ul>
+<h2 id="set_position">set_position</h2>
+<p>Method to change the position of the control on the window. Coordinates are passed to this method relative to the control's parent window.</p>
+<ul>
+<li>position - new position of the control</li>
+<li>redraw - tells the window whether to clear the previous position of the control. 
+For better performance, it should be set to false when <code>set_position</code> is called in response to a window resizing (since the entire window is cleared in this case).</li>
+</ul>
+<h2 id="position">position</h2>
+<p>Returns the coordinates of the control relative to the base window. That is, if the control is on a child window, <code>position()</code> should return the position of the control on the base window. 
+of the control on the base (physical) window.</p>
+<h2 id="set_parent">set_parent</h2>
+<p>The method called by the parent window when <code>`add_control()</code> is called allows the control to get a pointer to its parent window.</p>
+<h2 id="parent">parent</h2>
+<p>Returns a pointer to the window containing the control</p>
+<h2 id="clear_parent">clear_parent</h2>
+<p>The method called by the parent window when <code>`remove_control()</code> is called clears a pointer to the control's parent window.</p>
+<h2 id="topmost">topmost</h2>
+<p>Tells the parent window whether to draw the control on top of all other controls.</p>
+<h2 id="update_theme">update_theme</h2>
+<p>Changes the visual theme of the control. If the parameter is nullptr, the default application theme is used.</p>
+<h2 id="show">show</h2>
+<p>Turns on the control's display (if it was turned off by the <code>hide()</code> method).</p>
+<h2 id="hide">hide</h2>
+<p>Disables control display</p>
+<h2 id="show_1">show</h2>
+<p>Returns the control's display state (enabled or disabled)</p>
+<h2 id="enable">enable</h2>
+<p>Enables the control (if it was disabled by the <code>`disable()</code> method)</p>
+<h2 id="disable">disable</h2>
+<p>Disables the control. A disabled control, as a rule, does not react to user events, does not accept input focus and is grayed out.</p>
+<h2 id="focused">focused</h2>
+<p>Returns whether the control has input focus.</p>
+<h2 id="focused_1">focused</h2>
+<p>Returns whether the control accepts input focus. Disabled control, control not interacting with user returns false</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

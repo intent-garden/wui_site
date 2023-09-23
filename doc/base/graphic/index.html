@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Graphic - WUI</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">WUI</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Guide <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../common/">Common</a>
+</li>
+                                    
+<li >
+    <a href="../event/">Event</a>
+</li>
+                                    
+<li class="active">
+    <a href="./">Graphic</a>
+</li>
+                                    
+<li >
+    <a href="../interfaces/">Interfaces</a>
+</li>
+                                    
+<li >
+    <a href="../theme/">Theme</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../about/licence/">Licence</a>
+</li>
+                                    
+<li >
+    <a href="../../about/contacts/">Contacts</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../event/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../interfaces/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#graphical-context">Graphical context</a></li>
+            <li><a href="#constructor">constructor</a></li>
+            <li><a href="#init">init</a></li>
+            <li><a href="#release">release</a></li>
+            <li><a href="#set_background_color">set_background_color</a></li>
+            <li><a href="#clear">clear</a></li>
+            <li><a href="#flush">flush</a></li>
+            <li><a href="#draw_pixel">draw_pixel</a></li>
+            <li><a href="#draw_line">draw_line</a></li>
+            <li><a href="#measure_text">measure_text</a></li>
+            <li><a href="#draw_text">draw_text</a></li>
+            <li><a href="#draw_rect-1">draw_rect #1</a></li>
+            <li><a href="#draw_rect-2">draw_rect #2</a></li>
+            <li><a href="#draw_buffer">draw_buffer</a></li>
+            <li><a href="#draw_graphic">draw_graphic</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="graphical-context">Graphical context</h1>
+<p>Graphical context is an encapsulation of the system graphical context
+and serves to unify rendering procedures and isolate platform-dependent code.</p>
+<p>The interface:</p>
+<pre><code>class graphic
+{
+public:
+    graphic(system_context &amp;context);
+
+    void init(const rect &amp;max_size, color background_color);
+    void release();
+
+    void set_background_color(color background_color);
+
+    void clear(const rect &amp;position);
+
+    void flush(const rect &amp;updated_size);
+
+    void draw_pixel(const rect &amp;position, color color_);
+
+    void draw_line(const rect &amp;position, color color_, uint32_t width = 1);
+
+    rect measure_text(const std::string &amp;text, const font &amp;font_);
+    void draw_text(const rect &amp;position, const std::string &amp;text, color color_, const font &amp;font_);
+
+    void draw_rect(const rect &amp;position, color fill_color);
+    void draw_rect(const rect &amp;position, color border_color, color fill_color, uint32_t border_width, uint32_t round);
+
+    /// draw some buffer on context
+    void draw_buffer(const rect &amp;position, uint8_t *buffer, int32_t left_shift, int32_t top_shift);
+
+    /// draw another graphic on context
+    void draw_graphic(const rect &amp;position, graphic &amp;graphic_, int32_t left_shift, int32_t top_shift);
+};
+</code></pre>
+<h2 id="constructor">constructor</h2>
+<p>Takes the system context from the window as input</p>
+<h2 id="init">init</h2>
+<p>Initialization of the subsystem</p>
+<ul>
+<li>max_size - maximum size of the drawing field</li>
+<li>background_color - fill color</li>
+</ul>
+<h2 id="release">release</h2>
+<p>Deinitialization of the subsystem, clearing</p>
+<h2 id="set_background_color">set_background_color</h2>
+<p>Change fill color</p>
+<h2 id="clear">clear</h2>
+<p>Clearing the area with fill color</p>
+<ul>
+<li>position - coordinates of the area to be cleared</li>
+</ul>
+<h2 id="flush">flush</h2>
+<p>Resetting (drawing) the area to the system graphic context</p>
+<ul>
+<li>updated_size - coordinates of the reset area</li>
+</ul>
+<h2 id="draw_pixel">draw_pixel</h2>
+<p>Drawing a point</p>
+<ul>
+<li>position - coordinates of the point</li>
+<li>color_ - color of the point</li>
+</ul>
+<h2 id="draw_line">draw_line</h2>
+<p>Drawing a line</p>
+<ul>
+<li>position - coordinates of the start and end points</li>
+<li>color_ - line color</li>
+<li>width - line thickness</li>
+</ul>
+<h2 id="measure_text">measure_text</h2>
+<p>Returns the dimensions of the text line in pixels</p>
+<ul>
+<li>text - line</li>
+<li>font_ - font</li>
+</ul>
+<h2 id="draw_text">draw_text</h2>
+<p>Draw text string</p>
+<ul>
+<li>position - coordinates of the upper left corner of the string</li>
+<li>text - line text</li>
+<li>color_ - color</li>
+<li>font_ - font</li>
+</ul>
+<h2 id="draw_rect-1">draw_rect #1</h2>
+<p>Drawing a simple rectangle</p>
+<ul>
+<li>position - coordinates</li>
+<li>fill_color - fill color</li>
+</ul>
+<h2 id="draw_rect-2">draw_rect #2</h2>
+<p>Drawing a rectangle with border and rounding</p>
+<ul>
+<li>position - coordinates</li>
+<li>border_color - border color</li>
+<li>fill_color - fill color</li>
+<li>border_width - border thickness</li>
+<li>round - radius of rounding</li>
+</ul>
+<h2 id="draw_buffer">draw_buffer</h2>
+<p>Draw buffer with RGB32 color depth</p>
+<ul>
+<li>position - coordinates for drawing</li>
+<li>buffer - buffer</li>
+<li>buffer_size - buffer size in bytes</li>
+</ul>
+<h2 id="draw_graphic">draw_graphic</h2>
+<p>Drawing another graphic context</p>
+<ul>
+<li>position - coordinates for drawing</li>
+<li>graphic_ - graphic context</li>
+<li>left_shift - x offset</li>
+<li>top_shift - y offset</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

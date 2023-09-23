@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Event - WUI</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">WUI</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Guide <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../common/">Common</a>
+</li>
+                                    
+<li class="active">
+    <a href="./">Event</a>
+</li>
+                                    
+<li >
+    <a href="../graphic/">Graphic</a>
+</li>
+                                    
+<li >
+    <a href="../interfaces/">Interfaces</a>
+</li>
+                                    
+<li >
+    <a href="../theme/">Theme</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../about/licence/">Licence</a>
+</li>
+                                    
+<li >
+    <a href="../../about/contacts/">Contacts</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../common/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../graphic/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#events">events</a></li>
+            <li><a href="#stdstring-subscribe">std::string subscribe(...)</a></li>
+            <li><a href="#unsubscribeconst-stdstring-subscriber_id">unsubscribe(const std::string &amp;subscriber_id)</a></li>
+            <li><a href="#emit_eventint32_t-x-int32_t-y">emit_event(int32_t x, int32_t y)</a></li>
+        <li class="main "><a href="#event-types">Event types</a></li>
+        <li class="main "><a href="#system-events">System events</a></li>
+        <li class="main "><a href="#mouse-events">Mouse events</a></li>
+        <li class="main "><a href="#keyboard-events">Keyboard events</a></li>
+        <li class="main "><a href="#internal-events">Internal events</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h2 id="events">events</h2>
+<p>The subscription model is used to handle events. The control or user code subscribes in the window to the events it needs and receives them.
+Events can be generated by the system or user code.</p>
+<p>All events pass through the window. The following methods are used to work with them:</p>
+<pre><code>class window
+{
+public:
+    ...
+    std::string subscribe(std::function&lt;void(const event&amp;)&gt; receive_callback, event_type event_types, std::shared_ptr&lt;i_control&gt; control = nullptr);
+    void unsubscribe(const std::string &amp;subscriber_id);
+
+    void emit_event(int32_t x, int32_t y);
+    ...
+};
+</code></pre>
+<h3 id="stdstring-subscribe">std::string subscribe(...)</h3>
+<p>Used to receive events from the window. The method returns a unique identifier of the subscriber 
+which should be passed to <code>unsubscribe()</code> for unsubscribing.</p>
+<ul>
+<li>receive_callback - function that receives events</li>
+<li>event_types - bit mask indicating which events should be received</li>
+<li>control - if this field is set, only mouse events occurring on this control will be received.
+and keyboard events if it has input focus. Otherwise, all events from the window will be received.</li>
+</ul>
+<h3 id="unsubscribeconst-stdstring-subscriber_id">unsubscribe(const std::string &amp;subscriber_id)</h3>
+<p>Used to unsubscribe from window events </p>
+<ul>
+<li>subscriber_id is a unique identifier of the subscriber, given by the <code>`subscribe</code> method.</li>
+</ul>
+<h3 id="emit_eventint32_t-x-int32_t-y">emit_event(int32_t x, int32_t y)</h3>
+<p>A method that generates an internal event. Used by custom code to generate its own events.</p>
+<h2 id="event-types">Event types</h2>
+<pre><code>enum class event_type : uint32_t
+{
+    system = (1 &lt;&lt; 0),
+    mouse = (1 &lt;&lt; 1),
+    keyboard = (1 &lt;&lt; 2),
+    internal = (1 &lt;&lt; 3),
+
+    all = system | mouse | keyboard | internal
+};
+
+struct event
+{
+    event_type type;
+
+    union
+    {
+        mouse_event mouse_event_;
+        keyboard_event keyboard_event_;
+        internal_event internal_event_;
+        system_event system_event_;
+    };
+};
+</code></pre>
+<p>Depending on the type of event, the value from the event association is taken.</p>
+<h2 id="system-events">System events</h2>
+<pre><code>enum class system_event_type
+{
+    device_change
+};
+
+struct system_event
+{
+    system_event_type type;
+    int32_t x, y;
+};
+</code></pre>
+<h2 id="mouse-events">Mouse events</h2>
+<pre><code>enum class mouse_event_type
+{
+    move,
+    enter,
+    leave,
+    right_down,
+    right_up,
+    center_down,
+    center_up,
+    left_down,
+    left_up,
+    left_double,
+    wheel
+};
+
+struct mouse_event
+{
+    mouse_event_type type;
+
+    int32_t x, y;
+
+    int32_t wheel_delta;
+};
+</code></pre>
+<h2 id="keyboard-events">Keyboard events</h2>
+<pre><code>enum class keyboard_event_type
+{
+    down, 
+    up,
+    key
+};
+
+struct keyboard_event
+{
+    keyboard_event_type type;
+
+    uint8_t modifier; /// vk_capital or vk_shift or vk_alt or vk_insert
+    char key[4];
+    uint8_t key_size;
+};
+</code></pre>
+<h2 id="internal-events">Internal events</h2>
+<pre><code>enum class internal_event_type
+{
+    set_focus,
+    remove_focus,
+    execute_focused,
+
+    size_changed,
+    position_changed,
+
+    user_emitted
+};
+
+struct internal_event
+{
+    internal_event_type type;
+    int32_t x, y;
+};
+</code></pre></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
