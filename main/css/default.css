@@ -30,6 +30,7 @@
   --danger: #ff1744;
   --light: #ECEFF1;
   --dark: #11171a;
+  --brilliant_blue: #3E5F8A;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -4574,7 +4575,7 @@ button.close {
   vertical-align: text-top !important; }
 
 .bg-primary {
-  background-color: #1de9b6 !important; }
+  background-color: #00416A !important; }
 
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
@@ -4598,7 +4599,7 @@ button.bg-success:focus {
   background-color: #00b35c !important; }
 
 .bg-info {
-  background-color: #00e5ff !important; }
+  background-color: #FEE7F0 !important; }
 
 a.bg-info:hover, a.bg-info:focus,
 button.bg-info:hover,
@@ -7280,7 +7281,7 @@ a.text-success:hover, a.text-success:focus {
   color: #00b35c !important; }
 
 .text-info {
-  color: #00e5ff !important; }
+  color: #000404 !important; }
 
 a.text-info:hover, a.text-info:focus {
   color: #00b7cc !important; }
@@ -7472,7 +7473,7 @@ body {
 .navbar .navbar-brand {
   font-size: 1.5rem;
   font-weight: 900;
-  color: #1de9b6;
+  color: #0000e0;
   text-transform: uppercase; }
 
 .navbar .navbar-nav .nav-item {
