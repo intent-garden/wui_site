@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Interfaces - WUI</title>
+        <title>Базовые интерейсы - WUI</title>
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -44,28 +44,37 @@
                             <li >
                                 <a href="../..">Домашняя</a>
                             </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Руководства <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../howto/setup/">Установка</a>
+</li>
+                                </ul>
+                            </li>
                             <li class="dropdown active">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Справка <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li >
-    <a href="../common/">Common</a>
+    <a href="../common/">Общие типы</a>
 </li>
                                     
 <li >
-    <a href="../event/">Event</a>
+    <a href="../event/">События</a>
 </li>
                                     
 <li >
-    <a href="../graphic/">Graphic</a>
+    <a href="../graphic/">Графика</a>
 </li>
                                     
 <li class="active">
-    <a href="./">Interfaces</a>
+    <a href="./">Базовые интерейсы</a>
 </li>
                                     
 <li >
-    <a href="../theme/">Theme</a>
+    <a href="../theme/">Визуальные темы</a>
 </li>
                                 </ul>
                             </li>
@@ -110,30 +119,31 @@
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#_1">Базовые интерфейсы</a></li>
         <li class="main "><a href="#window">Window</a></li>
-            <li><a href="#init">init</a></li>
-            <li><a href="#destroy">destroy</a></li>
-            <li><a href="#add_control">add_control</a></li>
-            <li><a href="#remove_control">remove_control</a></li>
-            <li><a href="#redraw">redraw</a></li>
-            <li><a href="#subscribe">subscribe</a></li>
-            <li><a href="#unsubscribe">unsubscribe</a></li>
-            <li><a href="#system_context">system_context</a></li>
+            <li><a href="#bool-initconst-stdstring-caption-const-rect-position-window_style-style-stdfunction-close_callback">bool init(const std::string &amp;caption, const rect &amp;position, window_style style, std::function close_callback)</a></li>
+            <li><a href="#void-destroy">void destroy()</a></li>
+            <li><a href="#void-add_controlstdshared_ptr-control-const-rect-position">void add_control(std::shared_ptr control, const rect &amp;position)</a></li>
+            <li><a href="#void-remove_controlstdshared_ptr-control">void remove_control(std::shared_ptr control)</a></li>
+            <li><a href="#void-redrawconst-rect-position-bool-clear-false">void redraw(const rect &amp;position, bool clear = false)</a></li>
+            <li><a href="#stdstring-subscribestdfunction-receive_callback-event_type-event_types-stdshared_ptr-control-nullptr">std::string  subscribe(std::function receive_callback, event_type event_types, std::shared_ptr control = nullptr)</a></li>
+            <li><a href="#void-unsubscribeconst-stdstring-subscriber_id">void unsubscribe(const std::string &amp;subscriber_id)</a></li>
+            <li><a href="#system_context-context">system_context &amp;context()</a></li>
         <li class="main "><a href="#control">Control</a></li>
-            <li><a href="#draw">draw</a></li>
-            <li><a href="#set_position">set_position</a></li>
-            <li><a href="#position">position</a></li>
-            <li><a href="#set_parent">set_parent</a></li>
-            <li><a href="#parent">parent</a></li>
-            <li><a href="#clear_parent">clear_parent</a></li>
-            <li><a href="#topmost">topmost</a></li>
-            <li><a href="#update_theme">update_theme</a></li>
-            <li><a href="#show">show</a></li>
-            <li><a href="#hide">hide</a></li>
-            <li><a href="#showed">showed</a></li>
-            <li><a href="#enable">enable</a></li>
-            <li><a href="#disable">disable</a></li>
-            <li><a href="#focused">focused</a></li>
-            <li><a href="#focusing">focusing</a></li>
+            <li><a href="#void-drawgraphic-gr-const-rect-paint_rect">void draw(graphic &amp;gr, const rect &amp;paint_rect)</a></li>
+            <li><a href="#void-set_positionconst-rect-position-bool-redraw-true">void set_position(const rect &amp;position, bool redraw = true)</a></li>
+            <li><a href="#rect-position">rect position()</a></li>
+            <li><a href="#void-set_parentstdshared_ptr-window_">void set_parent(std::shared_ptr window_)</a></li>
+            <li><a href="#stdweak_ptr-parent-const">std::weak_ptr parent() const</a></li>
+            <li><a href="#void-clear_parent">void clear_parent()</a></li>
+            <li><a href="#bool-topmost">bool topmost()</a></li>
+            <li><a href="#void-update_themestdshared_ptr-theme_-nullptr">void update_theme(std::shared_ptr theme_ = nullptr)</a></li>
+            <li><a href="#void-show">void show()</a></li>
+            <li><a href="#void-hide">void hide()</a></li>
+            <li><a href="#bool-showed-const">bool showed() const</a></li>
+            <li><a href="#void-enable">void enable()</a></li>
+            <li><a href="#void-disable">void disable()</a></li>
+            <li><a href="#bool-enabled-const">bool enabled() const</a></li>
+            <li><a href="#bool-focused-const">bool focused() const</a></li>
+            <li><a href="#bool-focusing-const">bool focusing() const</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -164,34 +174,39 @@ protected:
 
 };
 </code></pre>
-<h2 id="init">init</h2>
+<h2 id="bool-initconst-stdstring-caption-const-rect-position-window_style-style-stdfunction-close_callback">bool init(const std::string &amp;caption, const rect &amp;position, window_style style, std::function<void(void)> close_callback)</h2>
 <p>Первоначальное создание окна. Данный метод должен быть вызван для создания отдельного (базового) окна, а также может использоваться для установки параметров дочернего окна.</p>
 <ul>
 <li>caption - заголовок окна</li>
-<li>position - размеры и положение окна. Если left установлен в -1 окно центрируется по горизонтали, если top установлен в -1 окно центрируется по вертикали</li>
+<li>position - размеры и положение окна. Если left установлен в -1 окно центрируется по горизонтали, если top установлен в 1 окно центрируется по вертикали</li>
 <li>style - комбинация битовых масок определяющих внешний вид окна</li>
-<li>close_callback - функция вызываемая при закрытии окна пользователем, вызове <code>destroy()</code> или откреплении дочернего окна от базового (вызовом <code>remove_control()</code>)</li>
+<li>
+<p>close_callback - функция вызываемая при закрытии окна пользователем, вызове <code>destroy()</code> или откреплении дочернего окна от базового (вызовом <code>remove_control()</code>)</p>
+</li>
+<li>
+<p>Возвращает true если окно создано успешно</p>
+</li>
 </ul>
-<h2 id="destroy">destroy</h2>
+<h2 id="void-destroy">void destroy()</h2>
 <p>Вызывается когда окно нужно уничтожить</p>
-<h2 id="add_control">add_control</h2>
+<h2 id="void-add_controlstdshared_ptr-control-const-rect-position">void add_control(std::shared_ptr<i_control> control, const rect &amp;position)</h2>
 <p>Добавляет на окно дочерний контрол (в том числе дочернее окно)</p>
 <ul>
 <li>control - указатель на добавляемый контрол</li>
 <li>position - положение контрола на окне</li>
 </ul>
-<h2 id="remove_control">remove_control</h2>
+<h2 id="void-remove_controlstdshared_ptr-control">void remove_control(std::shared_ptr<i_control> control)</h2>
 <p>Удаляет дочерний контрол с окна. Если дочерним контролом явлется окно, оно становится независимым (базовым)</p>
 <ul>
 <li>control - указатель на удаляемый контрол</li>
 </ul>
-<h2 id="redraw">redraw</h2>
+<h2 id="void-redrawconst-rect-position-bool-clear-false">void redraw(const rect &amp;position, bool clear = false)</h2>
 <p>Запускает перерисовку части окна с имеющимися на данном участке контролами.</p>
 <ul>
 <li>position - границы перерисовываемой области</li>
 <li>clear нужно устанавливать например при удалении или перемещении контрола</li>
 </ul>
-<h2 id="subscribe">subscribe</h2>
+<h2 id="stdstring-subscribestdfunction-receive_callback-event_type-event_types-stdshared_ptr-control-nullptr">std::string  subscribe(std::function<void(const event&)> receive_callback, event_type event_types, std::shared_ptr<i_control> control = nullptr)</h2>
 <p>Используется для получения событий от окна. Метод возвращает уникальный идентификатор подписчика который нужно передать в <code>unsubscribe()</code> для отписки.</p>
 <ul>
 <li>receive_callback - функция, получающая события</li>
@@ -199,12 +214,12 @@ protected:
 <li>control - при установке данного поля будут приходить только события мыши происходящие над этим контролом и клавиатурные события если у него имеется фокус ввода.
 В противном случае, будут приходить все события от окна.</li>
 </ul>
-<h2 id="unsubscribe">unsubscribe</h2>
+<h2 id="void-unsubscribeconst-stdstring-subscriber_id">void unsubscribe(const std::string &amp;subscriber_id)</h2>
 <p>Предназначен для прекращения подписки на события окна</p>
 <ul>
 <li>subscriber_id - уникальный идентификатор подписчика, выданный методом <code>subscribe</code></li>
 </ul>
-<h2 id="system_context">system_context</h2>
+<h2 id="system_context-context">system_context &amp;context()</h2>
 <p>Возвращает ссылку на структуру, содержащую платформозависимые сущности. Например дескриптор окна HWND в Windows или xcb_connection в Linux.</p>
 <h1 id="control">Control</h1>
 <p>Данный интерфейс должны реализовывать все контролы, а также окно, так как оно тоже может являеться контролом (дочерним окном)</p>
@@ -242,45 +257,47 @@ protected:
 
 };
 </code></pre>
-<h2 id="draw">draw</h2>
+<h2 id="void-drawgraphic-gr-const-rect-paint_rect">void draw(graphic &amp;gr, const rect &amp;paint_rect)</h2>
 <p>Метод вызывается окном при необходимости перерисовать контрол (например при вызове window::redraw)</p>
 <ul>
 <li>gr - ссылка на графический контекст окна, на котором контрол должен себя нарисовать</li>
 <li>paint_rect - область которая должна быть перерисована. Обычно игнорируется простыми контролами</li>
 </ul>
-<h2 id="set_position">set_position</h2>
+<h2 id="void-set_positionconst-rect-position-bool-redraw-true">void set_position(const rect &amp;position, bool redraw = true)</h2>
 <p>Мeтод для изменения положения контрола на окне. Координаты передаются в этот метод относительно родительского окна контрола.</p>
 <ul>
 <li>position - новое положение контрола</li>
 <li>redraw - указывает окну, нужно ли очищать предыдущее положение контрола. 
 Для улучшения производительности, должно быть установлено в false при вызове <code>set_position</code> в ответ на изменение размеров окна (так как в этом случае очищается все окно)</li>
 </ul>
-<h2 id="position">position</h2>
+<h2 id="rect-position">rect position()</h2>
 <p>Возвращает координаты контрола относительно базового окна. Т.е. если контрол находится на дочернем окне, <code>position()</code> должен вернуть положение 
 контрола на базовом(физическом) окне.</p>
-<h2 id="set_parent">set_parent</h2>
+<h2 id="void-set_parentstdshared_ptr-window_">void set_parent(std::shared_ptr<window> window_)</h2>
 <p>Метод, вызываемый родительским окном при вызове <code>add_control()</code>, позволяет контролу получить указатель на свое родителькое окно.</p>
-<h2 id="parent">parent</h2>
+<h2 id="stdweak_ptr-parent-const">std::weak_ptr<window> parent() const</h2>
 <p>Возвращает указатель на содержащее контрол окно</p>
-<h2 id="clear_parent">clear_parent</h2>
+<h2 id="void-clear_parent">void clear_parent()</h2>
 <p>Метод, вызываемый родительским окном при вызове <code>remove_control()</code> очищает указатель на родителькое окно контрола</p>
-<h2 id="topmost">topmost</h2>
+<h2 id="bool-topmost">bool topmost()</h2>
 <p>Сообщает родительскому окну, нужно ли рисовать контрол поверх всех остальных контролов</p>
-<h2 id="update_theme">update_theme</h2>
+<h2 id="void-update_themestdshared_ptr-theme_-nullptr">void update_theme(std::shared_ptr<i_theme> theme_ = nullptr)</h2>
 <p>Изменяет визуальную тему контрола. Если параметр равен nullptr то используется тема приложения по умолчанию.</p>
-<h2 id="show">show</h2>
+<h2 id="void-show">void show()</h2>
 <p>Включает отображение контрола (если оно было выключено методом <code>hide()</code>)</p>
-<h2 id="hide">hide</h2>
+<h2 id="void-hide">void hide()</h2>
 <p>Выключает отображение контрола</p>
-<h2 id="showed">showed</h2>
+<h2 id="bool-showed-const">bool showed() const</h2>
 <p>Возвращает состояние отображения контрола (включено или выключено)</p>
-<h2 id="enable">enable</h2>
+<h2 id="void-enable">void enable()</h2>
 <p>Включает контрол (если он был выключен методом <code>disable()</code>)</p>
-<h2 id="disable">disable</h2>
+<h2 id="void-disable">void disable()</h2>
 <p>Выключает контрол. Выключенный контрол, как правило, не реагирует на пользовательские события, не принимает фокус ввода и отрисовывается серым цветом</p>
-<h2 id="focused">focused</h2>
+<h2 id="bool-enabled-const">bool enabled() const</h2>
+<p>Возвращает состояние контрола: включен/выключен</p>
+<h2 id="bool-focused-const">bool focused() const</h2>
 <p>Возвращает наличие фокуса ввода у контрола</p>
-<h2 id="focusing">focusing</h2>
+<h2 id="bool-focusing-const">bool focusing() const</h2>
 <p>Возвращает принимает ли контрол фокус ввода. Выключеный контрол, контрол не взаимодействующий с пользователем возвращает false</p></div>
         </div>
 

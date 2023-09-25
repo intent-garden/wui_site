@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Theme - WUI</title>
+        <title>Visual Themes - WUI</title>
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -44,37 +44,46 @@
                             <li >
                                 <a href="../..">Home</a>
                             </li>
-                            <li class="dropdown active">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Guide <b class="caret"></b></a>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manuals <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li >
-    <a href="../common/">Common</a>
+    <a href="../../howto/setup/">Installation</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../common/">Common types</a>
 </li>
                                     
 <li >
-    <a href="../event/">Event</a>
+    <a href="../event/">Events</a>
 </li>
                                     
 <li >
-    <a href="../graphic/">Graphic</a>
+    <a href="../graphic/">Graphics</a>
 </li>
                                     
 <li >
-    <a href="../interfaces/">Interfaces</a>
+    <a href="../interfaces/">Basic Interfaces</a>
 </li>
                                     
 <li class="active">
-    <a href="./">Theme</a>
+    <a href="./">Visual Themes</a>
 </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About the Library <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
 <li >
-    <a href="../../about/licence/">Licence</a>
+    <a href="../../about/licence/">License</a>
 </li>
                                     
 <li >
@@ -108,13 +117,230 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#theme">Theme</a></li>
+        <li class="main active"><a href="#visual-themes">Visual Themes</a></li>
+            <li><a href="#helpers">Helpers</a></li>
+            <li><a href="#bool-set_default_theme_from_resourceconst-stdstring-name-int32_t-resource_index-const-stdstring-resource_section-windows-only">bool set_default_theme_from_resource(const std::string &amp;name, int32_t resource_index, const std::string &amp;resource_section); (Windows only)</a></li>
+            <li><a href="#bool-set_default_theme_from_jsonconst-stdstring-name-const-stdstring-json">bool set_default_theme_from_json(const std::string &amp;name, const std::string &amp;json)</a></li>
+            <li><a href="#bool-set_default_theme_from_fileconst-stdstring-name-const-stdstring-file_name">bool set_default_theme_from_file(const std::string &amp;name, const std::string &amp;file_name)</a></li>
+            <li><a href="#void-set_default_theme_emptyconst-stdstring-name">void set_default_theme_empty(const std::string &amp;name);</a></li>
+            <li><a href="#stdshared_ptri_theme-get_default_theme">std::shared_ptr&lt;i_theme&gt; get_default_theme()</a></li>
+            <li><a href="#stdshared_ptri_theme-make_custom_themeconst-stdstring-name">std::shared_ptr&lt;i_theme&gt; make_custom_theme(const std::string &amp;name = "");</a></li>
+            <li><a href="#stdshared_ptri_theme-make_custom_themeconst-stdstring-name-const-stdstring-json">std::shared_ptr&lt;i_theme&gt; make_custom_theme(const std::string &amp;name, const std::string &amp;json);</a></li>
+            <li><a href="#color-theme_colorconst-stdstring-control-const-stdstring-value-stdshared_ptri_theme-theme_-nullptr">color theme_color(const std::string &amp;control, const std::string &amp;value, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);</a></li>
+            <li><a href="#int32_t-theme_dimensionconst-stdstring-control-const-stdstring-value-stdshared_ptri_theme-theme_-nullptr">int32_t theme_dimension(const std::string &amp;control, const std::string &amp;value, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr)</a></li>
+            <li><a href="#const-stdstring-theme_stringconst-stdstring-control-const-stdstring-value-stdshared_ptri_theme-theme_-nullptr">const std::string &amp;theme_string(const std::string &amp;control, const std::string &amp;value, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr)</a></li>
+            <li><a href="#font-theme_fontconst-stdstring-control-const-stdstring-value-stdshared_ptri_theme-theme_-nullptr">font theme_font(const std::string &amp;control, const std::string &amp;value, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr)</a></li>
+            <li><a href="#const-stdvector-theme_imageconst-stdstring-name-stdshared_ptri_theme-theme_-nullptr">const std::vector &amp;theme_image(const std::string &amp;name, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr)</a></li>
+            <li><a href="#the-interface-of-the-theme-instance">The interface of the theme instance</a></li>
+            <li><a href="#stdstring-get_name-const">std::string get_name() const</a></li>
+            <li><a href="#void-set_colorconst-stdstring-control-const-stdstring-value-color-color_">void set_color(const std::string &amp;control, const std::string &amp;value, color color_)</a></li>
+            <li><a href="#color-get_colorconst-stdstring-control-const-stdstring-value-const">color get_color(const std::string &amp;control, const std::string &amp;value) const</a></li>
+            <li><a href="#void-set_dimensionconst-stdstring-control-const-stdstring-value-int32_t-dimension">void set_dimension(const std::string &amp;control, const std::string &amp;value, int32_t dimension)</a></li>
+            <li><a href="#int32_t-get_dimensionconst-stdstring-control-const-stdstring-value">int32_t get_dimension(const std::string &amp;control, const std::string &amp;value)</a></li>
+            <li><a href="#void-set_stringconst-stdstring-control-const-stdstring-value-const-stdstring-str">void set_string(const std::string &amp;control, const std::string &amp;value, const std::string &amp;str)</a></li>
+            <li><a href="#const-stdstring-get_stringconst-stdstring-control-const-stdstring-value">const std::string &amp;get_string(const std::string &amp;control, const std::string &amp;value)</a></li>
+            <li><a href="#void-set_fontconst-stdstring-control-const-stdstring-value-const-font-font_">void set_font(const std::string &amp;control, const std::string &amp;value, const font &amp;font_)</a></li>
+            <li><a href="#font-get_fontconst-stdstring-control-const-stdstring-value">font get_font(const std::string &amp;control, const std::string &amp;value)</a></li>
+            <li><a href="#void-set_imageconst-stdstring-name-const-stdvectoruint8_t-data">void set_image(const std::string &amp;name, const std::vector&lt;uint8_t&gt; &amp;data)</a></li>
+            <li><a href="#const-stdvectoruint8_t-get_imageconst-stdstring-name">const std::vector&lt;uint8_t&gt; &amp;get_image(const std::string &amp;name)</a></li>
+            <li><a href="#bool-load_resourceint32_t-resource_index-const-stdstring-resource_section-windows-only">bool load_resource(int32_t resource_index, const std::string &amp;resource_section); (Windows only)</a></li>
+            <li><a href="#bool-load_jsonconst-stdstring-json">bool load_json(const std::string &amp;json)</a></li>
+            <li><a href="#bool-load_fileconst-stdstring-file_name">bool load_file(const std::string &amp;file_name)</a></li>
+            <li><a href="#bool-load_themeconst-i_theme-theme_">bool load_theme(const i_theme &amp;theme_)</a></li>
+            <li><a href="#bool-is_okconst-i_theme-theme_-const">bool is_ok(const i_theme &amp;theme_) const</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="theme">Theme</h1>
-<p>The Theme sub-system provides a convenient way to centrally store visual settings.</p></div>
+<h1 id="visual-themes">Visual Themes</h1>
+<p>The Theme subsystem provides a convenient way to centrally store visual settings.
+The subsystem is designed to display application controls in a single view and easily centralize the ability to change the current theme on the fly.</p>
+<p>The subsystem provides handy helpers for working with themes. These helpers operate with a singleton that 
+all application controls use by default. The subsystem allows you to load a theme from json, which can be stored on disk or be a Windows application resource.</p>
+<p>Example <a href="https://github.com/ud84/wui/blob/main/res/dark.json">json file</a> containing visual parameters of the main controllers.</p>
+<p>Although the application always has a default theme, you can create your own custom theme and specify any control to use it. In this case, the control will be displayed according to your theme.</p>
+<p>Below are the main helpers for centralizing the application theme. These helpers essentially represent
+access to the default theme instance singleton of the application.</p>
+<h3 id="helpers">Helpers</h3>
+<pre><code>namespace wui
+{
+
+/// Set and get the current theme
+#ifdef _WIN32
+bool set_default_theme_from_resource(const std::string &amp;name, int32_t resource_index, const std::string &amp;resource_section);
+#endif
+bool set_default_theme_from_json(const std::string &amp;name, const std::string &amp;json);
+bool set_default_theme_from_file(const std::string &amp;name, const std::string &amp;file_name);
+void set_default_theme_empty(const std::string &amp;name);
+
+/// Return the pointer to current default theme instance
+std::shared_ptr&lt;i_theme&gt; get_default_theme();
+
+/// Make the custom theme for the some control
+std::shared_ptr&lt;i_theme&gt; make_custom_theme(const std::string &amp;name = "");
+std::shared_ptr&lt;i_theme&gt; make_custom_theme(const std::string &amp;name, const std::string &amp;json);
+
+/// Return the item's color by current theme
+color theme_color(const std::string &amp;control, const std::string &amp;value, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+
+/// Return the item's dimension by current theme
+int32_t theme_dimension(const std::string &amp;control, const std::string &amp;value, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+
+/// Return the item's string value by current theme
+const std::string &amp;theme_string(const std::string &amp;control, const std::string &amp;value, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+
+/// Return the item's font value by current theme
+font theme_font(const std::string &amp;control, const std::string &amp;value, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+
+const std::vector&lt;uint8_t&gt; &amp;theme_image(const std::string &amp;name, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+</code></pre>
+<h3 id="bool-set_default_theme_from_resourceconst-stdstring-name-int32_t-resource_index-const-stdstring-resource_section-windows-only">bool <span style="color:#9a0303">set_default_theme_from_resource</span>(const <span style="color:#0c8bb6">std::string</span> &amp;name, <span style="color:#0c8bb6">int32_t</span> resource_index, const <span style="color:#0c8bb6">std::string</span> &amp;resource_section); (Windows only)</h3>
+<p>Function that loads the default application theme from a json file stored in the application resource.
+Example:</p>
+<pre><code>#ifdef _WIN32
+auto ok = wui::set_default_theme_from_resource("dark", TXT_DARK_THEME, "JSONS");
+if (!ok)
+{
+    std::cerr &lt;&lt; "can't load theme" &lt;&lt; std::endl;
+    return -1;
+}
+#endif
+</code></pre>
+<h3 id="bool-set_default_theme_from_jsonconst-stdstring-name-const-stdstring-json">bool <span style="color:#9a0303">set_default_theme_from_json</span>(const <span style="color:#0c8bb6">std::string</span> &amp;name, const <span style="color:#0c8bb6">std::string</span> &amp;json)</h3>
+<p>Function loading default application theme from json string</p>
+<h3 id="bool-set_default_theme_from_fileconst-stdstring-name-const-stdstring-file_name">bool <span style="color:#9a0303">set_default_theme_from_file</span>(const <span style="color:#0c8bb6">std::string</span> &amp;name, const <span style="color:#0c8bb6">std::string</span> &amp;file_name)</h3>
+<p>Function loading default application theme from json file
+Example:</p>
+<pre><code>#ifdef _WIN32
+...
+#else
+auto ok = wui::set_default_theme_from_file("dark", "res/dark.json");
+if (!ok)
+{
+    std::cerr &lt;&lt; "can't load theme" &lt;&lt; std::endl;
+    return -1;
+}
+#endif
+</code></pre>
+<h3 id="void-set_default_theme_emptyconst-stdstring-name">void <span style="color:#9a0303">set_default_theme_empty</span>(const <span style="color:#0c8bb6">std::string</name> &amp;name);</h3>
+<p>Sets the current theme to an empty theme, e.g. to customize it later using instance setters.</p>
+<h3 id="stdshared_ptri_theme-get_default_theme">std::shared_ptr&lt;i_theme&gt; <span style="color:#9a0303">get_default_theme</span>()</h3>
+<p>Returns a pointer to the default instance of the theme</p>
+<h3 id="stdshared_ptri_theme-make_custom_themeconst-stdstring-name">std::shared_ptr&lt;i_theme&gt; <span style="color:#9a0303">make_custom_theme</span>(const <span style="color:#0c8bb6">std::string</span> &amp;name = "");</h3>
+<p>Creates and returns a pointer to an empty custom theme. Intended for use in an individual control or a group of controls.</p>
+<h3 id="stdshared_ptri_theme-make_custom_themeconst-stdstring-name-const-stdstring-json">std::shared_ptr&lt;i_theme&gt; <span style="color:#9a0303">make_custom_theme</span>(const <span style="color:#0c8bb6">std::string</span> &amp;name, const <span style="color:#0c8bb6">std::string</span> &amp;json);</h3>
+<p>Creates and returns a pointer to a custom theme loaded from json. Intended for use in an individual control or a group of controls.</p>
+<h3 id="color-theme_colorconst-stdstring-control-const-stdstring-value-stdshared_ptri_theme-theme_-nullptr">color <span style="color:#9a0303">theme_color</span>(const <span style="color:#0c8bb6">std::string</span> &amp;control, const <span style="color:#0c8bb6">std::string</span> &amp;value, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);</h3>
+<p>Returns the color for the <code>value</code> of the <code>control</code> control. The <code>theme_</code> parameter can contain the custom theme instance or be omitted, then the color from the default theme will be taken.
+Example:</p>
+<pre><code>auto fill_color = enabled_ ? (active || turned_ ? theme_color(tcn, tv_active, theme_) : theme_color(tcn, tv_calm, theme_)) : theme_color(tcn, tv_disabled, theme_);
+</code></pre>
+<p>Where:</p>
+<pre><code>tcn = "button";
+tv_active = "active";
+tv_calm = "calm";
+tv_disabled = "disabled";
+</code></pre>
+<p>A fragment of the theme's json:</p>
+<pre><code>{
+  "type": "button",
+  "calm": "#06a5df",
+  "active": "#1aafe9",
+  "disabled": "#a5a5a0"
+},
+</code></pre>
+<h3 id="int32_t-theme_dimensionconst-stdstring-control-const-stdstring-value-stdshared_ptri_theme-theme_-nullptr">int32_t <span style="color:#9a0303">theme_dimension</span>(const <span style="color:#0c8bb6">std::string</span> &amp;control, const <span style="color:#0c8bb6">std::string</span> &amp;value, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr)</h3>
+<p>Returns the size for the <code>value</code> of the <code>control</code> control. The <code>theme_</code> parameter can contain the custom theme instance or be omitted, in which case the size will be taken from the default theme.</p>
+<h3 id="const-stdstring-theme_stringconst-stdstring-control-const-stdstring-value-stdshared_ptri_theme-theme_-nullptr">const std::string &amp;<span style="color:#9a0303">theme_string</span>(const <span style="color:#0c8bb6">std::string</span> &amp;control, const <span style="color:#0c8bb6">std::string</span> &amp;value, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr)</h3>
+<p>Returns a string for the <code>value</code> of the <code>control</code> control. The <code>theme_</code> parameter can contain the custom theme instance or be omitted, in which case the string from the default theme will be taken.</p>
+<h3 id="font-theme_fontconst-stdstring-control-const-stdstring-value-stdshared_ptri_theme-theme_-nullptr">font <span style="color:#9a0303">theme_font</span>(const <span style="color:#0c8bb6">std::string</span> &amp;control, const <span style="color:#0c8bb6">std::string</span> &amp;value, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr)</h3>
+<p>Returns the font for the <code>value</code> of the <code>control</code> control. The <code>theme_</code> parameter can contain the custom theme instance or be omitted, in which case the font from the default theme will be taken.</p>
+<h3 id="const-stdvector-theme_imageconst-stdstring-name-stdshared_ptri_theme-theme_-nullptr">const std::vector<uint8_t> &amp;<span style="color:#9a0303">theme_image</span>(const <span style="color:#0c8bb6">std::string</span> &amp;name, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr)</h3>
+<p>Returns a byte array containing the theme image for the <code>value</code> of the <code>control</code> control. The theme supports storing images in json as an escaped array. The array can also be loaded into the theme by the instance setter.
+Example json:</p>
+<pre><code>"images": [
+{ "window_expand": "0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x19, 0x00, 0x00, 0x00, 0x19, 0x08, 0x06, 0x00, 0x00, 0x00, 0xC4, 0xE9, 0x85, 0x63, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59, 0x73, 0x00, 0x00, 0x0B, 0x13, 0x00, 0x00, 0x0B, 0x13, 0x01, 0x00, 0x9A, 0x9C, 0x18, 0x00, 0x00, 0x00, 0x19, 0x74, 0x45, 0x58, 0x74, 0x53, 0x6F, 0x66, 0x74, 0x77, 0x61, 0x72, 0x65, 0x00, 0x41, 0x64, 0x6F, 0x62, 0x65, 0x20, 0x49, 0x6D, 0x61, 0x67, 0x65, 0x52, 0x65, 0x61, 0x64, 0x79, 0x71, 0xC9, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x64, 0x49, 0x44, 0x41, 0x54, 0x78, 0xDA, 0x62, 0xFC, 0xFF, 0xFF, 0x3F, 0x03, 0xAD, 0x01, 0x13, 0x03, 0x1D, 0xC0, 0xA8, 0x25, 0x23, 0xD4, 0x12, 0x16, 0x6C, 0x82, 0x17, 0x2E, 0x9D, 0x9B, 0x00, 0xA4, 0x0C, 0x48, 0x35, 0xCC, 0x40, 0xCF, 0xC8, 0x81, 0x14, 0x9F, 0x18, 0x90, 0x68, 0x89, 0x02, 0x10, 0xDB, 0x93, 0xE4, 0x13, 0x98, 0x87, 0x70, 0xB9, 0x0C, 0x8B, 0xCF, 0x1B, 0x80, 0x54, 0xFD, 0x68, 0xEA, 0x1A, 0xB5, 0x64, 0x90, 0x64, 0x46, 0x58, 0xDA, 0x87, 0x26, 0x4D, 0x62, 0x80, 0x03, 0xB9, 0x96, 0xC8, 0xE3, 0x4B, 0xFB, 0xA4, 0x00, 0xC6, 0xD1, 0x9A, 0x71, 0xD4, 0x92, 0xA1, 0x6D, 0x09, 0x40, 0x80, 0x01, 0x00, 0x94, 0xC7, 0x13, 0xEF, 0xA5, 0x34, 0x2A, 0xAF, 0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82" }
+]
+</code></pre>
+<h3 id="the-interface-of-the-theme-instance">The interface of the theme instance</h3>
+<pre><code>class i_theme
+{
+public:
+    virtual std::string get_name() const = 0;
+
+    virtual void set_color(const std::string &amp;control, const std::string &amp;value, color color_) = 0;
+    virtual color get_color(const std::string &amp;control, const std::string &amp;value) const = 0;
+
+    virtual void set_dimension(const std::string &amp;control, const std::string &amp;value, int32_t dimension) = 0;
+    virtual int32_t get_dimension(const std::string &amp;control, const std::string &amp;value) const = 0;
+
+    virtual void set_string(const std::string &amp;control, const std::string &amp;value, const std::string &amp;str) = 0;
+    virtual const std::string &amp;get_string(const std::string &amp;control, const std::string &amp;value) const = 0;
+
+    virtual void set_font(const std::string &amp;control, const std::string &amp;value, const font &amp;font_) = 0;
+    virtual font get_font(const std::string &amp;control, const std::string &amp;value) const = 0;
+
+    virtual void set_image(const std::string &amp;name, const std::vector&lt;uint8_t&gt; &amp;data) = 0;
+    virtual const std::vector&lt;uint8_t&gt; &amp;get_image(const std::string &amp;name) = 0;
+
+#ifdef _WIN32
+    virtual void load_resource(int32_t resource_index, const std::string &amp;resource_section) = 0;
+#endif
+    virtual void load_json(const std::string &amp;json) = 0;
+    virtual void load_file(const std::string &amp;file_name) = 0;
+    virtual void load_theme(const i_theme &amp;theme_) = 0;
+
+    virtual bool is_ok() const = 0;
+
+    virtual ~i_theme() {}
+};
+</code></pre>
+<p>This interface accepts a control to receive visual parameters of its display.</p>
+<h3 id="stdstring-get_name-const">std::string <span style="color:#9a0303">get_name</span>() const</h3>
+<p>Returns the character name of the topic, for example <code>`"dark"</code> or <code>"light"</code></p>
+<h3 id="void-set_colorconst-stdstring-control-const-stdstring-value-color-color_">void <span style="color:#9a0303">set_color</span>(const <span style="color:#0c8bb6">std::string</span> &amp;control, const <span style="color:#0c8bb6">std::string</span> &amp;value, color color_)</h3>
+<p>Sets the color for the <code>value</code> of the <code>control</code> control</p>
+<p>Example:</p>
+<pre><code>auto redButtonTheme = wui::make_custom_theme(); // Create a new custom theme
+redButtonTheme-&gt;load_theme(*wui::get_default_theme()); // Load it from the default so that we don't have to set all the values
+
+redButtonTheme-&gt;set_color(wui::button::tc, wui::button::tv_calm, wui::make_color(205, 15, 20)); // Set the fill color of the button in the idle mode
+
+... Use a new theme when creating a button or apply it to an existing one
+</code></pre>
+<p>Where:</p>
+<pre><code>wui::button::tc = "button";
+wui::button::tv_calm = "calm";
+</code></pre>
+<p>Which means this color will be applied to the control named <code>"button"</code> in the <code>"calm"</code> state</p>
+<h3 id="color-get_colorconst-stdstring-control-const-stdstring-value-const">color <span style="color:#9a0303">get_color</span>(const <span style="color:#0c8bb6">std::string</span> &amp;control, const <span style="color:#0c8bb6">std::string</span> &amp;value) const</h3>
+<p>Returns the color for the <code>value</code> of the <code>control</code> control</p>
+<h3 id="void-set_dimensionconst-stdstring-control-const-stdstring-value-int32_t-dimension">void <span style="color:#9a0303">set_dimension</span>(const <span style="color:#0c8bb6">std::string</span> &amp;control, const <span style="color:#0c8bb6">std::string</span> &amp;value, <span style="color:#0c8bb6">int32_t</span> dimension)</h3>
+<p>Sets the size for the <code>value</code> of the <code>control</code> control</p>
+<h3 id="int32_t-get_dimensionconst-stdstring-control-const-stdstring-value">int32_t <span style="color:#9a0303">get_dimension</span>(const <span style="color:#0c8bb6">std::string</span> &amp;control, const <span style="color:#0c8bb6">std::string</span> &amp;value)</h3>
+<p>Returns the size for the <code>value</code> of the <code>control</code> control</p>
+<h3 id="void-set_stringconst-stdstring-control-const-stdstring-value-const-stdstring-str">void <span style="color:#9a0303">set_string</span>(const <span style="color:#0c8bb6">std::string</span> &amp;control, const <span style="color:#0c8bb6">std::string</span> &amp;value, const <span style="color:#0c8bb6">std::string</span> &amp;str)</h3>
+<p>Sets the string for the <code>value</code> of the <code>control</code> control</p>
+<h3 id="const-stdstring-get_stringconst-stdstring-control-const-stdstring-value">const std::string &amp;<span style="color:#9a0303">get_string</span>(const <span style="color:#0c8bb6">std::string</span> &amp;control, const <span style="color:#0c8bb6">std::string</span> &amp;value)</h3>
+<p>Returns a string for the <code>value</code> of the <code>control</code> control</p>
+<h3 id="void-set_fontconst-stdstring-control-const-stdstring-value-const-font-font_">void <span style="color:#9a0303">set_font</span>(const <span style="color:#0c8bb6">std::string</span> &amp;control, const <span style="color:#0c8bb6">std::string</span> &amp;value, const <span style="color:#0c8bb6">font</span> &amp;font_)</h3>
+<p>Sets the font for the <code>value</code> of the <code>control</code> control</p>
+<h3 id="font-get_fontconst-stdstring-control-const-stdstring-value">font <span style="color:#9a0303">get_font</span>(const <span style="color:#0c8bb6">std::string</span> &amp;control, const <span style="color:#0c8bb6">std::string</span> &amp;value)</h3>
+<p>Returns the font for the <code>value</code> of the <code>control</code> control</p>
+<h3 id="void-set_imageconst-stdstring-name-const-stdvectoruint8_t-data">void <span style="color:#9a0303">set_image</span>(const <span style="color:#0c8bb6">std::string</span> &amp;name, const std::vector&lt;<span style="color:#0c8bb6">uint8_t</span>&gt; &amp;data)</h3>
+<p>Sets the image from the byte array for the <code>value</code> of the <code>control</code> control</p>
+<h3 id="const-stdvectoruint8_t-get_imageconst-stdstring-name">const std::vector&lt;uint8_t&gt; &amp;<span style="color:#9a0303">get_image</span>(const <span style="color:#0c8bb6">std::string</span> &amp;name)</h3>
+<p>Returns a byte array containing the subject image for the <code>value</code> of the <code>control</code> control</p>
+<h3 id="bool-load_resourceint32_t-resource_index-const-stdstring-resource_section-windows-only">bool <span style="color:#9a0303">load_resource</span>(<span style="color:#0c8bb6">int32_t</span> resource_index, const <span style="color:#0c8bb6">std::string</span> &amp;resource_section); (Windows only)</h3>
+<p>Function loading a theme from a json file stored in the application resource</p>
+<h3 id="bool-load_jsonconst-stdstring-json">bool <span style="color:#9a0303">load_json</span>(const <span style="color:#0c8bb6">std::string</span> &amp;json)</h3>
+<p>Function loading theme from json string</p>
+<h3 id="bool-load_fileconst-stdstring-file_name">bool <span style="color:#9a0303">load_file</span>(const <span style="color:#0c8bb6">std::string</span> &amp;file_name)</h3>
+<p>Function loading theme from json file</p>
+<h3 id="bool-load_themeconst-i_theme-theme_">bool <span style="color:#9a0303">load_theme</span>(const i_theme &amp;theme_)</h3>
+<p>Function loading a topic from another theme instance</p>
+<h3 id="bool-is_okconst-i_theme-theme_-const">bool <span style="color:#9a0303">is_ok</span>(const i_theme &amp;theme_) const</h3>
+<p>Returns whether the theme loaded normally from json</p></div>
         </div>
 
         <footer class="col-md-12">
