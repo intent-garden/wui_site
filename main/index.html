@@ -27,6 +27,18 @@
 </head>
 <body>
 
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="height: 702px;">
+        <div class="modal-content" style="width: 1153px;">              
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                 <img src="" class="imagepreview" style="width: 100%;" >
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--navigation-->
 <section class="smart-scroll">
     <div class="container-fluid">
@@ -139,20 +151,25 @@
 <!-- demo section -->
 <section class="pt-6 pb-7" id="demo">
     <div class="container">
-        <div class="row mt-6">
-            <div class="col-md-6 mr-auto">
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center">
                 <h2>Some application's screenshots</h2>
                 <p class="mb-5">Such applications as VideoGrace video messenger, MAN trading terminal, and possibly your new application are created on WUI 😉</p>
                 Try the simple live demo on ::
                 <a href="../download/simple.exe"><i class="fa fa-windows"></i> Windows x64</a> | 
                 <a href="../download/simple.tar.bz2"><i class="fa fa-linux"></i> Linux x64</a>
             </div>
+        </div>
+        <div class="row mt-6">
             <div class="col-md-5">
-                <div class="slick-about">
-                    <img src="img/screenshoot-1.png" class="img-fluid rounded d-block mx-auto" alt="VideoGrace 1"/>
-                    <img src="img/screenshoot-2.png" class="img-fluid rounded d-block mx-auto" alt="VideoGrace 2"/>
-                    <img src="img/screenshoot-2.png" class="img-fluid rounded d-block mx-auto" alt="VideoGrace 3"/>
-                </div>
+                <a href="#demo" class="pop">
+                    <img id="imageresource" src="img/screenshoot-1.png" class="img-fluid rounded d-block mx-auto" alt="VideoGrace 1">
+                </a>
+            </div>
+            <div class="col-md-5">
+                <a href="#demo" class="pop">
+                    <img id="imageresource" src="img/screenshoot-2.png" class="img-fluid rounded d-block mx-auto" alt="VideoGrace 2">
+                </a>
             </div>
         </div>
     </div>

@@ -59,15 +59,12 @@ $(function () {
             scrollTop: 0
         }, 1000);
     });
+});
 
-    /**Theme switcher - DEMO PURPOSE ONLY */
-    $('.switcher-trigger').click(function () {
-        $('.switcher-wrap').toggleClass('active');
-    });
-    $('.color-switcher ul li').click(function () {
-        var color = $(this).attr('data-color');
-        $('#theme-color').attr("href", "css/" + color + ".css");
-        $('.color-switcher ul li').removeClass('active');
-        $(this).addClass('active');
-    });
+// Image full size viewer
+$(function() {
+    $('.pop').on('click', function() {
+        $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+        $('#imagemodal').modal('show');   
+    });		
 });
