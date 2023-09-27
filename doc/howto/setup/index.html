@@ -118,6 +118,7 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#receive-build-and-verify">Receive build and verify</a></li>
+        <li class="main "><a href="#dependencies-on-linux">Dependencies on Linux</a></li>
         <li class="main "><a href="#receive-and-build-on-linux">Receive and build on Linux</a></li>
         <li class="main "><a href="#checking-on-linux">Checking on Linux</a></li>
         <li class="main "><a href="#receive-and-build-on-windows">Receive and build on Windows</a></li>
@@ -127,6 +128,18 @@
                 <div class="col-md-9" role="main">
 
 <h2 id="receive-build-and-verify">Receive build and verify</h2>
+<h2 id="dependencies-on-linux">Dependencies on Linux</h2>
+<p>WUI applications that use the WUI depend on the following system libraries</p>
+<pre><code>xcb
+xcb-cursor
+xcb-ewmh
+xcb-icccm
+xcb-image
+X11
+X11-xcb
+cairo
+pthread
+</code></pre>
 <h2 id="receive-and-build-on-linux">Receive and build on Linux</h2>
 <pre><code>git clone https://github.com/ud84/wui
 cd wui
@@ -142,8 +155,9 @@ make
 </code></pre>
 <p>Open wui.sln using Visual Studio and build the project</p>
 <h2 id="test-on-windows">Test on Windows</h2>
-<p>Run
-    simple.exe</p></div>
+<p>Run</p>
+<pre><code>simple.exe
+</code></pre></div>
         </div>
 
         <footer class="col-md-12">

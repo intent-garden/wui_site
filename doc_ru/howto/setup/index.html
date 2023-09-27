@@ -118,8 +118,9 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#_1">Получение сборка и проверка</a></li>
-        <li class="main "><a href="#linux">Получение и сборка на Linux</a></li>
-        <li class="main "><a href="#linux_1">Проверка на Linux</a></li>
+        <li class="main "><a href="#linux">Зависимости на Linux</a></li>
+        <li class="main "><a href="#linux_1">Получение и сборка на Linux</a></li>
+        <li class="main "><a href="#linux_2">Проверка на Linux</a></li>
         <li class="main "><a href="#windows">Получение и сборка на Windows</a></li>
         <li class="main "><a href="#windows_1">Проверка на Windows</a></li>
     </ul>
@@ -127,13 +128,25 @@
                 <div class="col-md-9" role="main">
 
 <h2 id="_1">Получение сборка и проверка</h2>
-<h2 id="linux">Получение и сборка на Linux</h2>
+<h2 id="linux">Зависимости на Linux</h2>
+<p>Использующие WUI приложения зависят от следующих системных библиотек</p>
+<pre><code>xcb
+xcb-cursor
+xcb-ewmh
+xcb-icccm
+xcb-image
+X11
+X11-xcb
+cairo
+pthread
+</code></pre>
+<h2 id="linux_1">Получение и сборка на Linux</h2>
 <pre><code>git clone https://github.com/ud84/wui
 cd wui
 cmake CMakeLists.txt
 make
 </code></pre>
-<h2 id="linux_1">Проверка на Linux</h2>
+<h2 id="linux_2">Проверка на Linux</h2>
 <pre><code>cd examples/simple
 ./simple
 </code></pre>
@@ -142,8 +155,9 @@ make
 </code></pre>
 <p>Откройте wui.sln при помощи Visual Studio и соберите проект</p>
 <h2 id="windows_1">Проверка на Windows</h2>
-<p>Запустите 
-    simple.exe</p></div>
+<p>Запустите</p>
+<pre><code>simple.exe
+</code></pre></div>
         </div>
 
         <footer class="col-md-12">
