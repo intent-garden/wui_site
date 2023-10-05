@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>WUI - Window User Interface Libraray</title>
+    <meta name="description"
+          content="WUI - Window User Interface Libraray official site"/>
+
+    <!--Inter UI font-->
+    <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet">
+
+    <!--vendors styles-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+
+    <!-- favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+
+    <!-- Bootstrap CSS / Color Scheme -->
+    <link rel="stylesheet" href="css/default.css" id="theme-color">
+</head>
+<body>
+
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="height: 680px;">
+        <div class="modal-content" style="width: 990px; background-color: #979597;">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                 <img src="" class="imagepreview">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--navigation-->
+<section class="smart-scroll">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <a class="navbar-brand heading-black" href="index.html">
+                <img src="img/wui_logo.png" style="width:50pt;"> WUI
+            </a>
+            <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span data-feather="grid"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#features">Характеристики</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#demo">Демонстрация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#news">Новости</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="../doc_ru" target="_blank"><i class="fa fa-file"></i> Документация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="https://github.com/ud84/wui" target="_blank"><i class="fa fa-github"></i> GitHub</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#donate" target="_blank">Благодарность ❤️</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</section>
+
+<!--hero header-->
+<section class="py-7 py-md-0 bg-primary" id="home">
+    <div class="container">
+        <div class="row vh-md-100">
+            <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
+                <img src="img/wui_logo.png" style="width:100pt;">
+                <h1 class="heading-black text-capitalize">WUI - Оконная библиотека пользователя</h1>
+                <p class="lead py-3">WUI - это кроссплатформенная библиотека для создания графических пользовательских интерфейсов настольных приложений.<br><br> В настоящее время поддерживаются операционные системы Windows и Linux, в стадии разработки находится поддержка macOS. Код написан на C++ и пока не имеет биндингов к другим языкам.</p>
+                <a href="../doc_ru/"><button class="btn btn-primary d-inline-flex flex-row align-items-center">
+                    Открыть документацию
+                    <em class="ml-2" data-feather="arrow-right"></em>
+                </button></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- features section -->
+<section class="pt-6 pb-7 bg-secondary" id="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center">
+                <h3 class="heading-black">WUI предоставляет удобный способ создания кроссплатформенных графических программ на современном языке C++</h3>
+                <p class="text-dark lead">Библиотека использует современный язык C++ (C++11) и имеет минималистичный API. Основной принцип проектирования - выжать из минимума кода максимум функциональности и скорости выполнения. Платформозависимый код инкапсулирован всего в двух классах - window и graphic.</p>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-10 mx-auto">
+                <div class="row feature-boxes">
+                    <div class="col-md-6 box">
+                        <div class="icon-box box-primary">
+                            <div class="icon-box-inner">
+                                <span data-feather="edit-3" width="35" height="35"></span>
+                            </div>
+                        </div>
+                        <h5 class="text-dark">Создаете на одной системе, а запускаете на всех</h5>
+                        <p class="text-dark">Ваше приложение, написанное один раз, будет одинаково работать и выглядеть под Windows, Linux и macOS</p>
+                    </div>
+                    <div class="col-md-6 box">
+                        <div class="icon-box box-success">
+                            <div class="icon-box-inner">
+                                <span data-feather="monitor" width="35" height="35"></span>
+                            </div>
+                        </div>
+                        <h5 class="text-dark">Продвинутая система управления ресурсами</h5>
+                        <p class="text-dark">Встроенная поддержка локалей и цветовых тем на основе json-схем позволяет легко создавать впечатляющие многоязычные приложения с разнообразными цветовыми и визуальными темами.</p>
+                    </div>
+                    <div class="col-md-6 box">
+                        <div class="icon-box box-danger">
+                            <div class="icon-box-inner">
+                                <span data-feather="layout" width="35" height="35"></span>
+                            </div>
+                        </div>
+                        <h5 class="text-dark">Минимальный размер приложения</h5>
+                        <p class="text-dark">Средний размер двоичного кода, добавляемого в приложение, составляет 2 мегабайта, что в 20-30 раз меньше, чем у конкурентов</p>
+                    </div>
+                    <div class="col-md-6 box">
+                        <div class="icon-box box-info">
+                            <div class="icon-box-inner">
+                                <span data-feather="globe" width="35" height="35"></span>
+                            </div>
+                        </div>
+                        <h5 class="text-dark">Открытое ПО, лицензия Boost</h5>
+                        <p class="text-dark">Вы можете свободно внедрять WUI в свое программное обеспечение без необходимости публикации исходного кода или приобретения лицензии</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- demo section -->
+<section class="pt-6 pb-7" id="demo">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center">
+                <h2>Some application's screenshots</h2>
+                <p class="mb-5">Such applications as <a href="https://videograce.com" target="_blank"><i class="fa fa-camera"></i> VideoGrace</a> video messenger and possibly your new application are created on WUI 😉</p>
+                Try the simple live demo on ::
+                <a href="../download/simple.exe"><i class="fa fa-windows"></i> Windows x64</a> | 
+                <a href="../download/simple.tar.bz2"><i class="fa fa-linux"></i> Linux x64</a>
+            </div>
+        </div>
+        <div class="row mt-6">
+            <div class="col-md-6">
+                <a href="#demo" class="pop">
+                    <img id="imageresource" src="img/screenshoot-1.png" class="img-fluid rounded d-block mx-auto" alt="VideoGrace 1">
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="#demo" class="pop">
+                    <img id="imageresource" src="img/screenshoot-2.png" class="img-fluid rounded d-block mx-auto" alt="VideoGrace 2">
+                </a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center">
+                <a href="#demo" class="pop">
+                    <img id="imageresource" src="img/screenshoot-3.png" class="img-fluid rounded d-block mx-auto" alt="VideoGrace 3">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--faq section-->
+<!--<section class="py-7" id="faq">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center">
+                <h2>Frequently asked questions</h2>
+                <p class="text-muted lead">Answers to most common questions.</p>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-10 mx-auto">
+                <div class="row">
+                    <div class="col-md-6 mb-5">
+                        <h6>Can I try it for free?</h6>
+                        <p class="text-muted">Nam liber tempor cum soluta nobis eleifend option congue nihil imper per tem por legere me doming.</p>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <h6>Do you have hidden fees?</h6>
+                        <p class="text-muted">Nam liber tempor cum soluta nobis eleifend option congue nihil imper per tem por legere me doming.</p>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <h6>What are the payment methods you accept?</h6>
+                        <p class="text-muted">Nam liber tempor cum soluta nobis eleifend option congue nihil imper per tem por legere me doming.</p>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <h6>How often do you release updates?</h6>
+                        <p class="text-muted">Nam liber tempor cum soluta nobis eleifend option congue nihil imper per tem por legere me doming.</p>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <h6>What is your refund policy?</h6>
+                        <p class="text-muted">Nam liber tempor cum soluta nobis eleifend option congue nihil imper per tem por legere me doming.</p>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <h6>How can I contact you?</h6>
+                        <p class="text-muted">Nam liber tempor cum soluta nobis eleifend option congue nihil imper per tem por legere me doming.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6 mx-auto text-center">
+                <h5 class="mb-4">Have questions?</h5>
+                <a href="#" class="btn btn-primary">Contact us</a>
+            </div>
+        </div>
+    </div>
+</section>->
+
+<!--news section-->
+<section class="py-7 bg-light" id="news">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center">
+                <h2 class="text-dark">WUI life</h2>
+                <p class="text-muted lead">Key milestones</p>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="#" class="card-title mb-2"><h5>Project start</h5></a>
+                        <p class="text-muted small-xl mb-2">Dec 17, 2021</p>
+                        <p class="card-text">The first commit is the birthday of the project</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="#" class="card-title mb-2"><h5>Windows port is done</h5></a>
+                        <p class="text-muted small-xl mb-2">January 20, 2022</p>
+                        <p class="card-text">Implemented startup and operation on Windows</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="#" class="card-title mb-2"><h5>Linux port is done</h5></a>
+                        <p class="text-muted small-xl mb-2">February 26, 2022</p>
+                        <p class="card-text">Implemented startup and operation on Linux</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="#" class="card-title mb-2"><h5>Public release</h5></a>
+                        <p class="text-muted small-xl mb-2">September 26, 2023</p>
+                        <p class="card-text">The product has reached maturity and has been published</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="row mt-6">
+            <div class="col-md-6 mx-auto text-center">
+                <a href="#" class="btn btn-primary">View all posts</a>
+            </div>
+        </div>-->
+    </div>
+</section>
+
+<!-- donate section -->
+<section class="py-7 bg-info section-angle top-top bottom-left" id="donate">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center text-info">
+                <h2 class="text-info">Donations <span style="color:red">❤️</span></h2>
+                <p class="mb-5">We will be very grateful for your support of the project. The received funds are used to pay for hosting, purchase computers and material support for developers.</p>
+                <a href="https://www.paypal.com/paypalme/libwui" class="btn btn-primary">Paypal</a><br><br>
+                <a href="https://www.patreon.com/user/membership?u=66230239" class="btn btn-primary">Patreon</a><br><br>
+                <h4 class="text-info">Crypto (USDT): TAiA5MuS3nCkAaPWSjfLmGijvTzMychLbY TRC20</h4>
+        </div>
+    </div>
+</section>
+
+<!--footer-->
+<footer class="py-6">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 mr-auto">
+                <h5>About WUI Team</h5>
+                <p class="text-muted">WUI is maintained by a team of independent developers since 2021. Development is ongoing, almost full time. To join the team, email us.</p>
+                <ul class="list-inline social social-sm">
+                    <!--<li class="list-inline-item">
+                        <a href=""><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href=""><i class="fa fa-twitter"></i></a>
+                    </li>-->
+                    <li class="list-inline-item">
+                        <a href="https://github.com/ud84/wui" target="_blank"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://t.me/libwui" target="_blank"><i class="fa fa-telegram"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-2">
+                <h5>Documentation</h5>
+                <ul class="list-unstyled">
+                    <li><a href="../doc/" target="_blank">Engish documentation</a></li>
+                    <li><a href="../doc_ru/" target="_blank">Russian documentation</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-2">
+                <h5>Contacts</h5>
+                <ul class="list-unstyled">
+                    <li><a href="https://github.com/ud84/wui" target="_blank">GitHub</a></li>
+                    <li><a href="mailto:info@libwui.org">info@libwui.org</a></li>
+                    <li><a href="https://t.me/libwui" target="_blank">Telegram channel</a></li>
+                </ul>
+            </div>
+            <!--<div class="col-sm-2">
+                <h5>Donations ❤️</h5>
+                <ul class="list-unstyled">
+                    <li><a href="../donate/" target="_blank">From card</a></li>
+                    <li><a href="https://www.patreon.com/user/membership?u=66230239" target="_blank">Fund on Patreon</a></li>
+                    <li>USDT: TAiA5MuS3nCkAaPWSjfLmGijvTzMychLbY TRC20</li>
+                </ul>
+            </div>-->
+        </div>
+        <div class="row mt-5">
+            <div class="col-12 text-muted text-center small-xl">
+                &copy; 2021 - 2023 WUI Team
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--scroll to top-->
+<div class="scroll-top">
+    <i class="fa fa-angle-up" aria-hidden="true"></i>
+</div>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.3/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>
