@@ -139,8 +139,11 @@
 
 <h1 id="welcome-to-wui">Welcome to WUI</h1>
 <p>WUI is an attempt to make an easy to use and as fast as possible cross-platform library for creating a modern C++ graphical user interface. The library uses C++11 and has a minimalistic API.</p>
-<p>WUI is based on two primitives - Window and Control.</p>
-<p>A window can contain controls, also a window itself is a control. A <a href="base/interfaces/#control">control</a> is any visual element for user interaction - a button, an input field, a list, etc. <a href="base/interfaces/#window">window</a> - provides the physical work of drawing on the graphical context of the system, accepting input events, and controlling the input focus. Control knows how to handle events coming from Window, stores its states, and draws itself on the graphical context provided by the containing window.</p>
+<p>Everything is based on two entities - Window and Control. A window can contain controls, and the window itself is a control.</p>
+<p><a href="base/interfaces/#control">Control</a> is any visual element for user interaction - button, input field, list, menu, etc.
+Control knows how to handle events coming from Window, stores its states, and draws itself on the graphical context provided by the window containing it.</p>
+<p><a href="base/interfaces/#window">Window</a> - receives system events and provides their distribution to subscribers. The window also commands its controllers to redraw and provides them with their own graphic. In addition, the window controls the input focus, can do modality and send an event to the subscribed user or to the system.</p>
+<p><a href="base/graphic/">Graphic</a> is the third base entity that provides an interface to the system's drawing methods. Currently, drawing is implemented on Windows GDI/GDI+ and Linux xcb/cairo. Of course, there is no obstacle to implement drawing on vulcan/bare metal/etc.</p>
 <p>The library also has auxiliary tools for operation - structures <a href="base/common/">common</a> (contains such basic types as <code>rect</code>, <code>color</code>, <code>font</code>), <a href="base/event/">event</a> (<code>mouse</code>, <code>keyboard</code>, <code>internal</code> and <code>system events</code>), <a href="base/graphic/">graphic</a> (for physical drawing on the system graphic context) <a href="base/theme/">theme</a> (a system of constants for convenient support of visual themes) and <code>locale</code> (a subsystem for convenient storage of textual content).</p>
 <p><img src="img/system.png"></p>
 <h2 id="platforms">Platforms</h2>
@@ -243,5 +246,5 @@
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2023-10-06 10:05:11.800138+00:00
+Build Date UTC : 2023-10-06 11:21:25.664460+00:00
 -->
