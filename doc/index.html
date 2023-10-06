@@ -140,8 +140,8 @@
 <h1 id="welcome-to-wui">Welcome to WUI</h1>
 <p>WUI is an attempt to make an easy to use and as fast as possible cross-platform library for creating a modern C++ graphical user interface. The library uses C++11 and has a minimalistic API.</p>
 <p>WUI is based on two primitives - Window and Control.</p>
-<p>A window can contain controls, also a window itself is a control. A control is any visual element for user interaction - a button, an input field, a list, etc. Window - provides the physical work of drawing on the graphical context of the system, accepting input events, and controlling the input focus. Control knows how to handle events coming from Window, stores its states, and draws itself on the graphical context provided by the containing window.</p>
-<p>The library also has auxiliary tools for operation - structures <code>common</code> (contains such basic types as <code>rect</code>, <code>color</code>, <code>font</code>), <code>event</code> (<code>mouse</code>, <code>keyboard</code>, <code>internal</code> and <code>system events</code>), <code>graphic</code> (for physical drawing on the system graphic context) <code>theme</code> (a system of constants for convenient support of visual themes) and <code>locale</code> (a subsystem for convenient storage of textual content).</p>
+<p>A window can contain controls, also a window itself is a control. A <a href="base/interfaces/#control">control</a> is any visual element for user interaction - a button, an input field, a list, etc. <a href="base/interfaces/#window">window</a> - provides the physical work of drawing on the graphical context of the system, accepting input events, and controlling the input focus. Control knows how to handle events coming from Window, stores its states, and draws itself on the graphical context provided by the containing window.</p>
+<p>The library also has auxiliary tools for operation - structures <a href="base/common/">common</a> (contains such basic types as <code>rect</code>, <code>color</code>, <code>font</code>), <a href="base/event/">event</a> (<code>mouse</code>, <code>keyboard</code>, <code>internal</code> and <code>system events</code>), <a href="base/graphic/">graphic</a> (for physical drawing on the system graphic context) <a href="base/theme/">theme</a> (a system of constants for convenient support of visual themes) and <code>locale</code> (a subsystem for convenient storage of textual content).</p>
 <p><img src="img/system.png"></p>
 <h2 id="platforms">Platforms</h2>
 <p>The following platforms are currently supported:</p>
@@ -150,7 +150,7 @@
 <li>Linux (X11 + xcb)</li>
 </ul>
 <p>Work on MacOS platform will be completed soon.</p>
-<p>All platform-dependent code is collected in two elements - window and graphic (rendering subsystem).</p>
+<p>All platform-dependent code is collected in two elements - <a href="base/interfaces/">window</a> and <a href="base/graphic/">graphic</a> (rendering subsystem).</p>
 <h2 id="quick-start">Quick start</h2>
 <ul>
 <li><a href="howto/setup/">Receive, build and setup</a></li>
@@ -243,5 +243,5 @@
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2023-10-06 09:32:01.221023+00:00
+Build Date UTC : 2023-10-06 10:05:11.800138+00:00
 -->
