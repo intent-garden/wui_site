@@ -138,10 +138,11 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="welcome-to-wui">Welcome to WUI</h1>
-<p>WUI is an attempt to make an easy to use and as fast as possible cross-platform library for creating a modern C++ graphical user interface. The library uses modern C++ (C++11) and has a minimalistic API. The library doesn't try to build a complete abstraction over the operating system and only deals with basic UI stuff. It doesn't have anything about networking, strings, file handling, which are in modern C++ standard and boost.</p>
+<p>WUI is an attempt to make an easy to use and as fast as possible cross-platform library for creating a modern C++ graphical user interface. The library uses C++11 and has a minimalistic API.</p>
 <p>WUI is based on two primitives - Window and Control.</p>
 <p>A window can contain controls, also a window itself is a control. A control is any visual element for user interaction - a button, an input field, a list, etc. Window - provides the physical work of drawing on the graphical context of the system, accepting input events, and controlling the input focus. Control knows how to handle events coming from Window, stores its states, and draws itself on the graphical context provided by the containing window.</p>
-<p>The library also has auxiliary tools for operation - structures Common (contains such basic types as Rect, Color), Event (mouse, keyboard, internal and system events), Graphic (for physical drawing on the system graphic context) Theme (a system of constants for convenient support of visual themes) and Locale (a subsystem for convenient storage of textual content).</p>
+<p>The library also has auxiliary tools for operation - structures <code>common</code> (contains such basic types as <code>rect</code>, <code>color</code>, <code>font</code>), <code>event</code> (<code>mouse</code>, <code>keyboard</code>, <code>internal</code> and <code>system events</code>), <code>graphic</code> (for physical drawing on the system graphic context) <code>theme</code> (a system of constants for convenient support of visual themes) and <code>locale</code> (a subsystem for convenient storage of textual content).</p>
+<p><img src="img/system.png"></p>
 <h2 id="platforms">Platforms</h2>
 <p>The following platforms are currently supported:</p>
 <ul>
@@ -242,5 +243,5 @@
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2023-10-06 07:07:54.042530+00:00
+Build Date UTC : 2023-10-06 09:32:01.221023+00:00
 -->
