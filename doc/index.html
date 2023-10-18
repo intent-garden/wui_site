@@ -118,11 +118,27 @@
             
             <li class="nav-item" data-level="1"><a href="#welcome-to-wui" class="nav-link">Welcome to WUI</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#tasks-for-ui-framework" class="nav-link">Tasks for UI framework</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#general-scheme-of-the-framework" class="nav-link">General scheme of the framework</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-level="2"><a href="#platforms" class="nav-link">Platforms</a>
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="2"><a href="#fundamental-principles" class="nav-link">Fundamental Principles</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-level="2"><a href="#quick-start" class="nav-link">Quick start</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#handbook" class="nav-link">Handbook</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -139,13 +155,29 @@
 
 <h1 id="welcome-to-wui">Welcome to WUI</h1>
 <p>WUI is an attempt to make an easy to use and as fast as possible cross-platform library for creating a modern C++ graphical user interface. The library uses C++11 and has a minimalistic API.</p>
+<h2 id="tasks-for-ui-framework">Tasks for UI framework</h2>
+<ul>
+<li>Run on Windows (At least 7, but works on XP as well)</li>
+<li>Run on Linux (Starting with Ubuntu 16 / CentOS6)</li>
+<li>Run on macOS</li>
+<li>Open windows and display controls on them. </li>
+<li>Provide a common interface to the drawing subsystem that hides platform-dependent methods. This will allow you to write a control once, on any platform, and it will look and behave the same on all.</li>
+<li>Provide a common interface to events. Any control or user can subscribe to any message group, including custom ones, with the ability to send/receive messages asynchronously.</li>
+<li>Accept system messages, respond to mouse, keyboard and other events.</li>
+<li>Have the ability to change the color scheme / style / icons / images of all controls / windows from one place. Store all visual settings of the application in json, including having the ability to store images in it as well.</li>
+<li>Provide a system of text constants for titles and labels depending on the language selected.</li>
+<li>Have the ability to detach / attach windows from each other.</li>
+<li>Provide an implementation of basic UI controls and have a clear and accessible way for third party developers to add new controls for their applications.</li>
+<li>Have a user-friendly interface for working with application configs. Windows registry and ini files are supported. Naturally, with the possibility of modification.</li>
+</ul>
+<h2 id="general-scheme-of-the-framework">General scheme of the framework</h2>
+<p><img src="img/system.png"></p>
 <p>Everything is based on two entities - Window and Control. A window can contain controls, and the window itself is a control.</p>
 <p><a href="base/interfaces/#control">Control</a> is any visual element for user interaction - button, input field, list, menu, etc.
 Control knows how to handle events coming from Window, stores its states, and draws itself on the graphical context provided by the window containing it.</p>
 <p><a href="base/interfaces/#window">Window</a> - receives system events and provides their distribution to subscribers. The window also commands its controllers to redraw and provides them with their own graphic. In addition, the window controls the input focus, can do modality and send an event to the subscribed user or to the system.</p>
 <p><a href="base/graphic/">Graphic</a> is the third base entity that provides an interface to the system's drawing methods. Currently, drawing is implemented on Windows GDI/GDI+ and Linux xcb/cairo. Of course, there is no obstacle to implement drawing on vulcan/bare metal/etc.</p>
 <p>The library also has auxiliary tools for operation - structures <a href="base/common/">common</a> (contains such basic types as <code>rect</code>, <code>color</code>, <code>font</code>), <a href="base/event/">event</a> (<code>mouse</code>, <code>keyboard</code>, <code>internal</code> and <code>system events</code>), <a href="base/graphic/">graphic</a> (for physical drawing on the system graphic context) <a href="base/theme/">theme</a> (a system of constants for convenient support of visual themes) and <code>locale</code> (a subsystem for convenient storage of textual content).</p>
-<p><img src="img/system.png"></p>
 <h2 id="platforms">Platforms</h2>
 <p>The following platforms are currently supported:</p>
 <ul>
@@ -154,9 +186,45 @@ Control knows how to handle events coming from Window, stores its states, and dr
 </ul>
 <p>Work on MacOS platform will be completed soon.</p>
 <p>All platform-dependent code is collected in two elements - <a href="base/interfaces/">window</a> and <a href="base/graphic/">graphic</a> (rendering subsystem).</p>
+<h2 id="fundamental-principles">Fundamental Principles</h2>
+<p>In general terms, the application workflow is as follows:</p>
+<p>The window receives system events such as: need to render, mouse and keyboard input, device changes, user messages. These messages are passed to the subscribers of window events, these are firstly, the controls contained on the window, and secondly, the user code of the application, if necessary. To simplify the work, it is possible to receive only events related to the control - mouse in the rectangle occupied by the control, keyboard, if the control owns the input focus.</p>
+<p>Receiving messages/events from a control is performed by callbacks specific to that control. This allowed us to radically simplify the event system without losing in functionality and, in our opinion, winning in brevity.</p>
+<p>When it is necessary to draw a part of the window, we search for controls falling into the redrawing area and call the draw() method of each control sequentially, according to the order of adding controls to the window. Controls responding to the topmost() true are drawn last, to be at the top of the control stack.</p>
 <h2 id="quick-start">Quick start</h2>
 <ul>
 <li><a href="howto/setup/">Receive, build and setup</a></li>
+<li><a href="howto/hello-world.md">Hello world application</a></li>
+</ul>
+<h2 id="handbook">Handbook</h2>
+<ul>
+<li><a href="base/main-loop.md">Main application loop</a></li>
+<li>
+<p><a href="base/resources.md">Resources</a></p>
+</li>
+<li>
+<p><a href="base/transient.md">Transient / Modal</a></p>
+</li>
+<li>
+<p><a href="base/theme/">Visual themes</a></p>
+</li>
+<li><a href="base/locale.md">Locales</a></li>
+<li>
+<p><a href="base/config.md">Config</a></p>
+</li>
+<li>
+<p><a href="base/multithreading.md">Multithreading</a></p>
+</li>
+<li><a href="base/unicode.md">Unicode</a></li>
+<li>
+<p><a href="controls/error-handling.md">Error Handling</a></p>
+</li>
+<li>
+<p><a href="controls/all.md">Controls</a></p>
+</li>
+<li>
+<p><a href="base/dependencies.md">Dependencies</a></p>
+</li>
 </ul>
 <h2 id="contacts">Contacts:</h2>
 <ul>
@@ -246,5 +314,5 @@ Control knows how to handle events coming from Window, stores its states, and dr
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2023-10-18 09:09:17.315878+00:00
+Build Date UTC : 2023-10-18 09:25:16.715066+00:00
 -->
