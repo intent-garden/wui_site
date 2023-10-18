@@ -216,12 +216,30 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#error-handling" class="nav-link">Error handling</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-</div>
+<h2 id="error-handling">Error handling</h2>
+<p>WUI does not use exceptions. Methods that may terminate with an error return a bool. To get details about the problem, the get_error() method returns the structure </p>
+<pre><code>struct error
+{
+    error_type type;
+    std::string component, message;
+    bool is_ok() const;
+};
+</code></pre>
+<p>Errors that may have occurred in the object constructor should be checked like this:</p>
+<pre><code>newObject(new wui::image(IMG_LOGO)).....
+
+if (!newObject-&gt;get_error().is_ok()) { log("error", newObject-&gt;get_error().str()); }
+</code></pre></div>
             </div>
         </div>
 

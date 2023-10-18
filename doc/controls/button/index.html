@@ -216,12 +216,65 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#button" class="nav-link">Button</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#interface" class="nav-link">Interface</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-</div>
+<h1 id="button">Button</h1>
+<h2 id="interface">Interface</h2>
+<pre><code>class button : public i_control, public std::enable_shared_from_this&lt;button&gt;
+{
+public:
+    button(const std::string &amp;caption, std::function&lt;void(void)&gt; click_callback, const std::string &amp;theme_control_name = tc, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+    button(const std::string &amp;caption, std::function&lt;void(void)&gt; click_callback, button_view button_view_, const std::string &amp;theme_control_name = tc, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+
+#ifdef _WIN32
+    button(const std::string &amp;caption, std::function&lt;void(void)&gt; click_callback, button_view button_view_, int32_t image_resource_index, int32_t image_size, const std::string &amp;theme_control_name = tc, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+#endif
+    button(const std::string &amp;caption, std::function&lt;void(void)&gt; click_callback, button_view button_view_, const std::string &amp;  image_file_name, int32_t image_size, const std::string &amp;theme_control_name = tc, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+    button(const std::string &amp;caption, std::function&lt;void(void)&gt; click_callback, button_view button_view_, const std::vector&lt;uint8_t&gt; &amp;image_data, int32_t image_size, const std::string &amp;theme_control_name = tc, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+    ~button();
+
+    /// Button's interface
+    void set_caption(const std::string &amp;caption);
+
+    void set_button_view(button_view button_view_);
+#ifdef _WIN32
+    void set_image(int32_t resource_index);
+#endif
+    void set_image(const std::string &amp;file_name);
+    void set_image(const std::vector&lt;uint8_t&gt; &amp;image_data);
+
+    void enable_focusing();
+    void disable_focusing();
+
+    void turn(bool on);
+    bool turned() const;
+
+    void set_callback(std::function&lt;void(void)&gt; click_callback);
+};
+</code></pre>
+<p>The button can be of the following types:</p>
+<pre><code>text
+image
+image_right_text
+image_bottom_text
+switcher
+radio
+anchor
+sheet
+</code></pre>
+<p><img src="../../img/button.png"></p></div>
             </div>
         </div>
 

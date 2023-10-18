@@ -216,12 +216,30 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">Обработка ошибок</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-</div>
+<h2 id="_1">Обработка ошибок</h2>
+<p>WUI не использует исключения. Методы, которые могут завершиться ошибкой возвращают bool. Для получения подробностей о возникшей проблеме используется метод get_error() возвращающий структуру </p>
+<pre><code>struct error
+{
+    error_type type;
+    std::string component, message;
+    bool is_ok() const;
+};
+</code></pre>
+<p>Ошибки, возможно возникшие в конструкторе объекта, нужно проверять так:</p>
+<pre><code>newObject(new wui::image(IMG_LOGO))...
+
+if (!newObject-&gt;get_error().is_ok()) { log(“error”, newObject-&gt;get_error().str()); }
+</code></pre></div>
             </div>
         </div>
 

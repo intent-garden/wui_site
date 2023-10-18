@@ -216,12 +216,19 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">Зависимости</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-</div>
+<h2 id="_1">Зависимости</h2>
+<p>WUI использует три библиотеки в thirdparty. Это: boost::nowide, nlohman::json и utf8 от Nemanja Trifunovic. Последние две, header only и хлопот не вызывают. boost::widen поставляется в виде “вырезки” из boost, имеются сборки на vs 2017 и 2019 версия boost: 1.82. Если в вашем проекте уже используется boost (тем более другой версии), лучше указать для wui путь к вашему boost.</p>
+<p>Внешние зависимости отсутствуют на Windows. На Linux, в данный момент, для работы требуется xcb и cairo.</p></div>
             </div>
         </div>
 

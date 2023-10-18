@@ -216,12 +216,19 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#dependencies" class="nav-link">Dependencies</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-</div>
+<h2 id="dependencies">Dependencies</h2>
+<p>WUI uses three libraries in the thirdparty. These are: boost::nowide, nlohman::json and utf8 from Nemanja Trifunovic. The last two are header only and are not troublesome. boost::widen comes as a "cut" from boost, there are builds on vs 2017 and 2019 version of boost: 1.82. If your project already uses boost (especially a different version), it is better to specify for wui the path to your boost.</p>
+<p>External dependencies are not available on Windows. On Linux, currently, xcb and cairo are required to work.</p></div>
             </div>
         </div>
 
