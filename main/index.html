@@ -24,6 +24,9 @@
 
     <!-- Bootstrap CSS / Color Scheme -->
     <link rel="stylesheet" href="css/default.css" id="theme-color">
+
+    <!-- Google Code Prettify -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 </head>
 <body>
 
@@ -58,6 +61,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link page-scroll" href="#demo">Demo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#howto">HowTo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link page-scroll" href="#news">News</a>
@@ -183,53 +189,95 @@
     </div>
 </section>
 
-<!--faq section-->
-<!--<section class="py-7" id="faq">
+<!--howto section-->
+<section class="py-7 bg-light" id="howto">
     <div class="container">
         <div class="row">
             <div class="col-md-6 mx-auto text-center">
-                <h2>Frequently asked questions</h2>
-                <p class="text-muted lead">Answers to most common questions.</p>
+                <h2 class="text-dark">Quick start</h2>
+                <p class="text-muted lead">A few actions and your app is up and running and ready for further development</p>
             </div>
         </div>
         <div class="row mt-5">
             <div class="col-md-10 mx-auto">
                 <div class="row">
-                    <div class="col-md-6 mb-5">
-                        <h6>Can I try it for free?</h6>
-                        <p class="text-muted">Nam liber tempor cum soluta nobis eleifend option congue nihil imper per tem por legere me doming.</p>
+                    <div class="col">
+                        <h6 class="text-dark">Application entry point</h6>
+                        <p class="text-muted">Function main()</p>
+                        <pre class="prettyprint">int main(...)
+{
+    wui::framework::init();
+
+    MainFrame mainFrame;
+    mainFrame.Run();
+
+    wui::framework::run();
+
+    return 0;
+}
+</pre>
                     </div>
-                    <div class="col-md-6 mb-5">
-                        <h6>Do you have hidden fees?</h6>
-                        <p class="text-muted">Nam liber tempor cum soluta nobis eleifend option congue nihil imper per tem por legere me doming.</p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6 class="text-dark">Main widnow</h6>
+                        <p class="text-muted"></p>
+                        <pre class="prettyprint">class MainFrame
+{
+public:
+    MainFrame();
+
+    void Run();
+
+private:
+    void ReceiveEvents(const wui::event &ev);
+    void UpdateControlsPosition();
+    void OnOK();
+    
+    static const int32_t WND_WIDTH = 400, WND_HEIGHT = 400;
+    
+    std::shared_ptr<wui::window> window = std::make_shared<wui::window>();
+    
+    std::shared_ptr<wui::image> logoImage = std::make_shared<wui::image>(IMG_LOGO);
+    
+    std::shared_ptr<wui::text> whatsYourNameText = std::make_shared<wui::text>(
+        wui::locale("main_frame", "whats_your_name_text"),
+        wui::text_alignment::center,
+        "h1_text");
+                            
+    std::shared_ptr<wui::input> userNameInput = std::make_shared<wui::input>(wui::config::get_string("User", "Name", ""));
+                            
+    std::shared_ptr<wui::button> okButton = std::make_shared<wui::button>(
+        wui::locale("main_frame", "ok_button"),
+        std::bind(&MainFrame::OnOK, this));
+                            
+    std::shared_ptr<wui::message> messageBox = std::make_shared<wui::message>(window);
+                            
+    bool user_approve_close = false;
+};
+                            
+</pre>
                     </div>
-                    <div class="col-md-6 mb-5">
-                        <h6>What are the payment methods you accept?</h6>
-                        <p class="text-muted">Nam liber tempor cum soluta nobis eleifend option congue nihil imper per tem por legere me doming.</p>
-                    </div>
-                    <div class="col-md-6 mb-5">
-                        <h6>How often do you release updates?</h6>
-                        <p class="text-muted">Nam liber tempor cum soluta nobis eleifend option congue nihil imper per tem por legere me doming.</p>
-                    </div>
-                    <div class="col-md-6 mb-5">
-                        <h6>What is your refund policy?</h6>
-                        <p class="text-muted">Nam liber tempor cum soluta nobis eleifend option congue nihil imper per tem por legere me doming.</p>
-                    </div>
-                    <div class="col-md-6 mb-5">
-                        <h6>How can I contact you?</h6>
-                        <p class="text-muted">Nam liber tempor cum soluta nobis eleifend option congue nihil imper per tem por legere me doming.</p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6 class="text-dark">Result</h6>
+                        <p class="text-muted">The demo application shows the logo, displays a caption and provides an input field.
+                            When the button is clicked, a message box is displayed and the application closes.
+                            It also tracks when the user closes the window and displays a confirmation.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row mt-4">
             <div class="col-md-6 mx-auto text-center">
-                <h5 class="mb-4">Have questions?</h5>
-                <a href="#" class="btn btn-primary">Contact us</a>
+                <h5 class="mb-4 text-dark">More details</h5>
+                <a href="../doc_ru/howto/hello-world/" target="_blank" class="btn btn-primary">Description of the starter application</a>
             </div>
         </div>
     </div>
-</section>->
+</section>
 
 <!--news section-->
 <section class="py-7 bg-light" id="news">
