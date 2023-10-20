@@ -376,12 +376,6 @@ private:
 
 void MainFrame::Run()
 {
-    if (runned)
-    {
-        return;
-    }
-    runned = true;
-
     UpdateControlsPosition();
 
     window-&gt;set_control_callback([&amp;](wui::window_control control, std::string &amp;tooltip_text, bool &amp;continue_) {
@@ -424,7 +418,7 @@ void MainFrame::Run()
             }
             break;
             case wui::window_control::close:
-                if (runned)
+                if (!user_approve_close)
                 {
                     continue_ = false;
                     messageBox-&gt;show(wui::locale("main_frame", "confirm_close_text"),
@@ -432,6 +426,7 @@ void MainFrame::Run()
                         [this, &amp;continue_](wui::message_result r) {
                             if (r == wui::message_result::yes)
                             {
+                                user_approve_close = true;
                                 wui::framework::stop();
                             }
                         });
