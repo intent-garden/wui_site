@@ -239,15 +239,45 @@ while (GetMessage(&amp;msg, nullptr, 0, 0))
 return (int) msg.wParam;
 </code></pre>
 <p>Each running, non-child window becomes a message recipient via its existing wnd_proc. Then, depending on the type of event, either controls are redrawn, window position/size is handled, or the event is sent to subscribers. The lifetime of the first window created determines the lifetime of the application.</p>
-<p>On linux the picture is slightly different, but it looks similar for the user and controls. Each non-child window, starts a separate thread to wait for events in xcb_wait_for_event() and sends them out to subscribers as they arrive. Accordingly, in order for an application to wait for a main window to close, for example, that window must provide a method that returns true until the user or the application itself closes the window.</p>
-<pre><code>#elif __linux__
-// Wait for main window
-while (mainFrame.Runned())
+<p>On linux the picture is slightly different, but it looks similar for the user and controls. Each non-child window, starts a separate thread to wait for events in xcb_wait_for_event() and sends them out to subscribers as they arrive. </p>
+<pre><code>bool window::init(...)
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    ...
+    thread = std::thread(std::bind(&amp;window::process_events, this));
 }
-return 0;
-#endif
+
+void window::process_events()
+{
+    xcb_generic_event_t *e = nullptr;
+    while (runned &amp;&amp; (e = xcb_wait_for_event(context_.connection)))
+    {
+        switch (e-&gt;response_type &amp; ~0x80)
+        {
+            case XCB_EXPOSE:
+
+            ...
+</code></pre>
+<p>All this code is hidden in <code>window</code> and <code>framework</code>. <code>framework</code> has only 3 main functions <code>init()</code>, <code>run()</code> and <code>stop()</code>. <code>init()</code> should be called on the first line of <code>main()</code>, <code>run()</code> after <code>window-&gt;init(...)</code>, and <code>stop()</code> when the process needs to be terminated (e.g. the user pressed the "cross").</p>
+<pre><code>int main(..)
+{
+    wui::framework::init();
+
+    MainFrame mainFrame;
+    mainFrame.Run();
+
+    wui::framework::run();
+
+    return 0;
+}
+</code></pre>
+<p>Here <code>wui::framework::end();</code> is called in the main window closing callback:</p>
+<pre><code>void MainFrame::Run()
+{
+    window-&gt;init(wui::locale("main_frame", "caption"), { -1, -1, width, height },
+        wui::window_style::frame, [this]() { 
+            wui::framework::stop(); 
+    });
+}
 </code></pre></div>
             </div>
         </div>

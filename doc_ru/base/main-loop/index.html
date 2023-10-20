@@ -228,26 +228,54 @@
 
 <h2 id="_1">Главный цикл приложения</h2>
 <p>В случае работы на Windows запускается стандартный бесконечный цикл:</p>
-<pre><code>#ifdef _WIN32
-MSG msg;
+<pre><code>MSG msg;
 while (GetMessage(&amp;msg, nullptr, 0, 0))
 {
     TranslateMessage(&amp;msg);
     DispatchMessage(&amp;msg);
 }
-
-return (int) msg.wParam;
 </code></pre>
 <p>Каждое запущенное, не дочернее окно, становится получателем сообщений через имеющейся в нем wnd_proc. Далее, в зависимости от типа события, производится либо перерисовка контролов, работа с положением/размером окна, либо событие посылается подписчикам. Срок жизни первого созданного окна определяет срок жизни приложения.</p>
-<p>На линукс картина слегка отличается, но для пользователя и контролов выглядит аналогично. Каждое не дочернее окно, запускает отдельный тред для ожидания событий в xcb_wait_for_event() и по мере их поступления рассылает их подписчикам. Соответственно, для того чтобы приложение ждало закрытия, например, главного окна это окно должно предоставлять метод возвращающий true до тех пор, пока пользователь или само приложение не закроет окно.</p>
-<pre><code>#elif __linux__
-// Wait for main window
-while (mainFrame.Runned())
+<p>На линукс картина слегка отличается, но для пользователя и контролов выглядит аналогично. Каждое не дочернее окно, запускает отдельный тред для ожидания событий в xcb_wait_for_event() и по мере их поступления рассылает их подписчикам. </p>
+<pre><code>bool window::init(...)
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    ...
+    thread = std::thread(std::bind(&amp;window::process_events, this));
 }
-return 0;
-#endif
+
+void window::process_events()
+{
+    xcb_generic_event_t *e = nullptr;
+    while (runned &amp;&amp; (e = xcb_wait_for_event(context_.connection)))
+    {
+        switch (e-&gt;response_type &amp; ~0x80)
+        {
+            case XCB_EXPOSE:
+
+            ...
+</code></pre>
+<p>Весь этот код скрыт в <code>window</code> и <code>framework</code>.
+framework имеет всего 3 главные функции <code>init()</code>, <code>run()</code> и <code>stop()</code>. <code>init()</code> нужно вызвать в первой строке <code>main()</code>, <code>run()</code> после <code>window-&gt;init(...)</code>, а <code>stop()</code> когда нужно завершить процесс (например пользователь нажал "крестик").</p>
+<pre><code>int main(..)
+{
+    wui::framework::init();
+
+    MainFrame mainFrame;
+    mainFrame.Run();
+
+    wui::framework::run();
+
+    return 0;
+}
+</code></pre>
+<p>Здесь <code>wui::framework::end();</code> вызывается в коллбеке закрытия главного окна:</p>
+<pre><code>void MainFrame::Run()
+{
+    window-&gt;init(wui::locale("main_frame", "caption"), { -1, -1, width, height },
+        wui::window_style::frame, [this]() { 
+            wui::framework::stop(); 
+    });
+}
 </code></pre></div>
             </div>
         </div>
