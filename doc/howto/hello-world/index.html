@@ -257,30 +257,22 @@
 <p>Shows the use of theme, locale, and config, in an application that has two color schemes (dark and light), two languages, and stores its configuration in the registry on Windows and in an ini file on Linux.</p>
 <h2 id="maincpp">main.cpp</h2>
 <pre><code>#ifdef _WIN32
-    int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-    _In_opt_ HINSTANCE hPrevInstance,
+int APIENTRY wWinMain(_In_ HINSTANCE,
+    _In_opt_ HINSTANCE,
     _In_ LPWSTR    lpCmdLine,
     _In_ int       nCmdShow)
-{
-    Gdiplus::GdiplusStartupInput gdiplusStartupInput;
-    ULONG_PTR gdiplusToken;
-    Gdiplus::GdiplusStartup(&amp;gdiplusToken, &amp;gdiplusStartupInput, NULL);
 #elif __linux__
 int main(int argc, char *argv[])
-{
-    if (setlocale(LC_ALL, "") == NULL) {}
 #endif
+{
+    wui::framework::init();
 
-#ifdef _WIN32
-    auto ok = wui::config::use_registry("Software\\wui\\hello_world");
-#else
-    auto ok = wui::config::use_ini_file(“hello_world.ini”);
+    auto ok = wui::config::create_config("hello_world.ini", "Software\\wui\\hello_world");
     if (!ok)
     {
         std::cerr &lt;&lt; wui::config::get_error().str() &lt;&lt; std::endl;
         return -1;
     }
-#endif
 
     wui::error err;
 
@@ -316,24 +308,8 @@ int main(int argc, char *argv[])
     MainFrame mainFrame;
     mainFrame.Run();
 
-#ifdef _WIN32
-    // Main message loop
-    MSG msg;
-    while (GetMessage(&amp;msg, nullptr, 0, 0))
-    {
-        TranslateMessage(&amp;msg);
-        DispatchMessage(&amp;msg);
-    }
-
-    return (int) msg.wParam;
-#else
-    // Wait for main window
-    while (mainFrame.Runned())
-    {
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
+    wui::framework::run();
     return 0;
-#endif
 }
 </code></pre>
 <p>The demo application shows the logo, displays a caption and provides an input field. When the button is clicked, a message box is displayed and the application is closed. It also shows tracking of the user closing the window and displaying a confirmation message.</p>
@@ -345,40 +321,41 @@ int main(int argc, char *argv[])
 {
 public:
     MainFrame();
+
     void Run();
-    bool Runned() const;
 
 private:
-    static const int32_t WND_WIDTH = 400, WND_HEIGHT = 400;
-
-    std::shared_ptr&lt;wui::window&gt; window;
-
-    std::shared_ptr&lt;wui::image&gt; logoImage;
-    std::shared_ptr&lt;wui::text&gt; whatsYourNameText;
-    std::shared_ptr&lt;wui::input&gt; userNameInput;
-    std::shared_ptr&lt;wui::button&gt; okButton;
-    std::shared_ptr&lt;wui::message&gt; messageBox;
-
-    bool runned;
 
     void ReceiveEvents(const wui::event &amp;ev);
+
     void UpdateControlsPosition();
+
+    void OnOK();
+
+    static const int32_t WND_WIDTH = 400, WND_HEIGHT = 400;
+
+    std::shared_ptr&lt;wui::window&gt; window = std::make_shared&lt;wui::window&gt;();
+
+    std::shared_ptr&lt;wui::image&gt; logoImage = std::make_shared&lt;wui::image&gt;(IMG_LOGO);
+
+    std::shared_ptr&lt;wui::text&gt; whatsYourNameText = std::make_shared&lt;wui::text&gt;(
+        wui::locale("main_frame", "whats_your_name_text"),
+        wui::text_alignment::center,
+        "h1_text");
+
+    std::shared_ptr&lt;wui::input&gt; userNameInput = std::make_shared&lt;wui::input&gt;(wui::config::get_string("User", "Name", ""));
+
+    std::shared_ptr&lt;wui::button&gt; okButton = std::make_shared&lt;wui::button&gt;(
+        wui::locale("main_frame", "ok_button"),
+        std::bind(&amp;MainFrame::OnOK, this));
+
+    std::shared_ptr&lt;wui::message&gt; messageBox = std::make_shared&lt;wui::message&gt;(window);
+
+    bool user_approve_close = false;
 };
 </code></pre>
 <h2 id="mainframecpp">MainFrame.cpp</h2>
 <pre><code>MainFrame::MainFrame()
-    : window(new wui::window()),    
-    logoImage(new wui::image(IMG_LOGO)),
-    whatsYourNameText(new wui::text(wui::locale("main_frame", "whats_your_name_text"), wui::text_alignment::center, "h1_text")),
-    userNameInput(new wui::input(wui::config::get_string("User", "Name", ""))),
-    okButton(new wui::button(wui::locale("main_frame", "ok_button"), [this](){
-        wui::config::set_string("User", "Name", userNameInput-&gt;text());
-        messageBox-&gt;show(wui::locale("main_frame", "hello_text") + userNameInput-&gt;text(),
-        wui::locale("main_frame", "ok_message_caption"), wui::message_icon::information, wui::message_button::ok, [this](wui::message_result) {
-            runned = false; window-&gt;destroy(); }); })),
-    messageBox(new wui::message(window)),
-
-    runned(false)
 {
     window-&gt;subscribe(std::bind(&amp;MainFrame::ReceiveEvents,
         this,
@@ -455,11 +432,7 @@ void MainFrame::Run()
                         [this, &amp;continue_](wui::message_result r) {
                             if (r == wui::message_result::yes)
                             {
-#ifdef _WIN32
-                                PostQuitMessage(IDCANCEL);
-#else
-                                runned = false;
-#endif
+                                wui::framework::stop();
                             }
                         });
                 }
@@ -475,11 +448,7 @@ void MainFrame::Run()
         static_cast&lt;uint32_t&gt;(wui::window_style::switch_theme_button) |
         static_cast&lt;uint32_t&gt;(wui::window_style::switch_lang_button) |
         static_cast&lt;uint32_t&gt;(wui::window_style::border_all)), [this]() {
-#ifdef _WIN32
-            PostQuitMessage(IDCANCEL);
-#else
-            runned = false;
-#endif
+            wui::framework::stop();
     });
 }
 
@@ -531,16 +500,24 @@ void MainFrame::UpdateControlsPosition()
     });
 }
 
-bool MainFrame::Runned() const
+void MainFrame::OnOK()
 {
-    return runned;
+    wui::config::set_string("User", "Name", userNameInput-&gt;text());
+
+    messageBox-&gt;show(wui::locale("main_frame", "hello_text") + userNameInput-&gt;text(),
+        wui::locale("main_frame", "ok_message_caption"), wui::message_icon::information, 
+        wui::message_button::ok, [this](wui::message_result) {
+            user_approve_close = true; window-&gt;destroy();
+        });
 }
 </code></pre>
 <p>The window and controls are created in the MainFrame constructor. The application subscribes to events and adds controls to the window. Controls' callbacks are handled with the help of lambdas for the sake of brevity. </p>
 <p>The Run() method starts the window and contains a lambda that handles callbacks from window controls (language and theme buttons).
 ReceiveEvents() receives events from the window and is used to respond to window resizing by calling UpdateControlsPosition(). which recalculates the new coordinates of the controls.</p>
 <h2 id="resourceh">Resource.h</h2>
-<pre><code>#ifdef _WIN32
+<pre><code>#pragma once
+
+#ifdef _WIN32
 
 #define IDI_MAIN_ICON           107
 #define IMG_LOGO                109
