@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Button - WUI</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">WUI</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Manuals <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../howto/setup/" class="dropdown-item">Installation</a>
+</li>
+                                    
+<li>
+    <a href="../../howto/hello-world/" class="dropdown-item">Hello world</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Handbook <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../base/common/" class="dropdown-item">Common types</a>
+</li>
+                                    
+<li>
+    <a href="../../base/event/" class="dropdown-item">Events</a>
+</li>
+                                    
+<li>
+    <a href="../../base/graphic/" class="dropdown-item">Graphics</a>
+</li>
+                                    
+<li>
+    <a href="../../base/interfaces/" class="dropdown-item">Basic Interfaces</a>
+</li>
+                                    
+<li>
+    <a href="../../base/theme/" class="dropdown-item">Visual Themes</a>
+</li>
+                                    
+<li>
+    <a href="../../base/locale/" class="dropdown-item">Locales</a>
+</li>
+                                    
+<li>
+    <a href="../../base/config/" class="dropdown-item">Config</a>
+</li>
+                                    
+<li>
+    <a href="../../base/main-loop/" class="dropdown-item">Main application loop</a>
+</li>
+                                    
+<li>
+    <a href="../../base/resources/" class="dropdown-item">Resources</a>
+</li>
+                                    
+<li>
+    <a href="../../base/multi-threading/" class="dropdown-item">Multi-threading</a>
+</li>
+                                    
+<li>
+    <a href="../../base/unicode/" class="dropdown-item">Unicode</a>
+</li>
+                                    
+<li>
+    <a href="../../base/error-handling/" class="dropdown-item">Error handling</a>
+</li>
+                                    
+<li>
+    <a href="../../base/transient/" class="dropdown-item">Transient / Modal</a>
+</li>
+                                    
+<li>
+    <a href="../../base/dependencies/" class="dropdown-item">Dependencies</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Controls <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../all/" class="dropdown-item">All</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Button</a>
+</li>
+                                    
+<li>
+    <a href="../image/" class="dropdown-item">Image</a>
+</li>
+                                    
+<li>
+    <a href="../input/" class="dropdown-item">Text input</a>
+</li>
+                                    
+<li>
+    <a href="../list/" class="dropdown-item">List</a>
+</li>
+                                    
+<li>
+    <a href="../menu/" class="dropdown-item">Menu</a>
+</li>
+                                    
+<li>
+    <a href="../message/" class="dropdown-item">Message</a>
+</li>
+                                    
+<li>
+    <a href="../panel/" class="dropdown-item">Panel</a>
+</li>
+                                    
+<li>
+    <a href="../progress/" class="dropdown-item">Progress</a>
+</li>
+                                    
+<li>
+    <a href="../select/" class="dropdown-item">Select</a>
+</li>
+                                    
+<li>
+    <a href="../slider/" class="dropdown-item">Slider</a>
+</li>
+                                    
+<li>
+    <a href="../splitter/" class="dropdown-item">Splitter</a>
+</li>
+                                    
+<li>
+    <a href="../tooltip/" class="dropdown-item">Tooltip</a>
+</li>
+                                    
+<li>
+    <a href="../tray/" class="dropdown-item">Tray</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">About the Library <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../about/licence/" class="dropdown-item">License</a>
+</li>
+                                    
+<li>
+    <a href="../../about/contacts/" class="dropdown-item">Contacts</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../all/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../image/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#button" class="nav-link">Button</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#interface" class="nav-link">Interface</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#button-types" class="nav-link">button types</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="button">Button</h1>
+<h2 id="interface">Interface</h2>
+<pre><code>class button : public i_control, public std::enable_shared_from_this&lt;button&gt;
+{
+public:
+    button(const std::string &amp;caption, std::function&lt;void(void)&gt; click_callback, const std::string &amp;theme_control_name = tc, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+    button(const std::string &amp;caption, std::function&lt;void(void)&gt; click_callback, button_view button_view_, const std::string &amp;theme_control_name = tc, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+
+#ifdef _WIN32
+    button(const std::string &amp;caption, std::function&lt;void(void)&gt; click_callback, button_view button_view_, int32_t image_resource_index, int32_t image_size, const std::string &amp;theme_control_name = tc, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+#endif
+    button(const std::string &amp;caption, std::function&lt;void(void)&gt; click_callback, button_view button_view_, const std::string &amp;  image_file_name, int32_t image_size, const std::string &amp;theme_control_name = tc, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+    button(const std::string &amp;caption, std::function&lt;void(void)&gt; click_callback, button_view button_view_, const std::vector&lt;uint8_t&gt; &amp;image_data, int32_t image_size, const std::string &amp;theme_control_name = tc, std::shared_ptr&lt;i_theme&gt; theme_ = nullptr);
+    ~button();
+
+    /// Button's interface
+    void set_caption(const std::string &amp;caption);
+
+    void set_button_view(button_view button_view_);
+#ifdef _WIN32
+    void set_image(int32_t resource_index);
+#endif
+    void set_image(const std::string &amp;file_name);
+    void set_image(const std::vector&lt;uint8_t&gt; &amp;image_data);
+
+    void enable_focusing();
+    void disable_focusing();
+
+    void turn(bool on);
+    bool turned() const;
+
+    void set_callback(std::function&lt;void(void)&gt; click_callback);
+};
+</code></pre>
+<h2 id="button-types">button types</h2>
+<pre><code>text
+image
+image_right_text
+image_bottom_text
+switcher
+radio
+anchor
+sheet
+</code></pre>
+<p><img src="../../img/button.png"></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/jquery-3.6.0.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

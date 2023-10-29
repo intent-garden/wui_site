@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Ресурсы - WUI</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">WUI</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Домашняя</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Руководства <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../howto/setup/" class="dropdown-item">Установка</a>
+</li>
+                                    
+<li>
+    <a href="../../howto/hello-world/" class="dropdown-item">Hello world</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Справочник <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../common/" class="dropdown-item">Общие типы</a>
+</li>
+                                    
+<li>
+    <a href="../interfaces/" class="dropdown-item">Базовые интерейсы</a>
+</li>
+                                    
+<li>
+    <a href="../event/" class="dropdown-item">События</a>
+</li>
+                                    
+<li>
+    <a href="../graphic/" class="dropdown-item">Графика</a>
+</li>
+                                    
+<li>
+    <a href="../theme/" class="dropdown-item">Визуальные темы</a>
+</li>
+                                    
+<li>
+    <a href="../locale/" class="dropdown-item">Локали</a>
+</li>
+                                    
+<li>
+    <a href="../config/" class="dropdown-item">Конфиг</a>
+</li>
+                                    
+<li>
+    <a href="../main-loop/" class="dropdown-item">Главный цикл приложения</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Ресурсы</a>
+</li>
+                                    
+<li>
+    <a href="../multi-threading/" class="dropdown-item">Многопоточнось</a>
+</li>
+                                    
+<li>
+    <a href="../unicode/" class="dropdown-item">Unicode</a>
+</li>
+                                    
+<li>
+    <a href="../error-handling/" class="dropdown-item">Обработка ошибок</a>
+</li>
+                                    
+<li>
+    <a href="../transient/" class="dropdown-item">Транзиентность / Модальность</a>
+</li>
+                                    
+<li>
+    <a href="../dependencies/" class="dropdown-item">Зависимости</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Контролы <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../controls/all/" class="dropdown-item">Все</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/button/" class="dropdown-item">Кнопка</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/image/" class="dropdown-item">Изображение</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/input/" class="dropdown-item">Поле ввода</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/list/" class="dropdown-item">Список</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/menu/" class="dropdown-item">Меню</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/message/" class="dropdown-item">Сообщение</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/panel/" class="dropdown-item">Панель</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/progress/" class="dropdown-item">Прогресс</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/select/" class="dropdown-item">Селектор</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/slider/" class="dropdown-item">Регулятор</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/splitter/" class="dropdown-item">Разделитель</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/tooltip/" class="dropdown-item">Подсказка</a>
+</li>
+                                    
+<li>
+    <a href="../../controls/tray/" class="dropdown-item">Трей</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">О библиотеке <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../about/licence/" class="dropdown-item">Лицензия</a>
+</li>
+                                    
+<li>
+    <a href="../../about/contacts/" class="dropdown-item">Контакты</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../main-loop/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../multi-threading/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#_1" class="nav-link">Ресурсы</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#dark" class="nav-link">Тема dark:</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#light" class="nav-link">Тема light:</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="_1">Ресурсы</h1>
+<p>Для удобного и единообразного отображения множества контролов и надписей приложения, удобства работы не программистов, например дизайнеров, переводчиков реализованы подсистемы theme и locale. </p>
+<p>Приложение всегда имеет текущую тему и локаль. Это по сути конфиги, выдающие значения по паре секция + ключ. В каждый контрол (и окно, так как оно тоже контрол) передается тема для получения этим контролом значений своих цветов, размеров, толщин, шрифтов и прочего. По умолчанию, в контрол можно не передавать кастомную тему, тогда он будет использовать общую текущую тему приложения.</p>
+<p>У пользовательского кода для формирования надписей есть доступ к текущей локали приложения. Это позволяет собрать все текстовые ресурсы в одном месте и также, в одном месте, менять их для всего приложения.</p>
+<p>Приложение имеет возможность менять текущую тему и локаль, что вызывает автоматическую смену внешнего вида контролов и окон / языка всего приложения.</p>
+<p>Технически подсистемы реализованы схоже, рассмотрим на примере theme
+Тема представляет из себя json содержащий значения параметров для контролов, например для окна и надписи и изображений.</p>
+<h2 id="dark">Тема dark:</h2>
+<pre><code>{
+    "controls": [
+    {
+        "type": "window",
+        "background": "#131519",
+        "border": "#404040",
+        "border_width": 1,
+        "text": "#f5f5f0",
+        "active_button": "#3b3d41",
+        "caption_font": {
+            "name": "Segoe UI",
+            "size": 18,
+            "decorations": "normal"
+        }
+    },
+    {
+        "type": "text",
+        "color": "#f5f5f0",
+        "font": {
+            "name": "Segoe UI",
+            "size": 18
+        }
+    },
+    {
+        "type": "image",
+        "resource": "IMAGES_DARK",
+        "path": "~/.hello_wui/res/images/dark"
+    }
+    /* И так далее */
+}
+</code></pre>
+<h2 id="light">Тема light:</h2>
+<pre><code>{
+    "controls": [
+    {
+        "type": "window",
+        "background": "#fffffe",
+        "border": "#9a9a9a",
+        "border_width": 1,
+        "text": "#191914",
+        "caption_font": {
+            "name": "Segoe UI",
+            "size": 18
+        }
+    },
+    {
+        "type": "text",
+        "color": "#191914",
+        "font": {
+            "name": "Segoe UI",
+            "size": 18
+        }
+    },
+    {
+        "type": "image",
+        "resource": "IMAGES_LIGHT",
+        "path": "~/.hello_wui/res/images/light"
+    }
+    /* И так далее */
+}
+</code></pre>
+<p>Данный подход предоставляет приложению и контролам прозрачный,  централизованный механизм управления отображением. При необходимости создать кастомный контрол (например красную кнопку) можно просто добавить в json новый раздел: </p>
+<pre><code>{
+    "type": "red_button",
+    "calm": "#c61818",
+    "active": "#e31010",
+    "border": "#c90000",
+    "border_width": 1,
+    "focused_border": "#dcd2dc",
+    "text": "#f0f1f1",
+    "disabled": "#a5a5a0",
+    "round": 0,
+    "focusing": 1,
+    "font": {
+        "name": "Segoe UI",
+        "size": 18
+    }
+}
+</code></pre>
+<p>А при создании контрола указать имя контрола: “red_button”, например:</p>
+<pre><code>cancelButton(new wui::button(wui::locale("button", "cancel"), [this]() { window-&gt;destroy(); }, "red_button"))
+</code></pre>
+<p>Для работы с пиктограммами и подобными изображениями используется контрол image. Он также использует theme для получения идентификатора win32 ресурса или пути к файлу изображения. Это позволяет создать изображение </p>
+<pre><code>logoImage(new wui::image(IMG_LOGO))
+</code></pre>
+<p>где:</p>
+<pre><code>#ifdef _WIN32
+#define IMG_LOGO 4010
+#else
+static constexpr const char* IMG_LOGO = "logo.png";
+#endif
+</code></pre>
+<p>Логотип будет загружен в соответствии с заданной темой.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/jquery-3.6.0.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
