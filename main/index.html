@@ -1,448 +1,365 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>WUI - Window User Interface Libraray</title>
-    <meta name="description"
-          content="WUI - Window User Interface Libraray official site"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>libwui — lightweight modern C++ UI framework</title>
+  <meta name="description" content="libwui — cross‑platform UI framework in modern C++ with no code generators, minimal footprint and predictable API. An alternative to Qt/QML for those who value speed, control and simplicity." />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="libwui — lightweight modern C++ UI framework">
+  <meta property="og:description" content="libwui — cross‑platform UI framework in modern C++ with no code generators, minimal footprint and predictable API. An alternative to Qt/QML for those who value speed, control and simplicity.">
+  <meta property="og:url" content="https://libwui.org/">
+  <meta property="og:image" content="https://libwui.org/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="libwui — lightweight modern C++ UI framework">
+  <meta name="twitter:description" content="libwui — cross‑platform UI framework in modern C++ with no code generators, minimal footprint and predictable API. An alternative to Qt/QML for those who value speed, control and simplicity.">
+  <meta name="twitter:image" content="https://libwui.org/og.png">
+  <style>
+    :root{
+      --bg:#0b0d12; --card:#12151d; --muted:#8b93a7; --text:#e8eefc; --acc:#6ea8fe; --acc-2:#4ce0b3; --warn:#ffd166;
+      --radius:18px; --radius-sm:12px; --shadow:0 10px 30px rgba(0,0,0,.3);
+    }
+    html{scroll-behavior:smooth}
+    body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;color:var(--text);background:linear-gradient(180deg,#0a0d13 0%,#0b1018 60%,#0a0d13 100%);}
+    a{color:var(--acc);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px 32px}
+    header.nav{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700}
+    .brand .logo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc-2));box-shadow:0 0 40px rgba(78,224,179,.35);}
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:12px;background:var(--acc);color:#0a0d13;font-weight:700;border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);}
+    .btn.secondary{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.15)}
+    .btn:hover{transform:translateY(-1px);filter:saturate(1.1);}
+    .hero{padding:48px 0 24px;display:grid;grid-template-columns:1.35fr 1fr;gap:28px;align-items:center}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero h1{font-size:clamp(28px,4.2vw,48px);line-height:1.15;margin:0 0 14px}
+    .hero p.lead{color:var(--muted);font-size:clamp(16px,2vw,18px);margin:0 0 22px}
+    .badges{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 18px}
+    .badge{padding:8px 12px;border-radius:999px;background:#0f1420;border:1px solid rgba(255,255,255,.08);color:#cfe1ff;font-size:13px}
+    .code-card{padding:16px}
+    pre{margin:0;background:#0a0f19;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px;overflow:auto}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px}
 
-    <!--Inter UI font-->
-    <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet">
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 
-    <!--vendors styles-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    section{padding:40px 0}
+    h2{font-size:24px;margin:0 0 12px}
+    p{margin:0 0 10px}
 
-    <!-- favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-    <link rel="manifest" href="../site.webmanifest">
+    .feat{padding:18px}
+    .feat h3{margin:6px 0 6px;font-size:18px}
+    .feat p{color:var(--muted)}
 
-    <!-- Bootstrap CSS / Color Scheme -->
-    <link rel="stylesheet" href="css/default.css" id="theme-color">
+    table{width:100%;border-collapse:separate;border-spacing:0;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden}
+    th,td{text-align:left;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06)}
+    th{font-size:14px;color:#d8e5ff;background:rgba(255,255,255,.03)}
+    tr:last-child td{border-bottom:none}
+    .tick{color:var(--acc-2);font-weight:700}
+    .dash{color:#ff9b9b;font-weight:700}
 
-    <!-- Google Code Prettify -->
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    .cta{display:flex;gap:12px;flex-wrap:wrap}
+
+    .note{font-size:13px;color:var(--muted)}
+
+    .kpi{display:flex;gap:16px;flex-wrap:wrap}
+    .kpi .item{flex:1 1 160px;padding:16px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.08)}
+    .kpi .num{font-size:20px;font-weight:800}
+    .kpi .lbl{color:var(--muted);font-size:13px}
+
+    footer{margin-top:32px;padding:28px 0 18px;color:var(--muted);border-top:1px solid rgba(255,255,255,.08)}
+
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+    }
+
+    @media (prefers-color-scheme: light){
+      body{background:linear-gradient(180deg,#eef3ff 0%,#f4f7ff 100%);color:#0f172a}
+      :root{--card:#fff;--text:#0f172a;--muted:#4b5563}
+      .card{background:#fff;border-color:#e5e7eb}
+      pre{background:#0f172a;color:#e5e7eb}
+      .badge{background:#f8fafc;color:#334155;border-color:#e5e7eb}
+      table{background:#fff;border-color:#e5e7eb}
+      th{background:#f8fafc}
+    }
+    .lang{margin-left:6px;font-size:14px;opacity:.9}
+    .lang a{color:var(--muted)}
+    .lang a.active{color:var(--text);font-weight:700}
+    .thumbs{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .thumbs a{display:block;flex:0 0 120px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow)}
+    .thumbs img{display:block;width:100%;height:72px;object-fit:cover}
+  </style>
 </head>
 <body>
+  <div class="wrap">
+    <header class="nav">
+      <div class="brand"><div class="logo" aria-hidden="true"></div><span>libwui</span></div>
+      <nav class="nav-links">
+        <a href="#why">Why</a>
+        <a href="#compare">Compare</a>
+        <a href="#code">Code</a>
+        <a href="#components">Components</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn secondary" href="#get-started">Get started</a>
+        <span class="lang" aria-label="language switcher"><a href="../main_ru/" hreflang="ru">RU</a> · <a href="#" class="active">EN</a></span>
+      </nav>
+    </header>
 
-<!-- Creates the bootstrap modal where the image will appear -->
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="height: 680px;">
-        <div class="modal-content" style="width: 990px; background-color: #979597;">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                 <img src="" class="imagepreview">
-            </div>
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="badges">
+          <span class="badge">Pure C++17/20</span>
+          <span class="badge">No moc / uic / rcc</span>
+          <span class="badge">Cross‑platform</span>
         </div>
-    </div>
-</div>
-
-<!--navigation-->
-<section class="smart-scroll">
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-md navbar-dark">
-            <a class="navbar-brand heading-black" href="index.html">
-                <img src="img/wui_logo.png" style="width:50pt;"> WUI
-            </a>
-            <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
-                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span data-feather="grid"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#features">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#demo">Demo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#howto">HowTo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#news">News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="../doc" target="_blank"><i class="fa fa-file"></i> Documentation</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="https://github.com/ud84/wui" target="_blank"><i class="fa fa-github"></i> GitHub</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#donate" target="_blank">Donate ❤️</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</section>
-
-<!--hero header-->
-<section class="py-7 py-md-0 bg-primary" id="home">
-    <div class="container">
-        <div class="row vh-md-100">
-            <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
-                <img src="img/wui_logo.png" style="width:100pt;">
-                <h1 class="heading-black text-capitalize">Window User Interface Library</h1>
-                <p class="lead py-3">WUI is a cross-platform modern C++ library for creating graphical user interfaces of desktop applications.<br><br>Windows and Linux are currently supported, with macOS support in progress</p>
-                <a href="../doc/"><button class="btn btn-primary d-inline-flex flex-row align-items-center">
-                    Get started now
-                    <em class="ml-2" data-feather="arrow-right"></em>
-                </button></a>
-            </div>
+        <h1>Lightweight UI framework in pure C++<br/>without magic and bloat</h1>
+        <p class="lead">libwui — an alternative to Qt/QML for those who want fast UIs, small binaries and a predictable API. No code generators, minimal dependencies, maximum control.</p>
+        <div class="cta">
+          <a class="btn" href="#get-started">Setup in 5 minutes</a>
+          <a class="btn secondary" href="#compare">Compare with Qt/QML</a>
+          <a class="btn" href="https://libwui.org/download/simple.exe" target="_blank" rel="noopener">Download demo (Windows)</a>
+          <a class="btn" href="https://libwui.org/download/simple.tar.bz2" target="_blank" rel="noopener">Download demo (Linux)</a>
         </div>
-    </div>
-</section>
-
-<!-- features section -->
-<section class="pt-6 pb-7 bg-secondary" id="features">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 mx-auto text-center">
-                <h3 class="heading-black">WUI provides a convenient way to create cross-platform graphical programs in modern C++</h3>
-                <p class="text-dark lead">The library uses C++17 and has a minimalistic API. The main design principle is to make it as simple as possible, but not simpler. The library does not try to build a complete abstraction over the operating system and deals only with basic UI stuff. It has nothing about network, strings, file handling, multithreading, and other useful but irrelevant UI things, which are also available in the modern C++ standard.</p>
-            </div>
+        <p class="note">Open‑source. No vendor lock‑in. Suitable for desktop and embedded systems.</p>
+        <div class="kpi" aria-label="Key metrics">
+          <div class="item"><div class="num">~0 external tools</div><div class="lbl">no code generators</div></div>
+          <div class="item"><div class="num">↓ 30–70%</div><div class="lbl">smaller binaries vs Qt*</div></div>
+          <div class="item"><div class="num">↑ faster CI</div><div class="lbl">thanks to simple builds</div></div>
         </div>
-        <div class="row mt-5">
-            <div class="col-md-10 mx-auto">
-                <div class="row feature-boxes">
-                    <div class="col-md-6 box">
-                        <div class="icon-box box-primary">
-                            <div class="icon-box-inner">
-                                <span data-feather="edit-3" width="35" height="35"></span>
-                            </div>
-                        </div>
-                        <h5 class="text-dark">Create once. Share everywhere</h5>
-                        <p class="text-dark">Your application written once will run and look the same on Windows, on Linux and on macOS</p>
-                    </div>
-                    <div class="col-md-6 box">
-                        <div class="icon-box box-success">
-                            <div class="icon-box-inner">
-                                <span data-feather="monitor" width="35" height="35"></span>
-                            </div>
-                        </div>
-                        <h5 class="text-dark">Powerfull resource system</h5>
-                        <p class="text-dark">Built-in support for locales and color themes based on json schemes makes it easy to create impressive multilingual applications with a variety of color themes.</p>
-                    </div>
-                    <div class="col-md-6 box">
-                        <div class="icon-box box-danger">
-                            <div class="icon-box-inner">
-                                <span data-feather="layout" width="35" height="35"></span>
-                            </div>
-                        </div>
-                        <h5 class="text-dark">Minimal application size</h5>
-                        <p class="text-dark">The average size of binary code added to your application is 2 megabytes, which is 20-30 times smaller than your competitors</p>
-                    </div>
-                    <div class="col-md-6 box">
-                        <div class="icon-box box-info">
-                            <div class="icon-box-inner">
-                                <span data-feather="globe" width="35" height="35"></span>
-                            </div>
-                        </div>
-                        <h5 class="text-dark">Open Source, Boost Software Licence</h5>
-                        <p class="text-dark">You can freely embed WUI in your software without having to publish the source code or buy a license</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+      </div>
+      <div class="card code-card" id="code">
+        <p class="note">How libwui code looks</p>
+        <pre><code>// Minimal example: window + button
+#include &lt;wui/app.h&gt;
+#include &lt;wui/window.h&gt;
+#include &lt;wui/controls/button.h&gt;
 
-<!-- demo section -->
-<section class="pt-6 pb-7" id="demo">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 mx-auto text-center">
-                <h2>Some application's screenshots</h2>
-                <p class="mb-5">Such applications as <a href="https://videograce.com" target="_blank"><i class="fa fa-camera"></i> VideoGrace</a> video messenger and possibly your new application are created on WUI 😉</p>
-                Try the simple live demo on ::
-                <a href="../download/simple.exe"><i class="fa fa-windows"></i> Windows x64</a> | 
-                <a href="../download/simple.tar.bz2"><i class="fa fa-linux"></i> Linux x64</a>
-            </div>
-        </div>
-        <div class="row mt-6">
-            <div class="col-md-6">
-                <a href="#demo" class="pop">
-                    <img id="imageresource" src="img/screenshoot-1.png" class="img-fluid rounded d-block mx-auto" alt="VideoGrace 1">
-                </a>
-            </div>
-            <div class="col-md-6">
-                <a href="#demo" class="pop">
-                    <img id="imageresource" src="img/screenshoot-2.png" class="img-fluid rounded d-block mx-auto" alt="VideoGrace 2">
-                </a>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-6 mx-auto text-center">
-                <a href="#demo" class="pop">
-                    <img id="imageresource" src="img/screenshoot-3.png" class="img-fluid rounded d-block mx-auto" alt="VideoGrace 3">
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+int main(){
+    wui::app app;
+    wui::window win{"libwui demo", {800, 520}};
 
-<!--howto section-->
-<section class="py-7 bg-light" id="howto">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 mx-auto text-center">
-                <h2 class="text-dark">Quick start</h2>
-                <p class="text-muted lead">A few actions and your app is up and running and ready for further development</p>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-md-10 mx-auto">
-                <div class="row">
-                    <div class="col">
-                        <h6 class="text-dark">Application entry point</h6>
-                        <p class="text-muted">Function main()</p>
-                        <pre class="prettyprint">int main(...)
-{
-    wui::framework::init();
+    auto btn = std::make_shared&lt;wui::button&gt;("Click me");
+    btn-&gt;on_click([]{ std::puts("clicked"); });
 
-    // Code, initialization of config, visual theme and locale 
-
-    MainFrame mainFrame;
-    mainFrame.Run();
-
-    wui::framework::run();
-
-    return 0;
+    win.set_content(btn);
+    win.show();
+    return app.run();
 }
-</pre>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <h6 class="text-dark">Main widnow</h6>
-                        <p class="text-muted"></p>
-                        <pre class="prettyprint">class MainFrame
-{
-public:
-    MainFrame();
+</code></pre>
+        <p class="note">Pure C++: lambdas, std::function, no MOC.</p>
+      </div>
+    </section>
 
-    void Run();
+    <!-- WHY -->
+    <section id="why">
+      <h2>Why switch from Qt/QML to libwui</h2>
+      <div class="grid-3">
+        <div class="feat card">
+          <h3>Lightweight instead of bloat</h3>
+          <p>Only what’s needed for UI. No dozens of modules (SQL, XML, 3D, etc.) that inflate dependencies and complicate maintenance.</p>
+        </div>
+        <div class="feat card">
+          <h3>Modern C++ without “magic”</h3>
+          <p>Native std stack: templates, lambdas, smart pointers. Transparent event model, no hidden code generation.</p>
+        </div>
+        <div class="feat card">
+          <h3>Small binaries</h3>
+          <p>Minimal footprint and fast startup — important both for distribution and embedded systems.</p>
+        </div>
+      </div>
+      <div class="grid-3" style="margin-top:18px">
+        <div class="feat card">
+          <h3>Simpler CI/CD</h3>
+          <p>No external generators, fewer build stages, fewer “it broke on agents” cases.</p>
+        </div>
+        <div class="feat card">
+          <h3>Predictable API</h3>
+          <p>Docs and code go side by side: fewer “magical” states, clear lifecycle.</p>
+        </div>
+        <div class="feat card">
+          <h3>Open‑source without lock‑in</h3>
+          <p>No paid licenses for static linking and closed code; you control the product.</p>
+        </div>
+      </div>
+    </section>
 
-private:
-    void ReceiveEvents(const wui::event &ev);
-    void UpdateControlsPosition();
-    void OnOK();
-    
-    static const int32_t WND_WIDTH = 400, WND_HEIGHT = 400;
-    
-    std::shared_ptr<wui::window> window = std::make_shared<wui::window>();
-    
-    std::shared_ptr<wui::image> logoImage = std::make_shared<wui::image>(IMG_LOGO);
-    
-    std::shared_ptr<wui::text> whatsYourNameText = std::make_shared<wui::text>(
-        wui::locale("main_frame", "whats_your_name_text"),
-        wui::text_alignment::center,
-        "h1_text");
-                            
-    std::shared_ptr<wui::input> userNameInput = std::make_shared<wui::input>(wui::config::get_string("User", "Name", ""));
-                            
-    std::shared_ptr<wui::button> okButton = std::make_shared<wui::button>(
-        wui::locale("main_frame", "ok_button"),
-        std::bind(&MainFrame::OnOK, this));
-                            
-    std::shared_ptr<wui::message> messageBox = std::make_shared<wui::message>(window);
-                            
-    bool user_approve_close = false;
-};
-                            
-</pre>
-                    </div>
+    <!-- COMPARE -->
+    <section id="compare">
+      <h2>Comparison: libwui vs Qt/QML</h2>
+      <table aria-label="Comparison table">
+        <thead>
+          <tr>
+            <th>Criterion</th>
+            <th>libwui</th>
+            <th>Qt / QML</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Language / model</td>
+            <td>Pure C++, events via std::function</td>
+            <td>Custom signals/slots, MOC, QML (JS)</td>
+          </tr>
+          <tr>
+            <td>Build</td>
+            <td>No code generators, simpler CI</td>
+            <td>moc/uic/rcc, long builds</td>
+          </tr>
+          <tr>
+            <td>Binary size</td>
+            <td class="tick">Small footprint</td>
+            <td class="dash">Much larger</td>
+          </tr>
+          <tr>
+            <td>Dependencies</td>
+            <td>Minimal</td>
+            <td>Many modules and ABI layers</td>
+          </tr>
+          <tr>
+            <td>UI nativeness</td>
+            <td>Focus on custom modern UI</td>
+            <td>Widgets/QML, varying “nativeness” per platform</td>
+          </tr>
+          <tr>
+            <td>Learning curve</td>
+            <td>Low for C++ developers</td>
+            <td>QML/JS, new paradigm</td>
+          </tr>
+          <tr>
+            <td>Licensing</td>
+            <td>Open‑source, no fee for static linking</td>
+            <td>GPL/LGPL or expensive commercial</td>
+          </tr>
+          <tr>
+            <td>Ready‑made components</td>
+            <td>Core set + extensibility</td>
+            <td>Large widget library</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note" style="margin-top:10px">* Size and speed estimates depend on project config; given as guidance.</p>
+    </section>
+
+           <!-- COMPONENTS -->
+        <section id="components">
+            <h2>Components and extensibility</h2>
+            <div class="grid-2">
+                <div class="card feat">
+                    <h3>Out of the box</h3>
+                    <p>Windows, containers, buttons, input fields, lists, panels, dialogs. Smooth animations where appropriate.</p>
+                    <p class="note">“Sufficient minimum” strategy: no overloaded “combines”.</p>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <h6 class="text-dark">Result</h6>
-                        <p class="text-muted">The demo application shows the logo, displays a caption and provides an input field.
-                            When the button is clicked, a message box is displayed and the application closes.
-                            It also tracks when the user closes the window and displays a confirmation.
-                        </p>
+                <div class="card feat">
+                    <h3>Extensibility</h3>
+                    <p>Create your own controls and themes through clear base classes. No inheritance from “everything at once”.</p>
+                    <p class="note">Composition and simple interfaces instead of rigid hierarchies.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUSTED BY -->
+        <section id="trusted">
+            <h2>Who already uses it</h2>
+            <div class="grid-2">
+                <a class="card feat" href="https://videograce.com" target="_blank" rel="noopener">
+                    <h3>VideoGrace</h3>
+                    <p>On-premise video communication: desktop clients on WUI (Windows / Linux).</p>
+                    <p class="note">UI based on libWUI: fast startup, minimal footprint, modern design.</p>
+                    <!-- <div class="thumbs">
+                        <a href="https://videograce.com/main/img/screen1.png" target="_blank" rel="noopener"><img src="https://videograce.com/main/img/screen1_thumb.png" alt="VideoGrace screenshot 1"></a>
+                        <a href="https://videograce.com/main/img/screen2.png" target="_blank" rel="noopener"><img src="https://videograce.com/main/img/screen2_thumb.png" alt="VideoGrace screenshot 2"></a>
+                        <a href="https://videograce.com/main/img/screen3.png" target="_blank" rel="noopener"><img src="https://videograce.com/main/img/screen3_thumb.png" alt="VideoGrace screenshot 3"></a>
+                    </div> -->
+                </a>
+                <div class="card feat">
+                    <h3>Your product</h3>
+                    <p>We are ready to feature a case and logo after migration to WUI. Write to us at <a href="mailto:info@libwui.org">info@libwui.org</a>.</p>
+                    <!--<div class="thumbs">
+                        <a href="#"><img src="/img/case-placeholder1.png" alt="Product screenshot"></a>
+                        <a href="#"><img src="/img/case-placeholder2.png" alt="Product screenshot"></a>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+        <!-- GET STARTED -->
+        <section id="get-started">
+            <h2>Start in 5 minutes</h2>
+            <div class="grid-2">
+                <div class="card" style="padding:18px">
+                    <h3>1) Installation</h3>
+                    <pre><code># CMake (example)
+find_package(libwui REQUIRED)
+
+add_executable(app main.cpp)
+target_link_libraries(app PRIVATE wui)
+</code></pre>
+                    <p class="note">Supports CMake/Conan/Vcpkg — add it to your toolchain. Examples available in the repository.</p>
+                </div>
+                <div class="card" style="padding:18px">
+                    <h3>2) First window</h3>
+                    <pre><code>#include &lt;wui/wui.h&gt;
+int main(){ wui::app a; wui::window w{"Hello",{640,420}}; w.show(); return a.run(); }
+</code></pre>
+                    <div class="cta" style="margin-top:8px">
+                        <a class="btn" href="https://gitverse.ru/udattsk/wui/content/main/examples" target="_blank" rel="noopener">Open examples</a>
+                        <a class="btn secondary" href="https://libwui.org/doc_en/" target="_blank" rel="noopener">API documentation</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-6 mx-auto text-center">
-                <h5 class="mb-4 text-dark">More details</h5>
-                <a href="../doc_ru/howto/hello-world/" target="_blank" class="btn btn-primary">Description of the starter application</a>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+            <h2>FAQ</h2>
+            <div class="grid-2">
+                <div class="card feat">
+                    <h3>Where does it work?</h3>
+                    <p>Windows / Linux (Wayland/X11). macOS support — planned. For embedded systems — build without unnecessary dependencies.</p>
+                </div>
+                <div class="card feat">
+                    <h3>What about performance?</h3>
+                    <p>Minimal overhead and fast startup. Rendering optimized for typical desktop cases. No redundant abstractions.</p>
+                </div>
+                <div class="card feat">
+                    <h3>Theming and customization?</h3>
+                    <p>Yes. Theming via tokens and styles. Custom controls plug in without “breaking” the core.</p>
+                </div>
+                <div class="card feat">
+                    <h3>License?</h3>
+                    <p>Open-source Boost license. No fees for static linking.</p>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <footer>
+            <div class="grid-2">
+                <div>
+                    <strong>libwui</strong> — lightweight modern UI framework in pure C++.
+                    <div class="note">© <span id="year"></span> libwui. All rights reserved.</div>
+                </div>
+                <div style="text-align:right">
+                    <a href="https://gitverse.ru/udattsk/wui" class="note" target="_blank" rel="noopener">GitVerse</a> ·
+                    <a href="https://libwui.org/doc_en/" class="note" target="_blank" rel="noopener">Documentation</a> ·
+                    <a href="https://gitverse.ru/udattsk/wui/content/main/examples" class="note" target="_blank" rel="noopener">Examples</a>
+                </div>
+            </div>
+        </footer>
     </div>
-</section>
 
-<!--news section-->
-<section class="py-7 bg-light" id="news">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 mx-auto text-center">
-                <h2 class="text-dark">WUI life</h2>
-                <p class="text-muted lead">Key milestones</p>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="#" class="card-title mb-2"><h5>Project start</h5></a>
-                        <p class="text-muted small-xl mb-2">Dec 17, 2021</p>
-                        <p class="card-text">The first commit is the birthday of the project</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="#" class="card-title mb-2"><h5>Windows port is done</h5></a>
-                        <p class="text-muted small-xl mb-2">January 20, 2022</p>
-                        <p class="card-text">Implemented startup and operation on Windows</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="#" class="card-title mb-2"><h5>Linux port is done</h5></a>
-                        <p class="text-muted small-xl mb-2">February 26, 2022</p>
-                        <p class="card-text">Implemented startup and operation on Linux</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="#" class="card-title mb-2"><h5>Website made and documentation posted</h5></a>
-                        <p class="text-muted small-xl mb-2">September 26, 2023</p>
-                        <p class="card-text">After a year of commercial operation in a number of enterprises, the product has been stabilized and published</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="#" class="card-title mb-2"><h5>First post on Reddit</h5></a>
-                        <p class="text-muted small-xl mb-2">September 26, 2023</p>
-                        <p class="card-text"><a href="https://www.reddit.com/r/wui/comments/17izycu/experience_in_creating_a_ui_library_in_c/" target="_blank">Experience in creating a UI library in C++</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--<div class="row mt-6">
-            <div class="col-md-6 mx-auto text-center">
-                <a href="#" class="btn btn-primary">View all posts</a>
-            </div>
-        </div>-->
-    </div>
-</section>
-
-<!-- donate section -->
-<section class="py-7 bg-info section-angle top-top bottom-left" id="donate">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 mx-auto text-center text-info">
-                <h2 class="text-info">Donations <span style="color:red">❤️</span></h2>
-                <p class="mb-5">We will be very grateful for your support of the project. The received funds are used to pay for hosting, purchase computers and material support for developers.</p>
-                <!--<a href="https://www.paypal.com/paypalme/libwui" class="btn btn-primary">Paypal</a><br><br>-->
-                <!--<a href="https://www.patreon.com/user/membership?u=66230239" class="btn btn-primary">Patreon</a><br><br>-->
-                <a href="https://boosty.to/antong/donate" class="btn btn-primary">Boosty</a><br><br>
-                <!--<p>Crypto (USDT): TAiA5MuS3nCkAaPWSjfLmGijvTzMychLbY TRC20</p>-->
-        </div>
-    </div>
-</section>
-
-<!--footer-->
-<footer class="py-6">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-5 mr-auto">
-                <h5>About WUI Team</h5>
-                <p class="text-muted">WUI is maintained by a team of independent developers since 2021. Development is ongoing, almost full time. To join the team, email us.</p>
-                <ul class="list-inline social social-sm">
-                    <!--<li class="list-inline-item">
-                        <a href=""><i class="fa fa-facebook"></i></a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href=""><i class="fa fa-twitter"></i></a>
-                    </li>-->
-                    <li class="list-inline-item">
-                        <a href="https://github.com/ud84/wui" target="_blank"><i class="fa fa-github"></i></a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://t.me/libwui" target="_blank"><i class="fa fa-telegram"></i></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-sm-2">
-                <h5>Documentation</h5>
-                <ul class="list-unstyled">
-                    <li><a href="../doc/" target="_blank">Engish documentation</a></li>
-                    <li><a href="../doc_ru/" target="_blank">Russian documentation</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-2">
-                <h5>Contacts</h5>
-                <ul class="list-unstyled">
-                    <li><a href="https://github.com/ud84/wui" target="_blank">GitHub</a></li>
-                    <li><a href="mailto:info@libwui.org">info@libwui.org</a></li>
-                    <li><a href="https://t.me/libwui" target="_blank">Telegram channel</a></li>
-                </ul>
-            </div>
-            <!--<div class="col-sm-2">
-                <h5>Donations ❤️</h5>
-                <ul class="list-unstyled">
-                    <li><a href="../donate/" target="_blank">From card</a></li>
-                    <li><a href="https://www.patreon.com/user/membership?u=66230239" target="_blank">Fund on Patreon</a></li>
-                    <li>USDT: TAiA5MuS3nCkAaPWSjfLmGijvTzMychLbY TRC20</li>
-                </ul>
-            </div>-->
-        </div>
-        <div class="row mt-5">
-            <div class="col-12 text-muted text-center small-xl">
-                &copy; 2021 - 2023 WUI Team
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!--scroll to top-->
-<div class="scroll-top">
-    <i class="fa fa-angle-up" aria-hidden="true"></i>
-</div>
-
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.3/feather.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-<script src="js/scripts.js"></script>
-
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();
-    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
- 
-    ym(95291159, "init", {
-         clickmap:true,
-         trackLinks:true,
-         accurateTrackBounce:true
-    });
- </script>
- <noscript><div><img src="https://mc.yandex.ru/watch/95291159" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
- <!-- /Yandex.Metrika counter -->
-
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+    <!-- Note: replace screenshot links with your own paths if different -->
 </body>
 </html>
