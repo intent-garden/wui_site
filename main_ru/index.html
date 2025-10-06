@@ -412,7 +412,7 @@
                     <span class="badge">Без moc / uic / rcc</span>
                     <span class="badge">Кроссплатформа</span>
                 </div>
-                <h1>Лёгкий UI‑фреймворк на чистом C++<br />без лишней магии и перегруза</h1>
+                <h1>Лёгкий UI‑фреймворк на чистом C++<br />минимум когнитивной нагрузки, максимальный контроль отрисовки и событий</h1>
                 <p class="lead">libwui — альтернатива Qt/QML для тех, кто хочет быстрые интерфейсы, маленькие бинарники и предсказуемый API. Никаких генераторов кода, минимум зависимостей, максимум контроля.</p>
                 <div class="cta">
                     <a class="btn" href="#get-started">Установка за 5 минут</a>
@@ -429,24 +429,39 @@
             </div>
             <div class="card code-card" id="code">
                 <p class="note">Как выглядит код на libwui</p>
-                <pre><code>// Минимальный пример: окно + кнопка
-#include &lt;wui/app.h&gt;
-#include &lt;wui/window.h&gt;
-#include &lt;wui/controls/button.h&gt;
+                <pre><code>
+    // Минимальный пример: окно + кнопка
+    #include &lt;wui/framework/framework.hpp&gt;
+    #include &lt;wui/window/window.hpp&gt;
+    #include &lt;wui/control/button.hpp&gt;
+    #include &lt;wui/common/dbgtrace.hpp&gt;
 
-int main(){
-    wui::app app;
-    wui::window win{"libwui demo", {800, 520}};
+    int main() {
+        wui::framework::init();
 
-    auto btn = std::make_shared&lt;wui::button&gt;("Нажми меня");
-    btn-&gt;on_click([]{ std::puts("clicked"); });
+        auto window = std::make_shared<wui::window>();
 
-    win.set_content(btn);
-    win.show();
-    return app.run();
-}
+        auto button1 = std::make_shared<wui::button>("Button 1",
+            [this]() {
+                DBG_TRACE("Button 1 press");
+            });
+
+        window->add_control(button1, { 10, 10, 300, 35 });
+
+        window->init("Hello from WUI!", { -1, -1, 900, 600 },
+            wui::flags_map<wui::window_style>(3, wui::window_style::frame,
+            wui::window_style::switch_theme_button,
+            wui::window_style::border_all),
+            []() {
+                wui::framework::stop();
+            });
+
+        wui::framework::run();
+
+        return 0;
+    }
 </code></pre>
-                <p class="note">Чистый C++: лямбды, std::function, никакой MOC.</p>
+                <p class="note">Чистый C++: лямбды, std::function, никакого MOC.</p>
             </div>
         </section>
 
@@ -582,7 +597,7 @@ int main(){
             </div>
         </section>
 
-        <!-- GET STARTED -->
+        <!-- GET STARTED --
         <section id="get-started">
             <h2>Старт за 5 минут</h2>
             <div class="grid-2">
@@ -607,7 +622,7 @@ int main(){ wui::app a; wui::window w{"Hello",{640,420}}; w.show(); return a.run
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- FAQ -->
         <section id="faq">
