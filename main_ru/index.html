@@ -387,6 +387,27 @@
             margin: 0 auto;
             padding: 24px 32px
         }
+        .code-key {
+            color: deepskyblue;
+        }
+        .code-str {
+            color: orangered;
+        }
+        .code-prep {
+            color: dimgray;
+        }
+        .code-comment {
+            color: forestgreen;
+        }
+        .code-class {
+            color: lawngreen;
+        }
+        .code-func {
+            color: yellow;
+        }
+        .code-var {
+            color: mediumpurple;
+        }
     </style>
 </head>
 <body>
@@ -430,35 +451,37 @@
             <div class="card code-card" id="code">
                 <p class="note">Как выглядит код на libwui</p>
                 <pre><code>
-    // Минимальный пример: окно + кнопка
-    #include &lt;wui/framework/framework.hpp&gt;
-    #include &lt;wui/window/window.hpp&gt;
-    #include &lt;wui/control/button.hpp&gt;
-    #include &lt;wui/common/dbgtrace.hpp&gt;
+    <span class="code-comment">// Минимальный пример: окно + кнопка</span>
+    <span class="code-prep">#include</span> <span class="code-str">&lt;wui/framework/framework.hpp&gt;</span>
+    <span class="code-prep">#include</span> <span class="code-str">&lt;wui/window/window.hpp&gt;</span>
+    <span class="code-prep">#include</span> <span class="code-str">&lt;wui/control/button.hpp&gt;</span>
+    <span class="code-prep">#include</span> <span class="code-str">&lt;wui/common/dbgtrace.hpp&gt;</span>
 
-    int main() {
-        wui::framework::init();
+    <span class="code-key">int</span> <span class="code-func">main</span>() {
+        wui::<span class="code-class">framework</span>::<span class="code-func">init</span>();
 
-        auto window = std::make_shared<wui::window>();
+        <span class="code-key">auto</span> <span class="code-var">window</span> = std::<span class="code-func">make_shared</span>&lt;wui::<span class="code-class">window</span>&gt;();
 
-        auto button1 = std::make_shared<wui::button>("Button 1",
-            [this]() {
-                DBG_TRACE("Button 1 press");
-            });
-
-        window->add_control(button1, { 10, 10, 300, 35 });
-
-        window->init("Hello from WUI!", { -1, -1, 900, 600 },
-            wui::flags_map<wui::window_style>(3, wui::window_style::frame,
-            wui::window_style::switch_theme_button,
-            wui::window_style::border_all),
+        <span class="code-key">auto</span> <span class="code-var">button</span> = std::<span class="code-func">make_shared</span>&lt;wui::<span class="code-class">button</span>&gt;((<span class="code-str">"Button 1"</span>,
             []() {
-                wui::framework::stop();
+                <span class="code-prep">DBG_TRACE</span>(<span class="code-str">"Button 1 press"</span>);
             });
 
-        wui::framework::run();
+        <span class="code-var">window</span>-> <span class="code-func">add_control</span>(<span class="code-var">button</span>, { 10, 10, 300, 35 });
 
-        return 0;
+        <span class="code-var">window</span>-><span class="code-func">init</span>(<span class="code-str">"Hello from WUI!"</span>, { -1, -1, 900, 600 },
+            wui::<span class="code-func">flags_map</span>&lt;wui::<span class="code-class">window_style</span>&gt;(3, wui::<span class="code-class">window_style</span>::frame,
+                wui::<span class="code-class">window_style</span>::switch_theme_button,
+                wui::<span class="code-class">window_style</span>::border_all),
+            []() {
+                wui::<span class="code-class">framework</span>::<span class="code-func">stop</span>();
+            });
+
+        <span class="code-prep">DBG_TRACE</span>(<span class="code-str">"App started"</span>);
+        wui::<span class="code-class">framework</span>::<span class="code-func">run</span>();
+
+        <span class="code-prep">DBG_TRACE</span>(<span class="code-str">"App ended"</span>);
+        <span class="code-key">return</span> 0;
     }
 </code></pre>
                 <p class="note">Чистый C++: лямбды, std::function, никакого MOC.</p>
