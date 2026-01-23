@@ -17,474 +17,59 @@
     <meta name="twitter:title" content="libwui — лёгкий современный UI‑фреймворк на чистом C++">
     <meta name="twitter:description" content="$1">
     <meta name="twitter:image" content="https://libwui.org/og.png">
-    <style>
-        :root {
-            --bg: #0b0d12;
-            --card: #12151d;
-            --muted: #8b93a7;
-            --text: #e8eefc;
-            --acc: #6ea8fe;
-            --acc-2: #4ce0b3;
-            --warn: #ffd166;
-            --radius: 18px;
-            --radius-sm: 12px;
-            --shadow: 0 10px 30px rgba(0,0,0,.3);
-        }
-
-        html {
-            scroll-behavior: smooth
-        }
-
-        body {
-            margin: 0;
-            font: 16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
-            color: var(--text);
-            background: linear-gradient(180deg,#0a0d13 0%,#0b1018 60%,#0a0d13 100%);
-        }
-
-        a {
-            color: var(--acc);
-            text-decoration: none
-        }
-
-            a:hover {
-                text-decoration: underline
-            }
-
-        .wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px
-        }
-
-        header.nav {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 0
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700
-        }
-
-            .brand .logo {
-                width: 36px;
-                height: 36px;
-                border-radius: 9px;
-                background: linear-gradient(135deg,var(--acc),var(--acc-2));
-                box-shadow: 0 0 40px rgba(78,224,179,.35);
-            }
-
-        .nav-links {
-            display: flex;
-            gap: 18px;
-            flex-wrap: wrap
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 18px;
-            border-radius: 12px;
-            background: var(--acc);
-            color: #0a0d13;
-            font-weight: 700;
-            border: 1px solid rgba(255,255,255,.08);
-            box-shadow: var(--shadow);
-        }
-
-            .btn.secondary {
-                background: transparent;
-                color: var(--text);
-                border: 1px solid rgba(255,255,255,.15)
-            }
-
-            .btn:hover {
-                transform: translateY(-1px);
-                filter: saturate(1.1);
-            }
-
-        .hero {
-            padding: 48px 0 24px;
-            display: grid;
-            grid-template-columns: 1.35fr 1fr;
-            gap: 28px;
-            align-items: center
-        }
-
-        .card {
-            background: linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow)
-        }
-
-        .hero h1 {
-            font-size: clamp(28px,4.2vw,48px);
-            line-height: 1.15;
-            margin: 0 0 14px
-        }
-
-        .hero p.lead {
-            color: var(--muted);
-            font-size: clamp(16px,2vw,18px);
-            margin: 0 0 22px
-        }
-
-        .badges {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin: 0 0 18px
-        }
-
-        .badge {
-            padding: 8px 12px;
-            border-radius: 999px;
-            background: #0f1420;
-            border: 1px solid rgba(255,255,255,.08);
-            color: #cfe1ff;
-            font-size: 13px
-        }
-
-        .code-card {
-            padding: 16px
-        }
-
-        pre {
-            margin: 0;
-            background: #0a0f19;
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: 12px;
-            padding: 14px;
-            overflow: auto
-        }
-
-        code {
-            font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-            font-size: 13px
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3,1fr);
-            gap: 18px
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2,1fr);
-            gap: 18px
-        }
-
-        section {
-            padding: 26px 0
-        }
-
-        h2 {
-            font-size: 24px;
-            margin: 0 0 12px
-        }
-
-        p {
-            margin: 0 0 10px
-        }
-
-        .feat {
-            padding: 18px
-        }
-
-            .feat h3 {
-                margin: 6px 0 6px;
-                font-size: 18px
-            }
-
-            .feat p {
-                color: var(--muted)
-            }
-
-        input {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px 16px;
-            border-radius: 12px;
-            background: #fafdfd;
-            color: #0a0d13;
-            font-weight: 700;
-            border: 1px solid rgba(255,255,255,.08);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            background: rgba(255,255,255,.02);
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: 12px;
-            overflow: hidden
-        }
-
-        th, td {
-            text-align: left;
-            padding: 12px 14px;
-            border-bottom: 1px solid rgba(255,255,255,.06)
-        }
-
-        th {
-            font-size: 14px;
-            color: #d8e5ff;
-            background: rgba(255,255,255,.03)
-        }
-
-        tr:last-child td {
-            border-bottom: none
-        }
-
-        .tick {
-            color: var(--acc-2);
-            font-weight: 700
-        }
-
-        .dash {
-            color: #ff9b9b;
-            font-weight: 700
-        }
-
-        .cta {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap
-        }
-
-        .note {
-            font-size: 13px;
-            color: var(--muted)
-        }
-
-        .kpi {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap
-        }
-
-            .kpi .item {
-                flex: 1 1 160px;
-                padding: 16px;
-                border-radius: 14px;
-                background: linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
-                border: 1px solid rgba(255,255,255,.08)
-            }
-
-            .kpi .num {
-                font-size: 20px;
-                font-weight: 800
-            }
-
-            .kpi .lbl {
-                color: var(--muted);
-                font-size: 13px
-            }
-
-        footer {
-            margin-top: 32px;
-            padding: 28px 0 18px;
-            color: var(--muted);
-            border-top: 1px solid rgba(255,255,255,.08)
-        }
-
-        @media (max-width: 980px) {
-            .hero {
-                grid-template-columns: 1fr
-            }
-
-            .grid-3 {
-                grid-template-columns: 1fr
-            }
-
-            .grid-2 {
-                grid-template-columns: 1fr
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            body {
-                background: linear-gradient(180deg,#eef3ff 0%,#f4f7ff 100%);
-                color: #0f172a
-            }
-
-            :root {
-                --card: #fff;
-                --text: #0f172a;
-                --muted: #4b5563
-            }
-
-            .card {
-                background: #fff;
-                border-color: #e5e7eb
-            }
-
-            pre {
-                background: #0f172a;
-                color: #e5e7eb
-            }
-
-            .badge {
-                background: #f8fafc;
-                color: #334155;
-                border-color: #e5e7eb
-            }
-
-            table {
-                background: #fff;
-                border-color: #e5e7eb
-            }
-
-            th {
-                background: #f8fafc
-            }
-        }
-
-        .lang {
-            margin-left: 6px;
-            font-size: 14px;
-            opacity: .9
-        }
-
-            .lang a {
-                color: var(--muted)
-            }
-
-                .lang a.active {
-                    color: var(--text);
-                    font-weight: 700
-                }
-
-        .thumbs {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 10px
-        }
-
-            .thumbs a {
-                display: block;
-                flex: 0 0 120px;
-                border-radius: 10px;
-                overflow: hidden;
-                border: 1px solid rgba(255,255,255,.08);
-                box-shadow: var(--shadow)
-            }
-
-            .thumbs img {
-                display: block;
-                width: 100%;
-                height: 72px;
-                object-fit: cover
-            }
-
-        section {
-            padding: 40px 0
-        }
-
-        .wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px 32px
-        }
-    </style>
+  <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <div class="wrap">
-        <header class="nav">
-            <div class="brand"><div class="logo" aria-hidden="true"></div><span>libwui</span></div>
-            <nav class="nav-links">
-                <a href="../main_ru/">На главную</a>
-                <span class="lang" aria-label="language switcher"><a href="#" class="active">RU</a> · <a href="../donate/" hreflang="en">EN</a></span>
-            </nav>
-        </header>
+    <header id="main-header">
+        <nav class="main-nav">
+            <div class="nav-brand">libwui</div>
+            <ul class="nav-menu">
+                <li><a href="../main_ru/">На главную</a></li>
+                <li><span class="lang" aria-label="language switcher"><a href="#" class="active">RU</a> · <a href="../donate/" hreflang="en">EN</a></span></li>
+            </ul>
+        </nav>
+    </header>
 
-        <!-- COMPARE -->
-        <section id="compare">
-            <h2>Будем признательны за любой посильный вклад <span style="color:red">❤️</span></h2><br>
-            <p class="text-white">Полученные средства расходуются на развитие и поддержание материальной базы разработки. Оператором выступает ООО "ИВС", ИНН: 7017358460</p>
-        </section>
+    <!-- COMPARE -->
+    <section id="compare">
+        <h2>Будем признательны за любой посильный вклад <span style="color:red">❤️</span></h2>
+        <p>Полученные средства расходуются на развитие и поддержание материальной базы разработки. Оператором выступает ООО "ИВС", ИНН: 7017358460</p>
+    </section>
 
-        <section id="compare">
-            <div class="container">
-                <!-- Modal form -->
-                <h2>Платеж через Ю.Касса</h2>
-                <div class="row justify-content-center">
-                    <div class="modal-content">
-                        <form action="buy.php" method="post" name="buyform" id="buyform" role="form"
-                              class="php-email-form">
-                            <div class="modal-body">
-
-                                <div class="form-group mt-3">
-                                    <span id="count_capt">
-                                        Сумма
-                                    </span>
-                                    <input type="number" id="price" class="form-control" name="price" value="500" min="100" max="100000">
-                                    <span id="count_capt">
-                                        ₽
-                                    </span>
-                                </div>
-                                <br>
-                                <div class="form-group mt-3">
-                                    <span id="count_capt">
-                                        Контакт
-                                    </span>
-                                    <input id="email" class="form-control" name="email" required>
-                                    <span id="count_capt">
-                                        email, telegram, etc...
-                                    </span>
-                                </div>
-                                </br>
-                                <div class="my-3">
-                                    <div class="loading"></div>
-                                    <div class="error-message"></div>
-                                    <div class="sent-message"></div>
-                                </div>
-                                <div class="text-center">
-
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <div class="form-group mt-3">
-                                    <input style="height:40px;border-radius:5px;" id="submit_bank" class="btn btn-primary"
-                                           type="submit" name="submit_buy" value="Продолжить">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+    <section id="payment">
+        <h2>Платеж через Ю.Касса</h2>
+        <div class="card">
+            <form action="buy.php" method="post" name="buyform" id="buyform" role="form">
+                <div class="form-group">
+                    <label for="price">Сумма</label>
+                    <input type="number" id="price" name="price" value="500" min="100" max="100000" required>
+                    <span>₽</span>
                 </div>
+                <div class="form-group">
+                    <label for="email">Контакт</label>
+                    <input id="email" name="email" required placeholder="email, telegram, etc...">
+                </div>
+                <div class="cta">
+                    <input type="submit" name="submit_buy" value="Продолжить" class="btn">
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="grid-2">
+            <div>
+                <strong>libwui</strong> — лёгкий современный UI‑фреймворк на чистом C++.
+                <div class="note">© <span id="year"></span> libwui. Все права защищены.</div>
             </div>
-            <!-- End modal form -->
-        </section>
-
-        <footer>
-            <div class="grid-2">
-                <div>
-                    <strong>libwui</strong> — лёгкий современный UI‑фреймворк на чистом C++.
-                    <div class="note">© <span id="year"></span> libwui. Все права защищены.</div>
-                </div>
-                <div style="text-align:right">
-                    <a href="https://gitverse.ru/udattsk/wui" class="note" target="_blank" rel="noopener">GitVerse</a> ·
-                    <a href="https://libwui.org/doc_ru/" class="note" target="_blank" rel="noopener">Документация</a> ·
-                    <a href="https://gitverse.ru/udattsk/wui/content/main/examples" class="note" target="_blank" rel="noopener">Примеры</a> ·
-                    <a href="https://t.me/libwui_chat" class="note" target="_blank" rel="noopener">Телеграм чат</a>
-                </div>
+            <div style="text-align:right">
+                <a href="https://gitverse.ru/udattsk/wui" class="note" target="_blank" rel="noopener">GitVerse</a> ·
+                <a href="https://libwui.org/doc_ru/" class="note" target="_blank" rel="noopener">Документация</a> ·
+                <a href="https://gitverse.ru/udattsk/wui/content/main/examples" class="note" target="_blank" rel="noopener">Примеры</a> ·
+                <a href="https://t.me/libwui_chat" class="note" target="_blank" rel="noopener">Телеграм чат</a>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
 
     <script src="js/validate_form.js"></script>
 
