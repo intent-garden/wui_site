@@ -435,6 +435,40 @@ p {
     color: var(--steel);
 }
 
+/* Ссылки */
+a {
+    color: var(--phosphor);
+    text-decoration: none;
+}
+
+a:not(.card, .feat, .btn, .btn.secondary, .nav-menu a, .lang a, .thumbs a) {
+    text-decoration: underline;
+}
+
+a:not(.card, .feat, .btn, .btn.secondary, .nav-menu a, .lang a, .thumbs a):hover {
+    text-decoration: underline;
+    text-decoration-color: var(--phosphor);
+}
+
+/* Отменяем подчеркивание для карточек и других элементов */
+.card a,
+.feat a,
+.btn a,
+.nav-menu a,
+.lang a,
+.thumbs a {
+    text-decoration: none;
+}
+
+.card a:hover,
+.feat a:hover,
+.btn a:hover,
+.nav-menu a:hover,
+.lang a:hover,
+.thumbs a:hover {
+    text-decoration: none;
+}
+
 .text-block {
     line-height: 1.8;
     margin: 20px 0;
