@@ -666,6 +666,7 @@ footer > * {
         justify-content: space-between;
         align-items: center;
         gap: 8px;
+        flex-wrap: wrap; /* Разрешить перенос строк при необходимости */
     }
 
     .nav-brand {
@@ -682,6 +683,11 @@ footer > * {
         font-size: 0.6rem;
         padding: 2px 0;
         letter-spacing: 0.5px;
+    }
+    
+    .lang {
+        font-size: 0.7rem;
+        margin-left: 4px;
     }
 
     section, footer {
@@ -762,6 +768,11 @@ footer > * {
 
     .nav-menu a {
         font-size: 0.55rem;
+    }
+    
+    .lang {
+        font-size: 0.6rem;
+        margin-left: 3px;
     }
 
     section, footer {
