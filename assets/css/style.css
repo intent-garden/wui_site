@@ -355,16 +355,33 @@ pre {
     border: 1px solid var(--iron);
     border-radius: 4px;
     padding: 14px;
-    overflow: auto;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 code {
     font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .code-card {
     padding: 16px;
+}
+
+/* Дополнительные стили для мобильных устройств */
+@media (max-width: 768px) {
+    pre {
+        padding: 10px;
+        font-size: 12px;
+    }
+    
+    .code-card {
+        padding: 12px;
+        margin-top: 15px;
+    }
 }
 
 /* Таблицы */
@@ -469,6 +486,23 @@ p {
     color: var(--steel);
     font-size: clamp(16px, 2vw, 18px);
     margin: 0 0 22px;
+}
+
+/* Дополнительные стили для мобильных устройств */
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 30px 20px 15px; /* Добавлены горизонтальные отступы */
+    }
+    
+    .hero > div:first-child {
+        order: 1; /* Помещаем текст первым на мобильных устройствах */
+    }
+    
+    .hero > div:last-child {
+        order: 2; /* Помещаем блок кода вторым на мобильных устройствах */
+    }
 }
 
 /* CTA */
@@ -639,6 +673,31 @@ footer > * {
         font-size: 1.1rem;
         letter-spacing: 2px;
     }
+    
+    /* Дополнительные стили для hero на мобильных устройствах */
+    .hero h1 {
+        font-size: 1.4rem;
+        line-height: 1.2;
+    }
+    
+    .hero p.lead {
+        font-size: 1rem;
+        margin: 0 0 15px;
+    }
+    
+    .badges {
+        flex-wrap: wrap;
+    }
+    
+    .cta {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn, .btn.secondary {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -671,7 +730,26 @@ footer > * {
         font-size: 1.1rem;
     }
 
+    .hero {
+        padding: 20px 15px 10px; /* Добавлены горизонтальные отступы */
+    }
+    
     .hero h1 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        line-height: 1.2;
+    }
+    
+    .hero p.lead {
+        font-size: 0.9rem;
+    }
+    
+    .cta {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .btn, .btn.secondary {
+        padding: 10px 15px;
+        font-size: 0.65rem;
     }
 }
