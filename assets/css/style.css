@@ -698,6 +698,18 @@ footer > * {
         width: 100%;
         justify-content: center;
     }
+    
+    /* Стили для таблицы на мобильных устройствах */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    th, td {
+        min-width: 120px;
+        padding: 10px 12px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -751,5 +763,15 @@ footer > * {
     .btn, .btn.secondary {
         padding: 10px 15px;
         font-size: 0.65rem;
+    }
+    
+    /* Стили для таблицы на очень маленьких экранах */
+    table {
+        font-size: 0.85rem;
+    }
+    
+    th, td {
+        min-width: 100px;
+        padding: 8px 10px;
     }
 }
