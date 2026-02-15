@@ -12,11 +12,6 @@
     <meta property="og:title" content="libwui — лёгкий современный UI‑фреймворк на чистом C++">
     <meta property="og:description" content="$1">
     <meta property="og:url" content="https://libwui.org/">
-    <meta property="og:image" content="https://libwui.org/og.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="libwui — лёгкий современный UI‑фреймворк на чистом C++">
-    <meta name="twitter:description" content="$1">
-    <meta name="twitter:image" content="https://libwui.org/og.png">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -100,7 +95,7 @@
 
         <!-- WHY -->
         <section id="why">
-            <h2>Зачем менять Qt/QML на libwui</h2>
+            <h2>Основные примущества</h2>
             <div class="grid-3">
                 <div class="feat card">
                     <h3>Лёгкость вместо перегруза</h3>
@@ -211,21 +206,17 @@
             <div class="grid-2">
                 <a class="card feat" href="https://videograce.com" target="_blank" rel="noopener">
                     <h3>VideoGrace</h3>
-                    <p>On‑premise видеосвязь: десктоп‑клиенты на WUI (Windows / Linux).</p>
-                    <p class="note">UI на базе libWUI: быстрый старт, минимальный footprint, современный дизайн.</p>
-                    <!-- <div class="thumbs">
-                        <a href="https://videograce.com/main/img/screen1.png" target="_blank" rel="noopener"><img src="https://videograce.com/main/img/screen1_thumb.png" alt="VideoGrace скриншот 1"></a>
-                        <a href="https://videograce.com/main/img/screen2.png" target="_blank" rel="noopener"><img src="https://videograce.com/main/img/screen2_thumb.png" alt="VideoGrace скриншот 2"></a>
-                        <a href="https://videograce.com/main/img/screen3.png" target="_blank" rel="noopener"><img src="https://videograce.com/main/img/screen3_thumb.png" alt="VideoGrace скриншот 3"></a>
-                    </div> -->
+                    <p>Нативные десктоп‑клиенты мессенджера</p>
+                    <p class="note">UI на базе libWUI: ~10Mb 64bit static link with codecs and OpenSSL.</p>                    
+                </a>
+                <a class="card feat" href="https://decima8.org" target="_blank" rel="noopener">
+                    <h3>Decima8</h3>
+                    <p>IDE для нейроморфной машины Decima8</p>
+                    <p class="note">20 us такт цикла 256 тайлов, отрисовка в реальном времени. ~1.3 Mb exe static link, C++23</p>
                 </a>
                 <div class="card feat">
                     <h3>Ваш продукт</h3>
                     <p>Готовы разместить кейс и логотип после миграции на WUI. Напишите нам на <a href="mailto:info@libwui.org">info@libwui.org</a>.</p>
-                    <!--<div class="thumbs">
-                        <a href="#"><img src="/img/case-placeholder1.png" alt="Скриншот продукта"></a>
-                        <a href="#"><img src="/img/case-placeholder2.png" alt="Скриншот продукта"></a>
-                    </div> -->
                 </div>
             </div>
         </section>
@@ -263,7 +254,7 @@ int main(){ wui::app a; wui::window w{"Hello",{640,420}}; w.show(); return a.run
             <div class="grid-2">
                 <div class="card feat">
                     <h3>Где работает?</h3>
-                    <p>Windows / Linux (Wayland/X11). Поддержка macOS — в планах. Для встраиваемых систем — сборка без лишних зависимостей.</p>
+                    <p>Windows / Linux (gdi, gdi+ / xcb, cairo, X11). Поддержка macOS — в планах. Для встраиваемых систем — сборка без лишних зависимостей.</p>
                 </div>
                 <div class="card feat">
                     <h3>Как насчёт производительности?</h3>
@@ -271,7 +262,7 @@ int main(){ wui::app a; wui::window w{"Hello",{640,420}}; w.show(); return a.run
                 </div>
                 <div class="card feat">
                     <h3>Поддержка тем и кастомизация?</h3>
-                    <p>Да. Темизация через токены и стили. Кастомные контролы подключаются без «ломки» ядра.</p>
+                    <p>Встроенная система тем и локалей. Кастомные контролы приветствуются и поощряются</p>
                 </div>
                 <div class="card feat">
                     <h3>Лицензия?</h3>
@@ -284,14 +275,13 @@ int main(){ wui::app a; wui::window w{"Hello",{640,420}}; w.show(); return a.run
         <div class="grid-2">
             <div>
                 <strong>libwui</strong> — лёгкий современный UI‑фреймворк на чистом C++.
-                <div class="note">© <span id="year"></span> libwui. Все права защищены.</div>
+                <div class="note">© <span id="year"></span> Организация "Сад Намерений". Все права защищены.</div>
             </div>
             <div style="text-align:right">
-                <a href="https://github.com/ud84/wui" class="note" target="_blank" rel="noopener">GitHub</a> ·
+                <a href="https://github.com/intent-garden/wui" class="note" target="_blank" rel="noopener">GitHub</a> ·
                 <a href="https://libwui.org/doc_ru/" class="note" target="_blank" rel="noopener">Документация</a> ·
-                <a href="https://github.com/ud84/wui" class="note" target="_blank" rel="noopener">Примеры</a> ·
-                <a href="https://t.me/libwui_chat" class="note" target="_blank" rel="noopener">Телеграм чат</a> ·
-                <a href="https://libwui.org/donate_ru/" class="note" target="_blank" rel="noopener">Donate ❤️</a>
+                <a href="https://t.me/libwui_chat" class="note" target="_blank" rel="noopener">Сообщество</a> ·
+                <a href="https://libwui.org/maintainer_ru/" class="note" rel="noopener">Разработчик</a>
             </div>
         </div>
     </footer>
@@ -302,7 +292,6 @@ int main(){ wui::app a; wui::window w{"Hello",{640,420}}; w.show(); return a.run
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
-    <!-- Note: замените ссылки на скриншоты своими путями, если отличаятся -->
 
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >

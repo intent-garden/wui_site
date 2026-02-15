@@ -503,11 +503,11 @@ a:not(.card, .feat, .btn, .btn.secondary, .nav-menu a, .lang a, .thumbs a):hover
 
 /* Hero секция */
 .hero {
-    padding: 48px 0 24px;
+    padding: 48px 20px 24px; /* Добавлены горизонтальные отступы */
     display: grid;
     grid-template-columns: 1.35fr 1fr;
     gap: 28px;
-    align-items: center;
+    align-items: start; /* Выравнивание по верхнему краю */
 }
 
 .hero h1 {
