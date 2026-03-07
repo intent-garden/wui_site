@@ -1,275 +1,292 @@
 <!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>libwui — лёгкий современный UI-фреймворк на чистом C++</title>
-    <meta name="description" content="$1" />
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="libwui — лёгкий современный UI‑фреймворк на чистом C++">
-    <meta property="og:description" content="$1">
-    <meta property="og:url" content="https://libwui.org/">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WUI — Кроссплатформенная C++ библиотека для GUI</title>
+  <meta name="description" content="WUI — кроссплатформенная C++ библиотека для создания графических интерфейсов. Минималистичный API, C++17, плоская модель владения, система событий. Поддержка Windows и Linux.">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="WUI — Кроссплатформенная C++ библиотека для GUI">
+  <meta property="og:description" content="Кроссплатформенная C++ библиотека для создания графических интерфейсов. Минималистичный API, C++17, плоская модель владения.">
+  <meta property="og:url" content="https://libwui.org/">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <header id="main-header">
         <nav class="main-nav">
-            <div class="nav-brand">🎨 libwui</div>
+            <div class="nav-brand">🎨 WUI</div>
             <ul class="nav-menu">
-                <li><a href="#why">Почему</a></li>
-                <li><a href="#compare">Сравнение</a></li>
-                <li><a href="#code">Код</a></li>
-                <li><a href="#components">Компоненты</a></li>
-                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#about">О библиотеке</a></li>
+                <li><a href="#architecture">Архитектура</a></li>
+                <li><a href="#features">Возможности</a></li>
+                <li><a href="#examples">Примеры</a></li>
+                <li><a href="#used-by">Используется в</a></li>
+                <li><a href="#comparison">Сравнение</a></li>
                 <li><a href="../doc_ru/">Документация</a></li>
                 <li><span class="lang" aria-label="language switcher"><a href="#" class="active">RU</a> · <a href="../main/" hreflang="en">EN</a></span></li>
             </ul>
         </nav>
     </header>
 
-        <!-- HERO -->
-        <section id="hero" class="hero">
-            <div>
-                <div class="badges">
-                    <span class="badge">Чистый C++17/20</span>
-                    <span class="badge">Без moc / uic / rcc</span>
-                    <span class="badge">Кроссплатформа</span>
-                </div>
-                <h1>Лёгкий UI‑фреймворк на чистом C++<br />минимум когнитивной нагрузки, максимальный контроль отрисовки и событий</h1>
-                <p class="lead">libwui — альтернатива Qt/QML для тех, кто хочет быстрые интерфейсы, маленькие бинарники и предсказуемый API. Никаких генераторов кода, минимум зависимостей, максимум контроля.</p>
-                <div class="cta">
-                    <a class="btn" href="#get-started">Установка за 5 минут</a>
-                    <a class="btn secondary" href="#compare">Сравнить с Qt/QML</a>
-                    <a class="btn" href="https://libwui.org/download/simple.exe" target="_blank" rel="noopener">Скачать демо (Windows)</a>
-                    <a class="btn" href="https://libwui.org/download/simple.tar.bz2" target="_blank" rel="noopener">Скачать демо (Linux)</a>
-                </div>
-                <p class="note">Open‑source. Без vendor lock‑in. Подходит для десктопа и встраиваемых систем.</p>
-                <div class="kpi" aria-label="Ключевые показатели">
-                    <div class="item"><div class="num">~0 внешних тулов</div><div class="lbl">без генераторов кода</div></div>
-                    <div class="item"><div class="num">↓ 30–70%</div><div class="lbl">меньше размер бинарников vs Qt*</div></div>
-                    <div class="item"><div class="num">↑ быстрее CI</div><div class="lbl">за счёт простой сборки</div></div>
-                </div>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div>
+        <h1>WUI — Кроссплатформенная UI-библиотека для современного C++</h1>
+        <h2>Минималистичный API. C++17. Плоская модель владения. Событийная архитектура.</h2>
+        <p class="lead">WUI (Window User Interface) — кроссплатформенная C++ библиотека для создания графических интерфейсов. Сосредоточьтесь на логике приложения, а не на платформо-зависимых деталях реализации.</p>
+        <div class="cta">
+          <a class="btn" href="https://github.com/intent-garden/wui" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="../doc_ru/" target="_blank" rel="noopener">Документация</a>
+          <a class="btn secondary" href="https://github.com/intent-garden/wui/releases" target="_blank" rel="noopener">Скачать</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>О библиотеке</h2>
+      <div class="text-block">
+        <p>WUI — это кроссплатформенная библиотека для создания графического интерфейса пользователя на C++. Библиотека использует C++17 и имеет минималистичный API. В настоящее время поддерживается Windows (XP — 11) и Linux (glibc 2.23 и выше).</p>
+        <p>WUI разработана с целью предоставления разработчикам простого и эффективного инструмента для создания кроссплатформенных GUI-приложений на C++. Библиотека позволяет сосредоточиться на логике приложения, а не на особенностях реализации интерфейса для каждой платформы.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card feat">
+          <h3>🖥️ Кроссплатформа</h3>
+          <p>Поддержка Windows (WinAPI + GDI) и Linux (X11 + xcb). В планах — macOS.</p>
+        </div>
+        <div class="card feat">
+          <h3>📦 Минималистичный API</h3>
+          <p>Простой и интуитивный интерфейс. Без генераторов кода, без сложных систем сборки.</p>
+        </div>
+        <div class="card feat">
+          <h3>🎯 Событийная модель</h3>
+          <p>Плоская модель подписки. Любой объект может подписаться на события любого контрола.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section id="architecture">
+      <h2>Архитектура</h2>
+      <p class="lead">Проект основан на трёх ключевых сущностях:</p>
+      <div class="grid-3">
+        <div class="card feat">
+          <h3>Window</h3>
+          <p>Принимает системные события и управляет контролами. Осуществляет рассылку событий подписчикам, инициирует перерисовку контролов и предоставляет им графический контекст.</p>
+        </div>
+        <div class="card feat">
+          <h3>Control</h3>
+          <p>Визуальный элемент интерфейса (кнопки, поля ввода и т.д.). Обрабатывает события, хранит свои состояния и рисует себя на графическом контексте, предоставляемом содержащим его окном.</p>
+        </div>
+        <div class="card feat">
+          <h3>Graphic</h3>
+          <p>Интерфейс для отрисовки, абстрагирующий платформо-зависимые методы рисования. В настоящий момент реализовано рисование на Windows GDI/GDI+ и Linux xcb/cairo.</p>
+        </div>
+      </div>
+      <div class="text-block" style="margin-top: 30px;">
+        <p><strong>Вспомогательные компоненты:</strong></p>
+        <ul>
+          <li><strong>common</strong> — основные типы (rect, color, font)</li>
+          <li><strong>event</strong> — события мыши, клавиатуры, внутренние и системные события</li>
+          <li><strong>theme</strong> — система констант для поддержки визуальных тем</li>
+          <li><strong>locale</strong> — подсистема для хранения текстового контента</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <h2>Возможности</h2>
+      <div class="grid-2">
+        <div class="card feat">
+          <h3>📋 Плоская модель владения</h3>
+          <p>WUI использует плоскую модель владения контролами: все контролы окна владеются одним объектом-родителем (обычно классом диалога), который хранит их в <code>std::shared_ptr</code>. При уничтожении родителя все контролы автоматически освобождаются.</p>
+          <pre><code>class DialingDialog {
+    std::shared_ptr&lt;wui::window&gt; window;
+    std::shared_ptr&lt;wui::text&gt; text;
+    std::shared_ptr&lt;wui::button&gt; cancelButton;
+};</code></pre>
+        </div>
+        <div class="card feat">
+          <h3>🎯 Плоская подписка на события</h3>
+          <p>Окно выступает в роли центрального диспетчера событий. Любой объект может подписаться на нужные ему события.</p>
+          <pre><code>// Подписка на события клавиатуры и системы
+std::string sub_id = window-&gt;subscribe(
+    [this](const wui::event&amp; ev) {
+        if (ev.type == wui::event_type::keyboard) {
+            // Логика горячих клавиш
+        }
+    },
+    wui::event_type::keyboard | wui::event_type::system
+);
+
+// Отписка по ID
+window-&gt;unsubscribe(sub_id);</code></pre>
+        </div>
+        <div class="card feat">
+          <h3>🎨 Система тем</h3>
+          <p>Встроенная поддержка тем оформления с настраиваемыми визуальными стилями. Светлая, тёмная и пользовательские темы.</p>
+        </div>
+        <div class="card feat">
+          <h3>🌍 Локализация</h3>
+          <p>UTF-8 из коробки. Система локалей для многоязычных приложений.</p>
+        </div>
+        <div class="card feat">
+          <h3>⚙️ Конфигурация</h3>
+          <p>Управление конфигурацией приложения (реестр Windows, ini-файлы, JSON).</p>
+        </div>
+        <div class="card feat">
+          <h3>🔧 Свои контролы</h3>
+          <p>Создание и интеграция собственных контролов с понятными базовыми классами и интерфейсами.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXAMPLES -->
+    <section id="examples">
+      <h2>Пример кода</h2>
+      <div class="card code-card">
+        <pre><code><span class="code-comment">// Минимальный пример: окно + кнопка</span>
+<span class="code-prep">#include</span> <span class="code-str">&lt;wui/framework/framework.hpp&gt;</span>
+<span class="code-prep">#include</span> <span class="code-str">&lt;wui/window/window.hpp&gt;</span>
+<span class="code-prep">#include</span> <span class="code-str">&lt;wui/control/button.hpp&gt;</span>
+
+<span class="code-key">int</span> <span class="code-func">main</span>() {
+    wui::<span class="code-class">framework</span>::<span class="code-func">init</span>();
+
+    <span class="code-key">auto</span> <span class="code-var">window</span> = std::<span class="code-func">make_shared</span>&lt;wui::<span class="code-class">window</span>&gt;();
+
+    <span class="code-key">auto</span> <span class="code-var">button</span> = std::<span class="code-func">make_shared</span>&lt;wui::<span class="code-class">button</span>&gt;(<span class="code-str">"Нажми меня"</span>,
+        []() {
+            <span class="code-comment">// Обработчик нажатия</span>
+        });
+
+    <span class="code-var">window</span>-><span class="code-func">add_control</span>(<span class="code-var">button</span>, { 10, 10, 100, 35 });
+
+    <span class="code-var">window</span>-><span class="code-func">init</span>(<span class="code-str">"Hello WUI!"</span>, { -1, -1, 400, 300 });
+    wui::<span class="code-class">framework</span>::<span class="code-func">run</span>();
+
+    <span class="code-key">return</span> 0;
+}</code></pre>
+      </div>
+      <div class="thumbs" style="margin-top: 30px;">
+        <a href="../doc_ru/img/hw0.png" target="_blank" rel="noopener">
+          <img src="../doc_ru/img/hw0.png" alt="WUI Пример 1">
+        </a>
+        <a href="../doc_ru/img/hw1.png" target="_blank" rel="noopener">
+          <img src="../doc_ru/img/hw1.png" alt="WUI Пример 2">
+        </a>
+      </div>
+    </section>
+
+    <!-- USED BY -->
+    <section id="used-by">
+      <h2>Используется в</h2>
+      <div class="used-by-grid">
+        <div class="used-by-item">
+          <h3>Decima-8</h3>
+          <p class="used-by-description">Нейроморфная IDE с визуализацией 4096 тайлов в реальном времени. ~1.3 МБ бинарь, 60 FPS, нативный C++17.</p>
+          <div class="used-by-gif">
+            <!-- PLACEHOLDER FOR GIF: decima-hello-swarm.gif (800×500 px) -->
+            <div class="gif-placeholder-large">
+              <div class="gif-placeholder-inner">
+                <span class="gif-placeholder-text">GIF: Decima-8 IDE Demo<br><small>800×500 px<br>Загрузка → Heatmap → Эстафета → Лого</small></span>
+              </div>
             </div>
-            <div class="card code-card" id="code">
-                <p class="note">Как выглядит код на libwui</p>
-                <pre><code>
-    <span class="code-comment">// Минимальный пример: окно + кнопка</span>
-    <span class="code-prep">#include</span> <span class="code-str">&lt;wui/framework/framework.hpp&gt;</span>
-    <span class="code-prep">#include</span> <span class="code-str">&lt;wui/window/window.hpp&gt;</span>
-    <span class="code-prep">#include</span> <span class="code-str">&lt;wui/control/button.hpp&gt;</span>
-    <span class="code-prep">#include</span> <span class="code-str">&lt;wui/common/dbgtrace.hpp&gt;</span>
-
-    <span class="code-key">int</span> <span class="code-func">main</span>() {
-        wui::<span class="code-class">framework</span>::<span class="code-func">init</span>();
-
-        <span class="code-key">auto</span> <span class="code-var">window</span> = std::<span class="code-func">make_shared</span>&lt;wui::<span class="code-class">window</span>&gt;();
-
-        <span class="code-key">auto</span> <span class="code-var">button</span> = std::<span class="code-func">make_shared</span>&lt;wui::<span class="code-class">button</span>&gt;(<span class="code-str">"Button 1"</span>,
-            []() {
-                <span class="code-prep">DBG_TRACE</span>(<span class="code-str">"Button 1 press"</span>);
-            });
-
-        <span class="code-var">window</span>-><span class="code-func">add_control</span>(<span class="code-var">button</span>, { 10, 10, 300, 35 });
-
-        <span class="code-var">window</span>-><span class="code-func">init</span>(<span class="code-str">"Hello from WUI!"</span>, { -1, -1, 900, 600 },
-            wui::<span class="code-func">flags_map</span>&lt;wui::<span class="code-class">window_style</span>&gt;(3, wui::<span class="code-class">window_style</span>::frame,
-                wui::<span class="code-class">window_style</span>::switch_theme_button,
-                wui::<span class="code-class">window_style</span>::border_all),
-            []() {
-                wui::<span class="code-class">framework</span>::<span class="code-func">stop</span>();
-            });
-
-        <span class="code-prep">DBG_TRACE</span>(<span class="code-str">"App started"</span>);
-        wui::<span class="code-class">framework</span>::<span class="code-func">run</span>();
-
-        <span class="code-prep">DBG_TRACE</span>(<span class="code-str">"App ended"</span>);
-        <span class="code-key">return</span> 0;
-    }
-</code></pre>
-                <p class="note">Чистый C++: лямбды, std::function, никакого MOC.</p>
+          </div>
+          <p class="note">Decima-8 — закрытая IDE на WUI. Эмулятор — open-source.</p>
+          <div class="cta" style="margin-top: 15px;">
+            <a class="btn" href="https://decima.rulerom.com/ru/tools/ide/?src=libwui-hero" target="_blank" rel="noopener">Скачать IDE</a>
+            <a class="btn secondary" href="https://decima.rulerom.com/ru/codex/?src=libwui-proof" target="_blank" rel="noopener">Читать Кодекс</a>
+            <a class="btn secondary" href="https://github.com/rulerom/decima8?src=libwui-github" target="_blank" rel="noopener">Эмулятор на GitHub</a>
+          </div>
+        </div>
+        <div class="used-by-item">
+          <h3>VideoGrace</h3>
+          <p class="used-by-description">On-premise видеоконференцсвязь. Нативные десктоп-клиенты мессенджера с UI на WUI.</p>
+          <div class="used-by-gif">
+            <!-- PLACEHOLDER FOR GIF: videograce-demo.gif (800×500 px) -->
+            <div class="gif-placeholder-large">
+              <div class="gif-placeholder-inner">
+                <span class="gif-placeholder-text">GIF: VideoGrace Demo<br><small>800×500 px<br>Видеозвонки • Демонстрация экрана • Чат</small></span>
+              </div>
             </div>
-        </section>
+          </div>
+          <p class="note">~10 МБ 64-bit static link с кодеками и OpenSSL. Воспроизведение до 30 HD-видео на 60 Гц.</p>
+          <div class="cta" style="margin-top: 15px;">
+            <a class="btn" href="https://videograce.com" target="_blank" rel="noopener">Сайт проекта</a>
+          </div>
+        </div>
+      </div>
+      <div class="used-by-your-project">
+        <div class="card feat">
+          <h3>Ваш проект</h3>
+          <p>WUI готова стать основой вашего десктопного приложения. Напишите нам на <a href="mailto:info@libwui.org">info@libwui.org</a>, чтобы поделиться своей историей успеха.</p>
+        </div>
+      </div>
+    </section>
 
-        <!-- WHY -->
-        <section id="why">
-            <h2>Основные примущества</h2>
-            <div class="grid-3">
-                <div class="feat card">
-                    <h3>Лёгкость вместо перегруза</h3>
-                    <p>Только то, что нужно для UI. Без десятков модулей (SQL, XML, 3D и т.д.), которые раздувают зависимости и усложняют поддержку.</p>
-                </div>
-                <div class="feat card">
-                    <h3>Современный C++ без «магии»</h3>
-                    <p>Нативный std‑стек: шаблоны, лямбды, умные указатели. Прозрачная модель событий, без скрытой генерации кода.</p>
-                </div>
-                <div class="feat card">
-                    <h3>Маленькие бинарники</h3>
-                    <p>Минимальный footprint и быстрый старт приложения — важны как для дистрибуции, так и для встраиваемых систем.</p>
-                </div>
-            </div>
-            <div class="grid-3" style="margin-top:18px">
-                <div class="feat card">
-                    <h3>Проще CI/CD</h3>
-                    <p>Нет внешних генераторов, меньше стадий сборки, меньше причин для «сломалось на агентах».</p>
-                </div>
-                <div class="feat card">
-                    <h3>Предсказуемое API</h3>
-                    <p>Документация и код идут рядом: меньше «магических» состояний, понятный жизненный цикл.</p>
-                </div>
-                <div class="feat card">
-                    <h3>Open‑source без lock‑in</h3>
-                    <p>Никаких платных лицензий за право статической линковки и закрытый код; вы контролируете продукт.</p>
-                </div>
-            </div>
-        </section>
+    <!-- COMPARISON -->
+    <section id="comparison">
+      <h2>Сравнение: WUI с другими библиотеками</h2>
+      <table aria-label="Сравнение библиотек">
+        <thead>
+          <tr>
+            <th>Библиотека</th>
+            <th>Лицензия</th>
+            <th>Коммерческое</th>
+            <th>Зависимости</th>
+            <th>Размер</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>WUI</strong></td>
+            <td>BSL-1.0</td>
+            <td class="tick">✅ Да</td>
+            <td class="tick">Минимум</td>
+            <td>~100 КБ</td>
+          </tr>
+          <tr>
+            <td>Dear ImGui</td>
+            <td>MIT</td>
+            <td class="tick">✅ Да</td>
+            <td class="tick">❌ Нет</td>
+            <td>~200 КБ</td>
+          </tr>
+          <tr>
+            <td>Qt</td>
+            <td>GPL/Commercial</td>
+            <td class="dash">⚠️ Ограничено</td>
+            <td class="dash">✅ Много</td>
+            <td>~50 МБ</td>
+          </tr>
+          <tr>
+            <td>wxWidgets</td>
+            <td>LGPL</td>
+            <td class="tick">✅ Да</td>
+            <td class="dash">✅ Есть</td>
+            <td>~10 МБ</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">* Оценки размеров и скорости зависят от конфигурации проекта; приведены как ориентиры.</p>
+    </section>
 
-        <!-- COMPARE -->
-        <section id="compare">
-            <h2>Сравнение: libwui vs Qt/QML</h2>
-            <table aria-label="Сравнительная таблица">
-                <thead>
-                    <tr>
-                        <th>Критерий</th>
-                        <th>libwui</th>
-                        <th>Qt / QML</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Язык/модель</td>
-                        <td>Чистый C++, события через std::function</td>
-                        <td>Собственные сигналы/слоты, MOC, QML (JS)</td>
-                    </tr>
-                    <tr>
-                        <td>Сборка</td>
-                        <td>Без генераторов кода, проще CI</td>
-                        <td>moc/uic/rcc, длинные сборки</td>
-                    </tr>
-                    <tr>
-                        <td>Размер бинарников</td>
-                        <td class="tick">Малый footprint</td>
-                        <td class="dash">Существенно больше</td>
-                    </tr>
-                    <tr>
-                        <td>Зависимости</td>
-                        <td>Минимальные</td>
-                        <td>Много модулей и ABI‑слоёв</td>
-                    </tr>
-                    <tr>
-                        <td>Нативность UI</td>
-                        <td>Фокус на кастомном современном UI</td>
-                        <td>Widgets/QML, разная «нативность» по платформам</td>
-                    </tr>
-                    <tr>
-                        <td>Кривая обучения</td>
-                        <td>Для C++ разработчиков — низкая</td>
-                        <td>QML/JS, новая парадигма</td>
-                    </tr>
-                    <tr>
-                        <td>Лицензирование</td>
-                        <td>Open‑source, без платы за стат. линковку</td>
-                        <td>GPL/LGPL или дорогостоящая коммерческая</td>
-                    </tr>
-                    <tr>
-                        <td>Готовые компоненты</td>
-                        <td>База + расширяемость</td>
-                        <td>Большая библиотека виджетов</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="note" style="margin-top:10px">* Оценки размеров и скорости зависят от конфигурации проекта; приведены как ориентиры.</p>
-        </section>
-
-        <!-- COMPONENTS -->
-        <section id="components">
-            <h2>Компоненты и расширение</h2>
-            <div class="grid-2">
-                <div class="card feat">
-                    <h3>Готово из коробки</h3>
-                    <p>Окна, контейнеры, кнопки, поля ввода, списки, панели, диалоги. Гладкие анимации там, где это уместно.</p>
-                    <p class="note">Стратегия «достаточный минимум»: без перегруженных «комбайнов».</p>
-                </div>
-                <div class="card feat">
-                    <h3>Расширяемость</h3>
-                    <p>Создавайте собственные контролы и темы через понятные базовые классы. Без наследования от «всего подряд».</p>
-                    <p class="note">Композиция и простые интерфейсы вместо жёстких иерархий.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- TRUSTED BY -->
-        <section id="trusted">
-            <h2>Кто уже использует</h2>
-            <div class="grid-2">
-                <a class="card feat" href="https://videograce.com" target="_blank" rel="noopener">
-                    <h3>VideoGrace</h3>
-                    <p>Нативный десктоп‑клиент мессенджера</p>
-                    <p class="note">UI на базе libWUI: ~10Mb 64bit static link with codecs and OpenSSL. Воспроизведение до 30 HD-видео с частотой 60 Гц.</p>                    
-                </a>
-                <a class="card feat" href="https://decima8.org" target="_blank" rel="noopener">
-                    <h3>Decima8</h3>
-                    <p>IDE для нейроморфной машины Decima8</p>
-                    <p class="note">20 us такт цикла 256 тайлов на одном ядре i5-3550, отрисовка в реальном времени. ~1.3 Mb exe static link, C++23</p>
-                </a>
-                <div class="card feat">
-                    <h3>Ваш продукт</h3>
-                    <p>Готовы разместить кейс и логотип после миграции на WUI. Напишите нам на <a href="mailto:info@libwui.org">info@libwui.org</a>.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- GET STARTED --
-        <section id="get-started">
-            <h2>Старт за 5 минут</h2>
-            <div class="grid-2">
-                <div class="card" style="padding:18px">
-                    <h3>1) Установка</h3>
-                    <pre><code># CMake (пример)
-find_package(libwui REQUIRED)
-
-add_executable(app main.cpp)
-target_link_libraries(app PRIVATE wui)
-</code></pre>
-                    <p class="note">Поддержка CMake/Conan/Vcpkg — добавьте в свой toolchain. Примеры доступны в репозитории.</p>
-                </div>
-                <div class="card" style="padding:18px">
-                    <h3>2) Первое окно</h3>
-                    <pre><code>#include &lt;wui/wui.h&gt;
-int main(){ wui::app a; wui::window w{"Hello",{640,420}}; w.show(); return a.run(); }
-</code></pre>
-                    <div class="cta" style="margin-top:8px">
-                        <a class="btn" href="https://github.com/ud84/wui" target="_blank" rel="noopener">Открыть примеры</a>
-                        <a class="btn secondary" href="https://libwui.org/doc_ru/" target="_blank" rel="noopener">Документация API</a>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
-        <!-- FAQ -->
-        <section id="faq">
-            <h2>FAQ</h2>
-            <div class="grid-2">
-                <div class="card feat">
-                    <h3>Где работает?</h3>
-                    <p>Windows / Linux (gdi, gdi+ / xcb, cairo, X11). Поддержка macOS — в планах. Для встраиваемых систем — сборка без лишних зависимостей.</p>
-                </div>
-                <div class="card feat">
-                    <h3>Производительность?</h3>
-                    <p>Минимальные оверхеды и быстрый старт. Отрисовка оптимизирована под типичные десктоп‑кейсы. Нет избыточных абстракций.</p>
-                </div>
-                <div class="card feat">
-                    <h3>Поддержка тем и кастомизация?</h3>
-                    <p>Встроенная система тем и локалей. Кастомные контролы приветствуются и поощряются</p>
-                </div>
-                <div class="card feat">
-                    <h3>Лицензия?</h3>
-                    <p>Open‑source boost лицензия. Никаких платежей за статическую линковку.</p>
-                </div>
-            </div>
-        </section>
+    <!-- CTA -->
+    <section id="get-started" class="cta-section">
+      <h2>Готовы начать?</h2>
+      <p class="cta-intro">WUI — open-source и готова стать основой вашего следующего C++ GUI проекта. Присоединяйтесь к сообществу и начните разработку сегодня.</p>
+      <div class="cta">
+        <a class="btn" href="https://github.com/intent-garden/wui" target="_blank" rel="noopener">Смотреть на GitHub</a>
+        <a class="btn" href="../doc_ru/">Документация</a>
+        <a class="btn secondary" href="https://github.com/intent-garden/wui/releases" target="_blank" rel="noopener">Скачать</a>
+      </div>
+      <p class="cta-note">Есть вопросы? Присоединяйтесь к нашему <a href="https://t.me/libwui_chat" target="_blank" rel="noopener">Telegram-сообществу</a> или пишите на <a href="mailto:info@libwui.org">info@libwui.org</a>.</p>
+    </section>
 
     <footer>
         <!-- Intent-Garden Ecosystem -->
@@ -279,16 +296,16 @@ int main(){ wui::app a; wui::window w{"Hello",{640,420}}; w.show(); return a.run
                 <a href="https://intent-garden.org" style="color: var(--copper); text-decoration: none;">🌿 Intent-Garden</a>
                 <a href="https://rulerom.com" style="color: var(--copper); text-decoration: none;">📜 RuleROM</a>
                 <a href="https://decima8.org" style="color: var(--copper); text-decoration: none;">🐉 Decima8</a>
-                <a href="https://libwui.org" style="color: var(--copper); text-decoration: none;">🎨 libwui</a>
+                <a href="https://libwui.org" style="color: var(--copper); text-decoration: none;">🎨 WUI</a>
             </div>
         </div>
 
-        <div class="grid-2">
+        <div class="footer-content">
             <div>
-                <strong>libwui</strong> — лёгкий современный UI‑фреймворк на чистом C++.
+                <strong>WUI</strong> — Кроссплатформенная C++ библиотека для GUI.
                 <div class="note">© <span id="year"></span> 🌿 Организация "Сад Намерений". Все права защищены.</div>
             </div>
-            <div style="text-align:right">
+            <div class="footer-links">
                 <a href="https://github.com/intent-garden/wui" class="note" target="_blank" rel="noopener">GitHub</a> ·
                 <a href="https://libwui.org/doc_ru/" class="note" target="_blank" rel="noopener">Документация</a> ·
                 <a href="https://t.me/libwui_chat" class="note" target="_blank" rel="noopener">Сообщество</a>
@@ -296,9 +313,6 @@ int main(){ wui::app a; wui::window w{"Hello",{640,420}}; w.show(); return a.run
         </div>
     </footer>
 
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
@@ -310,7 +324,7 @@ int main(){ wui::app a; wui::window w{"Hello",{640,420}}; w.show(); return a.run
     for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
     k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
     (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
- 
+
     ym(95291159, "init", {
          clickmap:true,
          trackLinks:true,
