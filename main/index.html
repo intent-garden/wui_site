@@ -54,7 +54,7 @@
       <div class="grid-3">
         <div class="card feat">
           <h3>🖥️ Cross-Platform</h3>
-          <p>Windows (WinAPI + GDI) and Linux (X11 + xcb) support. macOS support planned.</p>
+          <p>Windows (WinAPI + GDI) and Linux (X11 + xcb) support. macOS — coming soon.</p>
         </div>
         <div class="card feat">
           <h3>📦 Minimalist API</h3>
@@ -62,47 +62,63 @@
         </div>
         <div class="card feat">
           <h3>🎯 Event-Driven</h3>
-          <p>Flat subscription model. Any object can subscribe to events of any control.</p>
+          <p>Flat ownership model, events through common hub. std::function callbacks.</p>
         </div>
       </div>
     </section>
 
     <!-- ARCHITECTURE -->
     <section id="architecture">
-      <h2>Architecture</h2>
-      <p class="lead">The project is based on three key entities:</p>
-      <div class="grid-3">
-        <div class="card feat">
-          <h3>Window</h3>
-          <p>Receives system events and manages controls. Handles event dispatching to subscribers, triggers control redraws, and provides graphic context.</p>
+      <h2>Transparent Architecture Without Magic Layers</h2>
+      <p class="lead">All platform-specific code is isolated in just two files.</p>
+      
+      <div class="architecture-diagram">
+        <div class="diagram-box cross-platform">
+          <div class="diagram-title">Cross-Platform Core</div>
+          <div class="diagram-content">Controls, Events, Layout, Logic, Flat Ownership</div>
         </div>
-        <div class="card feat">
-          <h3>Control</h3>
-          <p>Visual interface element (buttons, input fields, etc.). Handles events, stores its states, and renders itself on the graphic context provided by the containing window.</p>
-        </div>
-        <div class="card feat">
-          <h3>Graphic</h3>
-          <p>Interface for rendering that abstracts platform-specific drawing methods. Currently implemented for Windows GDI/GDI+ and Linux xcb/cairo.</p>
+        <div class="diagram-arrow">▼</div>
+        <div class="diagram-split">
+          <div class="diagram-box platform-file">
+            <div class="diagram-title">window.cpp</div>
+            <div class="diagram-content">WinAPI / XCB<br>Window & Input</div>
+          </div>
+          <div class="diagram-box platform-file">
+            <div class="diagram-title">graphic.cpp</div>
+            <div class="diagram-content">GDI / Cairo<br>Rendering</div>
+          </div>
         </div>
       </div>
+
       <div class="text-block" style="margin-top: 30px;">
-        <p><strong>Supporting components:</strong></p>
+        <p>Unlike other frameworks where platform abstraction is spread across dozens of classes, libwui encapsulates all OS work in just two files:</p>
         <ul>
-          <li><strong>common</strong> — basic types (rect, color, font)</li>
-          <li><strong>event</strong> — mouse, keyboard, internal and system events</li>
-          <li><strong>theme</strong> — visual theme constants system</li>
-          <li><strong>locale</strong> — text content storage subsystem</li>
+          <li><strong>window.cpp</strong> — window creation, input handling, system events.</li>
+          <li><strong>graphic.cpp</strong> — rendering primitives (text, lines, images).</li>
         </ul>
+        <p>This means you know exactly where to look for porting code and don't depend on hidden system dependencies.</p>
       </div>
     </section>
 
     <!-- FEATURES -->
     <section id="features">
-      <h2>Key Features</h2>
+      <h2>Why libwui?</h2>
       <div class="grid-2">
         <div class="card feat">
+          <h3>✅ True Zero External Dependencies</h3>
+          <p>No vcpkg, conan, or system packages (except basic dev packages on Linux). Everything you need is already in the repository.</p>
+        </div>
+        <div class="card feat">
+          <h3>🔧 Portable by Design</h3>
+          <p>Want to port to a new OS? You only need to implement two files (window.cpp and graphic.cpp). The rest of the code remains unchanged.</p>
+        </div>
+        <div class="card feat">
+          <h3>📦 Predictable Build</h3>
+          <p>No hidden dependencies. You see the entire build graph immediately. Versions of json and utf are fixed and won't break your project with an update.</p>
+        </div>
+        <div class="card feat">
           <h3>📋 Flat Ownership Model</h3>
-          <p>WUI uses a flat control ownership model: all window controls are owned by a single parent object (typically a dialog class), which stores them in <code>std::shared_ptr</code>. When the parent is destroyed, all controls are automatically freed.</p>
+          <p>Controls are explicitly owned via std::shared_ptr in a container. No hidden deletion hierarchies, no dangling pointers.</p>
           <pre><code>class DialingDialog {
     std::shared_ptr&lt;wui::window&gt; window;
     std::shared_ptr&lt;wui::text&gt; text;
@@ -112,34 +128,18 @@
         <div class="card feat">
           <h3>🎯 Flat Event Subscription</h3>
           <p>Window acts as a central event dispatcher. Any object can subscribe to events it needs.</p>
-          <pre><code>// Subscribe to keyboard and system events
-std::string sub_id = window-&gt;subscribe(
+          <pre><code>std::string sub_id = window-&gt;subscribe(
     [this](const wui::event&amp; ev) {
         if (ev.type == wui::event_type::keyboard) {
             // Hotkey logic
         }
     },
     wui::event_type::keyboard | wui::event_type::system
-);
-
-// Unsubscribe by ID
-window-&gt;unsubscribe(sub_id);</code></pre>
+);</code></pre>
         </div>
         <div class="card feat">
-          <h3>🎨 Theme System</h3>
-          <p>Built-in theme support with customizable visual styles. Light, dark, and custom themes available.</p>
-        </div>
-        <div class="card feat">
-          <h3>🌍 Localization</h3>
-          <p>UTF-8 support out of the box. Locale system for multi-language applications.</p>
-        </div>
-        <div class="card feat">
-          <h3>⚙️ Configuration</h3>
-          <p>Application configuration management (Windows registry, ini-files, JSON).</p>
-        </div>
-        <div class="card feat">
-          <h3>🔧 Custom Controls</h3>
-          <p>Create and integrate your own controls with clear base classes and interfaces.</p>
+          <h3>🎨 Theme System & Localization</h3>
+          <p>Built-in theme support (light, dark, custom) and UTF-8 localization out of the box.</p>
         </div>
       </div>
     </section>
@@ -234,45 +234,40 @@ window-&gt;unsubscribe(sub_id);</code></pre>
       <table aria-label="Library comparison">
         <thead>
           <tr>
-            <th>Library</th>
-            <th>License</th>
-            <th>Commercial</th>
+            <th>Framework</th>
             <th>Dependencies</th>
-            <th>Size</th>
+            <th>Platform Layer</th>
+            <th>Build</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>WUI</strong></td>
-            <td>BSL-1.0</td>
-            <td class="tick">✅ Yes</td>
-            <td class="tick">Minimal</td>
-            <td>~100 KB</td>
+            <td><strong>libwui</strong></td>
+            <td class="tick">0 external<br><small>(json/utf bundled)</small></td>
+            <td class="tick">2 files<br><small>(window.cpp, graphic.cpp)</small></td>
+            <td class="tick">cmake && build</td>
           </tr>
           <tr>
             <td>Dear ImGui</td>
-            <td>MIT</td>
-            <td class="tick">✅ Yes</td>
-            <td class="tick">❌ None</td>
-            <td>~200 KB</td>
+            <td class="tick">0 (core)<br><small>+ backends separate</small></td>
+            <td class="tick">Separate repos/files<br><small>(imgui_impl_...)</small></td>
+            <td class="dash">Manual backend build</td>
           </tr>
           <tr>
             <td>Qt</td>
-            <td>GPL/Commercial</td>
-            <td class="dash">⚠️ Limited</td>
-            <td class="dash">✅ Many</td>
-            <td>~50 MB</td>
+            <td class="dash">~10+ libs + modules</td>
+            <td class="dash">Complex abstraction<br><small>(QPA)</small></td>
+            <td class="dash">Package manager required</td>
           </tr>
           <tr>
             <td>wxWidgets</td>
-            <td>LGPL</td>
-            <td class="tick">✅ Yes</td>
-            <td class="dash">✅ Present</td>
-            <td>~10 MB</td>
+            <td class="dash">System (GTK/Cocoa)</td>
+            <td class="dash">Native control wrappers</td>
+            <td class="dash">Long compilation</td>
           </tr>
         </tbody>
       </table>
-      <p class="note">* Size and speed estimates depend on project config; given as guidance.</p>
+      <p class="note"><strong>libwui:</strong> Third-party libs (json, utf) included in thirdparty/. Platform code uses direct system APIs (WinAPI/GDI, XCB/Cairo) without intermediate layers.</p>
     </section>
 
     <!-- CTA -->

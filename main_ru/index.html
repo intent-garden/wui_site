@@ -55,7 +55,7 @@
       <div class="grid-3">
         <div class="card feat">
           <h3>🖥️ Кроссплатформа</h3>
-          <p>Поддержка Windows (WinAPI + GDI) и Linux (X11 + xcb). В планах — macOS.</p>
+          <p>Поддержка Windows (WinAPI + GDI) и Linux (X11 + xcb). macOS — coming soon.</p>
         </div>
         <div class="card feat">
           <h3>📦 Минималистичный API</h3>
@@ -63,47 +63,63 @@
         </div>
         <div class="card feat">
           <h3>🎯 Событийная модель</h3>
-          <p>Плоская модель подписки. Любой объект может подписаться на события любого контрола.</p>
+          <p>Плоская модель владения, события через общий хаб. Коллбеки на std::function.</p>
         </div>
       </div>
     </section>
 
     <!-- ARCHITECTURE -->
     <section id="architecture">
-      <h2>Архитектура</h2>
-      <p class="lead">Проект основан на трёх ключевых сущностях:</p>
-      <div class="grid-3">
-        <div class="card feat">
-          <h3>Window</h3>
-          <p>Принимает системные события и управляет контролами. Осуществляет рассылку событий подписчикам, инициирует перерисовку контролов и предоставляет им графический контекст.</p>
+      <h2>Прозрачная архитектура без магических слоёв</h2>
+      <p class="lead">Весь платформенный код изолирован в двух файлах.</p>
+      
+      <div class="architecture-diagram">
+        <div class="diagram-box cross-platform">
+          <div class="diagram-title">Cross-Platform Core</div>
+          <div class="diagram-content">Controls, Events, Layout, Logic, Flat Ownership</div>
         </div>
-        <div class="card feat">
-          <h3>Control</h3>
-          <p>Визуальный элемент интерфейса (кнопки, поля ввода и т.д.). Обрабатывает события, хранит свои состояния и рисует себя на графическом контексте, предоставляемом содержащим его окном.</p>
-        </div>
-        <div class="card feat">
-          <h3>Graphic</h3>
-          <p>Интерфейс для отрисовки, абстрагирующий платформо-зависимые методы рисования. В настоящий момент реализовано рисование на Windows GDI/GDI+ и Linux xcb/cairo.</p>
+        <div class="diagram-arrow">▼</div>
+        <div class="diagram-split">
+          <div class="diagram-box platform-file">
+            <div class="diagram-title">window.cpp</div>
+            <div class="diagram-content">WinAPI / XCB<br>Окно и ввод</div>
+          </div>
+          <div class="diagram-box platform-file">
+            <div class="diagram-title">graphic.cpp</div>
+            <div class="diagram-content">GDI / Cairo<br>Отрисовка</div>
+          </div>
         </div>
       </div>
+
       <div class="text-block" style="margin-top: 30px;">
-        <p><strong>Вспомогательные компоненты:</strong></p>
+        <p>В отличие от других фреймворков, где платформенная абстракция размазана по десяткам классов, в libwui вся работа с ОС инкапсулирована в двух файлах:</p>
         <ul>
-          <li><strong>common</strong> — основные типы (rect, color, font)</li>
-          <li><strong>event</strong> — события мыши, клавиатуры, внутренние и системные события</li>
-          <li><strong>theme</strong> — система констант для поддержки визуальных тем</li>
-          <li><strong>locale</strong> — подсистема для хранения текстового контента</li>
+          <li><strong>window.cpp</strong> — создание окон, обработка ввода, системные события.</li>
+          <li><strong>graphic.cpp</strong> — примитивы отрисовки (текст, линии, изображения).</li>
         </ul>
+        <p>Это означает, что вы точно знаете, где искать код для портирования, и не зависите от скрытых системных зависимостей.</p>
       </div>
     </section>
 
     <!-- FEATURES -->
     <section id="features">
-      <h2>Возможности</h2>
+      <h2>Почему libwui?</h2>
       <div class="grid-2">
         <div class="card feat">
+          <h3>✅ True Zero External Dependencies</h3>
+          <p>Никаких vcpkg, conan или системных пакетов (кроме базовых dev-пакетов на Linux). Всё необходимое уже в репозитории.</p>
+        </div>
+        <div class="card feat">
+          <h3>🔧 Portable by Design</h3>
+          <p>Хотите портировать на новую ОС? Вам нужно реализовать всего два файла (window.cpp и graphic.cpp). Остальной код не изменится.</p>
+        </div>
+        <div class="card feat">
+          <h3>📦 Predictable Build</h3>
+          <p>Нет скрытых зависимостей. Вы видите весь граф сборки сразу. Версии json и utf зафиксированы и не сломают ваш проект обновлением.</p>
+        </div>
+        <div class="card feat">
           <h3>📋 Плоская модель владения</h3>
-          <p>WUI использует плоскую модель владения контролами: все контролы окна владеются одним объектом-родителем (обычно классом диалога), который хранит их в <code>std::shared_ptr</code>. При уничтожении родителя все контролы автоматически освобождаются.</p>
+          <p>Контролы владеются явно через std::shared_ptr в контейнере. Никаких скрытых иерархий удаления, никаких «висячих» указателей.</p>
           <pre><code>class DialingDialog {
     std::shared_ptr&lt;wui::window&gt; window;
     std::shared_ptr&lt;wui::text&gt; text;
@@ -113,34 +129,18 @@
         <div class="card feat">
           <h3>🎯 Плоская подписка на события</h3>
           <p>Окно выступает в роли центрального диспетчера событий. Любой объект может подписаться на нужные ему события.</p>
-          <pre><code>// Подписка на события клавиатуры и системы
-std::string sub_id = window-&gt;subscribe(
+          <pre><code>std::string sub_id = window-&gt;subscribe(
     [this](const wui::event&amp; ev) {
         if (ev.type == wui::event_type::keyboard) {
             // Логика горячих клавиш
         }
     },
     wui::event_type::keyboard | wui::event_type::system
-);
-
-// Отписка по ID
-window-&gt;unsubscribe(sub_id);</code></pre>
+);</code></pre>
         </div>
         <div class="card feat">
-          <h3>🎨 Система тем</h3>
-          <p>Встроенная поддержка тем оформления с настраиваемыми визуальными стилями. Светлая, тёмная и пользовательские темы.</p>
-        </div>
-        <div class="card feat">
-          <h3>🌍 Локализация</h3>
-          <p>UTF-8 из коробки. Система локалей для многоязычных приложений.</p>
-        </div>
-        <div class="card feat">
-          <h3>⚙️ Конфигурация</h3>
-          <p>Управление конфигурацией приложения (реестр Windows, ini-файлы, JSON).</p>
-        </div>
-        <div class="card feat">
-          <h3>🔧 Свои контролы</h3>
-          <p>Создание и интеграция собственных контролов с понятными базовыми классами и интерфейсами.</p>
+          <h3>🎨 Система тем и локализация</h3>
+          <p>Встроенная поддержка тем (светлая, тёмная, кастомная) и UTF-8 локализация из коробки.</p>
         </div>
       </div>
     </section>
@@ -235,45 +235,40 @@ window-&gt;unsubscribe(sub_id);</code></pre>
       <table aria-label="Сравнение библиотек">
         <thead>
           <tr>
-            <th>Библиотека</th>
-            <th>Лицензия</th>
-            <th>Коммерческое</th>
+            <th>Фреймворк</th>
             <th>Зависимости</th>
-            <th>Размер</th>
+            <th>Платформенный слой</th>
+            <th>Сборка</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>WUI</strong></td>
-            <td>BSL-1.0</td>
-            <td class="tick">✅ Да</td>
-            <td class="tick">Минимум</td>
-            <td>~100 КБ</td>
+            <td><strong>libwui</strong></td>
+            <td class="tick">0 внешних<br><small>(json/utf в bundled)</small></td>
+            <td class="tick">2 файла<br><small>(window.cpp, graphic.cpp)</small></td>
+            <td class="tick">cmake && build</td>
           </tr>
           <tr>
             <td>Dear ImGui</td>
-            <td>MIT</td>
-            <td class="tick">✅ Да</td>
-            <td class="tick">❌ Нет</td>
-            <td>~200 КБ</td>
+            <td class="tick">0 (ядро)<br><small>+ бэкенды отдельно</small></td>
+            <td class="tick">Отдельные репозитории/файлы<br><small>(imgui_impl_...)</small></td>
+            <td class="dash">Ручная сборка бэкендов</td>
           </tr>
           <tr>
             <td>Qt</td>
-            <td>GPL/Commercial</td>
-            <td class="dash">⚠️ Ограничено</td>
-            <td class="dash">✅ Много</td>
-            <td>~50 МБ</td>
+            <td class="dash">~10+ библиотек + модули</td>
+            <td class="dash">Сложная абстракция<br><small>(QPA)</small></td>
+            <td class="dash">Требуется менеджер пакетов</td>
           </tr>
           <tr>
             <td>wxWidgets</td>
-            <td>LGPL</td>
-            <td class="tick">✅ Да</td>
-            <td class="dash">✅ Есть</td>
-            <td>~10 МБ</td>
+            <td class="dash">Системные (GTK/Cocoa)</td>
+            <td class="dash">Обёрки над нативными контролами</td>
+            <td class="dash">Длительная компиляция</td>
           </tr>
         </tbody>
       </table>
-      <p class="note">* Оценки размеров и скорости зависят от конфигурации проекта; приведены как ориентиры.</p>
+      <p class="note"><strong>libwui:</strong> Third-party libs (json, utf) included in thirdparty/. Platform code uses direct system APIs (WinAPI/GDI, XCB/Cairo) without intermediate layers.</p>
     </section>
 
     <!-- CTA -->

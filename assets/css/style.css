@@ -243,9 +243,9 @@ h3 {
     justify-content: center;
     gap: 8px;
     padding: 12px 24px;
-    background: #0a0a0a;
-    border: 1px solid var(--steel);
-    color: var(--steel);
+    background: var(--copper);
+    border: 1px solid var(--copper);
+    color: #000;
     cursor: pointer;
     font-family: inherit;
     text-transform: uppercase;
@@ -253,18 +253,20 @@ h3 {
     letter-spacing: 1px;
     text-decoration: none;
     transition: all 0.3s;
+    font-weight: 600;
 }
 
 .btn.secondary {
     background: transparent;
-    border-color: var(--steel);
-    color: var(--steel);
+    border-color: var(--copper);
+    color: var(--copper);
 }
 
 .btn:hover, .btn.secondary:hover {
-    border-color: var(--phosphor);
-    color: var(--phosphor);
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.1);
+    background: transparent;
+    border-color: var(--copper);
+    color: var(--copper);
+    box-shadow: 0 0 15px rgba(135, 206, 235, 0.3);
     transform: translateY(-1px);
 }
 
@@ -398,8 +400,9 @@ table {
 
 th, td {
     text-align: left;
-    padding: 12px 14px;
+    padding: 14px 16px;
     border-bottom: 1px solid var(--iron);
+    vertical-align: top;
 }
 
 th {
@@ -408,6 +411,14 @@ th {
     background: rgba(255, 255, 255, 0.03);
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+td small {
+    display: block;
+    font-size: 12px;
+    color: var(--steel);
+    margin-top: 4px;
+    font-weight: 400;
 }
 
 tr:last-child td {
@@ -556,11 +567,12 @@ a:not(.card, .feat, .btn, .btn.secondary, .nav-menu a, .lang a, .thumbs a):hover
     font-size: clamp(24px, 3vw, 36px);
     line-height: 1.15;
     margin: 0 0 10px;
+    color: #fff;
 }
 
 .hero h2 {
     font-size: clamp(16px, 2vw, 20px);
-    color: var(--steel);
+    color: #ddd;
     font-weight: 400;
     border: none;
     padding: 0;
@@ -585,6 +597,63 @@ a:not(.card, .feat, .btn, .btn.secondary, .nav-menu a, .lang a, .thumbs a):hover
 .text-block li {
     margin-bottom: 8px;
     line-height: 1.7;
+}
+
+/* Architecture diagram */
+.architecture-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+    padding: 20px;
+}
+
+.diagram-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid var(--copper);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    min-width: 280px;
+}
+
+.diagram-box.cross-platform {
+    background: rgba(135, 206, 235, 0.1);
+    border-color: var(--copper);
+}
+
+.diagram-box.platform-file {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: var(--steel);
+    min-width: 200px;
+}
+
+.diagram-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--copper);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.diagram-content {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.diagram-arrow {
+    font-size: 24px;
+    color: var(--steel);
+    margin: 15px 0;
+}
+
+.diagram-split {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* PROOF секция */
@@ -1121,6 +1190,17 @@ footer > * {
 
     .cta-section h2 {
         font-size: 1.4rem;
+    }
+
+    .diagram-box {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .diagram-split {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
     }
 
     /* Стили для таблицы на мобильных устройствах */
