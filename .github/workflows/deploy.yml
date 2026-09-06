@@ -21,14 +21,15 @@ jobs:
     defaults:
       run:
         shell: bash
-    env:
-      SITE_DIR: ${{ runner.temp }}/wui-site
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+
+      - name: Set deployment directory
+        run: echo "SITE_DIR=$RUNNER_TEMP/wui-site" >> "$GITHUB_ENV"
 
       - name: Prepare and validate static website
         run: |
