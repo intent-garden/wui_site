@@ -37,6 +37,10 @@ try {
         };
         await page.locator('#playground').scrollIntoViewIfNeeded();
         let app=await ready();
+        assert.match(app.url(),/wasm\/demo/,'Showcase loads by default');
+        assert.equal(await page.locator('[role=tab]').first().getAttribute('data-app'),'demo');
+        assert.equal(await page.locator('[data-app=demo]').getAttribute('aria-selected'),'true');
+        assert.match(await page.locator('#open-demo').getAttribute('href'),/wasm\/demo/);
         assert.equal(await app.locator('.wui-canvas').count(),1);
         await page.evaluate(()=>scrollTo(0,0));
         await page.screenshot({path:path.join(screenshots,`${lang}-${engine}-desktop.png`),fullPage:true});
@@ -76,7 +80,7 @@ try {
             const w=Module.wui.windows.values().next().value;
             return w.x>=0 && w.x+w.width<=document.querySelector('#wui').clientWidth;
         }),true,'Whole application fits the mobile iframe');
-        await page.locator('[data-app=simple]').focus();await page.keyboard.press('ArrowRight');
+        await page.locator('[data-app=simple]').focus();await page.keyboard.press('ArrowLeft');
         assert.equal(await page.locator('[data-app=demo]').getAttribute('aria-selected'),'true');
         await ready();
         assert.deepEqual(errors,[]);
@@ -84,7 +88,7 @@ try {
         await page.close();
     }
     const failure=await browser.newPage();
-    await failure.route('**/wasm/simple/*.wasm',route=>route.abort());
+    await failure.route('**/wasm/demo/*.wasm',route=>route.abort());
     await failure.goto(`${base}/main/`);await failure.locator('#playground').scrollIntoViewIfNeeded();
     await failure.locator('#retry').waitFor({state:'visible'});
     assert.match(await failure.locator('#demo-status').textContent(),/could not load/);

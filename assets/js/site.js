@@ -9,7 +9,7 @@ const status = document.querySelector('#demo-status');
 const retry = document.querySelector('#retry');
 const tabs = [...document.querySelectorAll('[role=tab]')];
 const examples = {demo: {width: 880, height: 660}, simple: {width: 960, height: 660}, hello_world: {width: 460, height: 460}};
-let selected = 'simple', frame, timeout, started = false;
+let selected = 'demo', frame, timeout, started = false;
 
 function resize() {
     if (!frame) return;
