@@ -66,7 +66,7 @@ WUI_BROWSER=webkit PLAYWRIGHT_MODULE="$PWD/../wui/tests/wasm/node_modules/playwr
 
 ## Автодеплой GitHub Actions
 
-`.github/workflows/deploy.yml` публикует сайт при push в `main`. Ручной запуск доступен через Actions → Deploy website to Yandex Object Storage → Run workflow (ветка `main`).
+`.github/workflows/deploy.yml` публикует сайт при push в `master`. Ручной запуск доступен через Actions → Deploy website to Yandex Object Storage → Run workflow (ветка `master`).
 
 Используются repository secrets `YC_BUCKET_NAME`, `YC_ACCESS_KEY_ID` и `YC_SECRET_ACCESS_KEY`. Бакет и публичный доступ настраиваются отдельно. Workflow использует AWS CLI из Ubuntu 24.04 runner и endpoint `https://storage.yandexcloud.net`.
 
