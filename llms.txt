@@ -1,166 +1,24 @@
-# WUI (Window User Interface Library)
+# WUI — Window User Interface Library
 
-**WUI** — кроссплатформенная C++ библиотека для создания графических интерфейсов.
+WUI is an open-source C++17 GUI library with a compact API, flat control ownership, event callbacks, themes and localization.
 
-## Quick Start
+- Website: https://libwui.org/main/
+- Russian: https://libwui.org/main_ru/
+- Repository: https://github.com/intent-garden/wui
+- Documentation: https://libwui.org/doc/ and https://libwui.org/doc_ru/
+- Live WebAssembly examples: https://libwui.org/main/#playground
+- License: Boost Software License 1.0
 
-```cpp
-#include <wui/framework/framework.hpp>
-#include <wui/window/window.hpp>
-#include <wui/control/button.hpp>
+## Platforms
 
-int main() {
-    wui::framework::init();
-    
-    auto window = std::make_shared<wui::window>();
-    auto button = std::make_shared<wui::button>("Click me", []() {
-        // Handle click
-    });
-    
-    window->add_control(button, {10, 10, 100, 35});
-    window->init("Hello WUI!", {-1, -1, 400, 300});
-    wui::framework::run();
-    
-    return 0;
-}
-```
+Windows uses WinAPI and GDI/GDI+. Linux uses X11/XCB and Cairo. The experimental macOS backend uses AppKit and CoreGraphics. The experimental WebAssembly backend uses Emscripten, Canvas 2D and DOM events. Controls and application logic are shared C++.
 
-## Key Features
+WUI is a compiled library, not header-only. Platform development dependencies are required. It is not an official Boost library. Consult the repository's current build guides for supported toolchains and installation steps.
 
-- **C++17** — современный стандарт без исключений
-- **Кроссплатформа** — Windows (WinAPI+GDI), Linux (X11+xcb), macOS в разработке
-- **Минимум зависимостей** — 0 внешних библиотек (json/utf bundled в thirdparty/)
-- **Плоская модель владения** — контролы владеются через std::shared_ptr
-- **События через хаб** — std::function коллбеки, без макросов и MOC
-- **Прозрачная архитектура** — весь платформенный код в 2 файлах (window.cpp, graphic.cpp)
+## Live examples
 
-## Architecture
+The site embeds the actual hello_world, simple and demo executables compiled to WASM. They support shared controls, editing, themes and dialogs. Browser settings are in memory and reset on reload. The browser backend is single-threaded, has no native tray, and does not yet provide a complete accessibility tree. Clipboard and IME behavior follow the browser port's documented limits.
 
-```
-┌─────────────────────────────────────────┐
-│         Cross-Platform Core             │
-│  (Controls, Events, Layout, Logic)      │
-└────────────────────┬────────────────────┘
-                     │
-         ┌───────────┴───────────┐
-         ▼                       ▼
-┌─────────────────┐     ┌─────────────────┐
-│  window.cpp     │     │  graphic.cpp    │
-│  WinAPI / XCB   │     │  GDI / Cairo    │
-│  Window & Input │     │  Rendering      │
-└─────────────────┘     └─────────────────┘
-```
+## Integration
 
-## Installation
-
-```bash
-# CMake
-find_package(libwui REQUIRED)
-target_link_libraries(your_app PRIVATE wui)
-
-# Или напрямую в проекте
-add_subdirectory(wui)
-target_link_libraries(your_app PRIVATE wui)
-```
-
-## Components
-
-### Core
-- `window` — окно, системные события, управление контролами
-- `control` — базовый класс для всех контролов
-- `graphic` — интерфейс отрисовки (абстракция над GDI/Cairo)
-
-### Controls
-- `button` — кнопка с текстом/иконой
-- `text` — текстовая метка
-- `image` — изображение
-- `text_field` — поле ввода текста
-- `list` — список
-- `panel` — панель-контейнер
-- `dialog` — модальное/немодальное окно
-
-### Common Types
-- `rect` — прямоугольник (x, y, width, height)
-- `color` — цвет (r, g, b, a)
-- `font` — шрифт (family, size, weight)
-
-### Events
-- `event_type::mouse` — события мыши
-- `event_type::keyboard` — события клавиатуры
-- `event_type::system` — системные события
-- `event_type::internal` — внутренние события контролов
-
-## Event System
-
-```cpp
-// Подписка на события
-std::string sub_id = window->subscribe(
-    [](const wui::event& ev) {
-        if (ev.type == wui::event_type::keyboard) {
-            // Handle keyboard event
-        }
-    },
-    wui::event_type::keyboard | wui::event_type::system
-);
-
-// Отписка
-window->unsubscribe(sub_id);
-```
-
-## Flat Ownership Model
-
-```cpp
-class MyDialog {
-    std::shared_ptr<wui::window> window_;
-    std::shared_ptr<wui::button> ok_button_;
-    std::shared_ptr<wui::button> cancel_button_;
-    
-public:
-    MyDialog() {
-        window_ = std::make_shared<wui::window>();
-        ok_button_ = std::make_shared<wui::button>("OK", []() { /* ... */ });
-        cancel_button_ = std::make_shared<wui::button>("Cancel", []() { /* ... */ });
-        
-        window_->add_control(ok_button_, {10, 10, 80, 30});
-        window_->add_control(cancel_button_, {100, 10, 80, 30});
-    }
-};
-// При уничтожении MyDialog все контролы автоматически освобождаются
-```
-
-## Platform Support
-
-| Platform | Status | Backend |
-|----------|--------|---------|
-| Windows XP–11 | ✅ Stable | WinAPI + GDI |
-| Linux (glibc 2.23+) | ✅ Stable | X11 + xcb + Cairo |
-| macOS | 🔄 Coming soon | TBD |
-
-## License
-
-**BSL-1.0** (Boost Software License)
-
-- ✅ Коммерческое использование без ограничений
-- ✅ Можно закрывать код продукта
-- ✅ Нет необходимости платить лицензионные отчисления
-- ⚠️ Укажите автора в документации
-
-## Resources
-
-- **GitHub**: https://github.com/intent-garden/wui
-- **Documentation**: https://libwui.org/doc/ (EN), https://libwui.org/doc_ru/ (RU)
-- **Telegram**: https://t.me/libwui_chat
-- **Email**: info@libwui.org
-
-## Used By
-
-- **Decima-8** — нейроморфная IDE (4096 тайлов @ 60 FPS, ~1.3 MB бинарь)
-- **VideoGrace** — on-premise видеоконференцсвязь (~10 MB static link)
-
-## Third-Party Libraries
-
-WUI включает bundled версии:
-- `json` — работа с JSON
-- `utf` — UTF-8 обработка
-
-Обе библиотеки находятся в `thirdparty/` и не требуют внешней установки.
+Use add_subdirectory(path/to/wui) and target_link_libraries(my_app PRIVATE wui), or start from the included examples. The examples include the themes and localization resources needed for a working application.

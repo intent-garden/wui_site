@@ -1,354 +1,52 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" class="no-js">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WUI — Кроссплатформенная C++ библиотека для GUI</title>
-  <meta name="description" content="WUI — кроссплатформенная C++ библиотека для создания графических интерфейсов. Минималистичный API, C++17, плоская модель владения, система событий. Поддержка Windows и Linux.">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="WUI — Кроссплатформенная C++ библиотека для GUI">
-  <meta property="og:description" content="Кроссплатформенная C++ библиотека для создания графических интерфейсов. Минималистичный API, C++17, плоская модель владения.">
-  <meta property="og:url" content="https://libwui.org/">
-  <link rel="stylesheet" href="../assets/css/style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WUI — интерфейсы на C++ для разных платформ</title><meta name="description" content="Компактная GUI-библиотека на C++17 для Windows, Linux, macOS и WebAssembly. Рабочие примеры на C++ прямо в браузере.">
+<meta name="theme-color" content="#f5f4ee"><link rel="canonical" href="https://libwui.org/main_ru/">
+<link rel="alternate" hreflang="en" href="https://libwui.org/main/"><link rel="alternate" hreflang="ru" href="https://libwui.org/main_ru/">
+<meta property="og:type" content="website"><meta property="og:title" content="WUI — интерфейсы на C++ для разных платформ"><meta property="og:description" content="Компактная GUI-библиотека на C++17 для Windows, Linux, macOS и WebAssembly. Рабочие примеры на C++ прямо в браузере."><meta property="og:url" content="https://libwui.org/main_ru/"><meta property="og:image" content="https://libwui.org/android-chrome-512x512.png">
+<link rel="icon" href="../favicon.ico" sizes="any"><link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/css/site.css"><script src="../assets/js/site.js" defer></script>
 </head>
-<body>
-    <header id="main-header">
-        <nav class="main-nav">
-            <div class="nav-brand">🎨 WUI</div>
-            <ul class="nav-menu">
-                <li><a href="#about">О библиотеке</a></li>
-                <li><a href="#architecture">Архитектура</a></li>
-                <li><a href="#features">Возможности</a></li>
-                <li><a href="#examples">Примеры</a></li>
-                <li><a href="#used-by">Используется в</a></li>
-                <li><a href="#comparison">Сравнение</a></li>
-                <li><a href="../doc_ru/">Документация</a></li>
-                <li><span class="lang" aria-label="language switcher"><a href="#" class="active">RU</a> · <a href="../main/" hreflang="en">EN</a></span></li>
-            </ul>
-        </nav>
-    </header>
+<body data-copy="Копировать" data-copied="Скопировано">
+<a class="skip" href="#content">К содержимому</a>
+<header class="wrap nav"><a class="brand" href="./" aria-label="WUI"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>wui</a><nav class="nav-links" aria-label="Главная навигация"><a class="desktop" href="#playground">Примеры</a><a class="desktop" href="#approach">О библиотеке</a><a class="desktop" href="#start">Начать</a><a class="nav-git" href="https://github.com/intent-garden/wui"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.5 21.6c.6.1.8-.2.8-.5v-2.1c-3.4.7-4.1-1.5-4.1-1.5-.5-1.3-1.3-1.6-1.3-1.6-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.6 1.3 3.3 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.4-5.5-6.1 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.3a12 12 0 0 1 6.2 0c2.4-1.6 3.4-1.3 3.4-1.3.6 1.7.2 3 .1 3.3.8.9 1.2 2 1.2 3.3 0 4.8-2.8 5.8-5.5 6.1.5.4.8 1.1.8 2.2V22c0 .3.2.6.8.5A11.1 11.1 0 0 0 12 .9Z"/></svg><span>GitHub ↗</span></a><span class="lang"><a href="../main/" lang="en" hreflang="en">EN</a><a href="../main_ru/" lang="ru" hreflang="ru" aria-current="page">RU</a></span></nav></header>
+<main id="content">
+<div class="wrap">
+<section class="hero"><div><div class="eyebrow"><span class="dot"></span>Небольшая библиотека. Простор для ваших идей.</div><h1>Ваш интерфейс.<br>Ваш C++.<br><em>На всех платформах.</em></h1><p>Создавайте интерфейсы с компактным API на C++17. Сохраняйте контролы, темы и логику приложения при смене платформы — теперь и в браузере.</p><div class="actions"><a class="button primary" href="#playground">Попробовать <span aria-hidden="true">↘</span></a><a class="button" href="https://libwui.org/doc_ru/">Документация <span aria-hidden="true">↗</span></a></div><div class="hero-note">OPEN SOURCE · C++17 · BOOST SOFTWARE LICENSE 1.0</div></div>
+<div class="code-card"><div class="code-head"><span>main.cpp / excerpt</span><span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span></div><pre><code id="cpp-code">wui::framework::init();
+wui::set_default_theme_from_file(
+    <span class="str">&quot;dark&quot;</span>, <span class="str">&quot;res/dark.json&quot;</span>);
 
-    <!-- HERO -->
-    <section id="hero" class="hero">
-      <div>
-        <h1>WUI — Кроссплатформенная UI-библиотека для современного C++</h1>
-        <h2>Минималистичный API. C++17. Плоская модель владения. Событийная архитектура.</h2>
-        <p class="lead">WUI (Window User Interface) — кроссплатформенная C++ библиотека для создания графических интерфейсов. Сосредоточьтесь на логике приложения, а не на платформо-зависимых деталях реализации.</p>
-        <div class="cta">
-          <a class="btn" href="https://github.com/intent-garden/wui" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="../doc_ru/" target="_blank" rel="noopener">Документация</a>
-          <a class="btn secondary" href="https://github.com/intent-garden/wui/releases" target="_blank" rel="noopener">Скачать</a>
-        </div>
-      </div>
-    </section>
+<span class="kw">auto</span> window = std::make_shared&lt;wui::window&gt;();
+<span class="kw">auto</span> button = std::make_shared&lt;wui::button&gt;(
+    <span class="str">&quot;Hello, WUI!&quot;</span>, [] { <span class="comment">/* your code */</span> });
 
-    <!-- ABOUT -->
-    <section id="about">
-      <h2>О библиотеке</h2>
-      <div class="text-block">
-        <p>WUI — это кроссплатформенная библиотека для создания графического интерфейса пользователя на C++. Библиотека использует C++17 и имеет минималистичный API. В настоящее время поддерживается Windows (XP — 11) и Linux (glibc 2.23 и выше).</p>
-        <p>WUI разработана с целью предоставления разработчикам простого и эффективного инструмента для создания кроссплатформенных GUI-приложений на C++. Библиотека позволяет сосредоточиться на логике приложения, а не на особенностях реализации интерфейса для каждой платформы.</p>
-      </div>
-      <div class="grid-3">
-        <div class="card feat">
-          <h3>🖥️ Кроссплатформа</h3>
-          <p>Поддержка Windows (WinAPI + GDI) и Linux (X11 + xcb). macOS — coming soon.</p>
-        </div>
-        <div class="card feat">
-          <h3>📦 Минималистичный API</h3>
-          <p>Простой и интуитивный интерфейс. Без генераторов кода, без сложных систем сборки.</p>
-        </div>
-        <div class="card feat">
-          <h3>🎯 Событийная модель</h3>
-          <p>Плоская модель владения, события через общий хаб. Коллбеки на std::function.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ARCHITECTURE -->
-    <section id="architecture">
-      <h2>Прозрачная архитектура без магических слоёв</h2>
-      <p class="lead">Весь платформенный код изолирован в двух файлах.</p>
-      
-      <div class="architecture-diagram">
-        <div class="diagram-box cross-platform">
-          <div class="diagram-title">Cross-Platform Core</div>
-          <div class="diagram-content">Controls, Events, Layout, Logic, Flat Ownership</div>
-        </div>
-        <div class="diagram-arrow">▼</div>
-        <div class="diagram-split">
-          <div class="diagram-box platform-file">
-            <div class="diagram-title">window.cpp</div>
-            <div class="diagram-content">WinAPI / XCB<br>Окно и ввод</div>
-          </div>
-          <div class="diagram-box platform-file">
-            <div class="diagram-title">graphic.cpp</div>
-            <div class="diagram-content">GDI / Cairo<br>Отрисовка</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-block" style="margin-top: 30px;">
-        <p>В отличие от других фреймворков, где платформенная абстракция размазана по десяткам классов, в libwui вся работа с ОС инкапсулирована в двух файлах:</p>
-        <ul>
-          <li><strong>window.cpp</strong> — создание окон, обработка ввода, системные события.</li>
-          <li><strong>graphic.cpp</strong> — примитивы отрисовки (текст, линии, изображения).</li>
-        </ul>
-        <p>Это означает, что вы точно знаете, где искать код для портирования, и не зависите от скрытых системных зависимостей.</p>
-      </div>
-    </section>
-
-    <!-- FEATURES -->
-    <section id="features">
-      <h2>Почему libwui?</h2>
-      <div class="grid-2">
-        <div class="card feat">
-          <h3>✅ True Zero External Dependencies</h3>
-          <p>Никаких vcpkg, conan или системных пакетов (кроме базовых dev-пакетов на Linux). Всё необходимое уже в репозитории.</p>
-        </div>
-        <div class="card feat">
-          <h3>🔧 Portable by Design</h3>
-          <p>Хотите портировать на новую ОС? Вам нужно реализовать всего два файла (window.cpp и graphic.cpp). Остальной код не изменится.</p>
-        </div>
-        <div class="card feat">
-          <h3>📦 Predictable Build</h3>
-          <p>Нет скрытых зависимостей. Вы видите весь граф сборки сразу. Версии json и utf зафиксированы и не сломают ваш проект обновлением.</p>
-        </div>
-        <div class="card feat">
-          <h3>📋 Плоская модель владения</h3>
-          <p>Контролы владеются явно через std::shared_ptr в контейнере. Никаких скрытых иерархий удаления, никаких «висячих» указателей.</p>
-          <pre><code>class DialingDialog {
-    std::shared_ptr&lt;wui::window&gt; window;
-    std::shared_ptr&lt;wui::text&gt; text;
-    std::shared_ptr&lt;wui::button&gt; cancelButton;
-};</code></pre>
-        </div>
-        <div class="card feat">
-          <h3>🎯 Плоская подписка на события</h3>
-          <p>Окно выступает в роли центрального диспетчера событий. Любой объект может подписаться на нужные ему события.</p>
-          <pre><code>std::string sub_id = window-&gt;subscribe(
-    [this](const wui::event&amp; ev) {
-        if (ev.type == wui::event_type::keyboard) {
-            // Логика горячих клавиш
-        }
-    },
-    wui::event_type::keyboard | wui::event_type::system
-);</code></pre>
-        </div>
-        <div class="card feat">
-          <h3>🎨 Система тем и локализация</h3>
-          <p>Встроенная поддержка тем (светлая, тёмная, кастомная) и UTF-8 локализация из коробки.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXAMPLES -->
-    <section id="examples">
-      <h2>Пример кода</h2>
-      <div class="card code-card">
-        <pre><code><span class="code-comment">// Минимальный пример: окно + кнопка</span>
-<span class="code-prep">#include</span> <span class="code-str">&lt;wui/framework/framework.hpp&gt;</span>
-<span class="code-prep">#include</span> <span class="code-str">&lt;wui/window/window.hpp&gt;</span>
-<span class="code-prep">#include</span> <span class="code-str">&lt;wui/control/button.hpp&gt;</span>
-
-<span class="code-key">int</span> <span class="code-func">main</span>() {
-    wui::<span class="code-class">framework</span>::<span class="code-func">init</span>();
-
-    <span class="code-key">auto</span> <span class="code-var">window</span> = std::<span class="code-func">make_shared</span>&lt;wui::<span class="code-class">window</span>&gt;();
-
-    <span class="code-key">auto</span> <span class="code-var">button</span> = std::<span class="code-func">make_shared</span>&lt;wui::<span class="code-class">button</span>&gt;(<span class="code-str">"Нажми меня"</span>,
-        []() {
-            <span class="code-comment">// Обработчик нажатия</span>
-        });
-
-    <span class="code-var">window</span>-><span class="code-func">add_control</span>(<span class="code-var">button</span>, { 10, 10, 100, 35 });
-
-    <span class="code-var">window</span>-><span class="code-func">init</span>(<span class="code-str">"Hello WUI!"</span>, { -1, -1, 400, 300 });
-    wui::<span class="code-class">framework</span>::<span class="code-func">run</span>();
-
-    <span class="code-key">return</span> 0;
-}</code></pre>
-      </div>
-      <div class="thumbs" style="margin-top: 30px;">
-        <a href="../doc_ru/img/hw0.png" target="_blank" rel="noopener">
-          <img src="../doc_ru/img/hw0.png" alt="WUI Пример 1">
-        </a>
-        <a href="../doc_ru/img/hw1.png" target="_blank" rel="noopener">
-          <img src="../doc_ru/img/hw1.png" alt="WUI Пример 2">
-        </a>
-      </div>
-    </section>
-
-    <!-- USED BY -->
-    <section id="used-by">
-      <h2>Используется в</h2>
-      <div class="used-by-grid">
-        <div class="used-by-item">
-          <h3>Decima-8</h3>
-          <p class="used-by-description">Нейроморфная IDE с визуализацией 4096 тайлов в реальном времени. ~1.3 МБ бинарь, 60 FPS, нативный C++17.</p>
-          <div class="used-by-gif">
-            <a href="#" class="gif-link" onclick="openImageModal('../assets/img/decima_ocr_demo1.gif'); return false;" title="Нажмите для просмотра в полном размере">
-              <img src="../assets/img/decima_ocr_demo1.gif" alt="Decima-8 IDE Demo">
-            </a>
-          </div>
-          <p class="note">Decima-8 — закрытая IDE на WUI. Эмулятор — open-source.</p>
-          <div class="cta" style="margin-top: 15px;">
-            <a class="btn" href="https://decima.rulerom.com/ru/tools/ide/?src=libwui-hero" target="_blank" rel="noopener">Скачать IDE</a>
-            <a class="btn secondary" href="https://decima.rulerom.com/ru/codex/?src=libwui-proof" target="_blank" rel="noopener">Читать Кодекс</a>
-            <a class="btn secondary" href="https://github.com/rulerom/decima8?src=libwui-github" target="_blank" rel="noopener">Эмулятор на GitHub</a>
-          </div>
-        </div>
-        <div class="used-by-item">
-          <h3>VideoGrace</h3>
-          <p class="used-by-description">On-premise видеоконференцсвязь. Нативные десктоп-клиенты мессенджера с UI на WUI.</p>
-          <div class="used-by-gif">
-            <!-- PLACEHOLDER FOR GIF: videograce-demo.gif (800×500 px) -->
-            <div class="gif-placeholder-large">
-              <div class="gif-placeholder-inner">
-                <span class="gif-placeholder-text">GIF: VideoGrace Demo<br><small>800×500 px<br>Видеозвонки • Демонстрация экрана • Чат</small></span>
-              </div>
-            </div>
-          </div>
-          <p class="note">~10 МБ 64-bit static link с кодеками и OpenSSL. Воспроизведение до 30 HD-видео на 60 Гц.</p>
-          <div class="cta" style="margin-top: 15px;">
-            <a class="btn" href="https://videograce.com" target="_blank" rel="noopener">Сайт проекта</a>
-          </div>
-        </div>
-      </div>
-      <div class="used-by-your-project">
-        <div class="card feat">
-          <h3>Ваш проект</h3>
-          <p>WUI готова стать основой вашего десктопного приложения. Напишите нам на <a href="mailto:info@libwui.org">info@libwui.org</a>, чтобы поделиться своей историей успеха.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- COMPARISON -->
-    <section id="comparison">
-      <h2>Сравнение: WUI с другими библиотеками</h2>
-      <table aria-label="Сравнение библиотек">
-        <thead>
-          <tr>
-            <th>Фреймворк</th>
-            <th>Зависимости</th>
-            <th>Платформенный слой</th>
-            <th>Сборка</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>libwui</strong></td>
-            <td class="tick">0 внешних<br><small>(json/utf в bundled)</small></td>
-            <td class="tick">2 файла<br><small>(window.cpp, graphic.cpp)</small></td>
-            <td class="tick">cmake && build</td>
-          </tr>
-          <tr>
-            <td>Dear ImGui</td>
-            <td class="tick">0 (ядро)<br><small>+ бэкенды отдельно</small></td>
-            <td class="tick">Отдельные репозитории/файлы<br><small>(imgui_impl_...)</small></td>
-            <td class="dash">Ручная сборка бэкендов</td>
-          </tr>
-          <tr>
-            <td>Qt</td>
-            <td class="dash">~10+ библиотек + модули</td>
-            <td class="dash">Сложная абстракция<br><small>(QPA)</small></td>
-            <td class="dash">Требуется менеджер пакетов</td>
-          </tr>
-          <tr>
-            <td>wxWidgets</td>
-            <td class="dash">Системные (GTK/Cocoa)</td>
-            <td class="dash">Обёрки над нативными контролами</td>
-            <td class="dash">Длительная компиляция</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="note"><strong>libwui:</strong> Third-party libs (json, utf) included in thirdparty/. Platform code uses direct system APIs (WinAPI/GDI, XCB/Cairo) without intermediate layers.</p>
-    </section>
-
-    <!-- CTA -->
-    <section id="get-started" class="cta-section">
-      <h2>Готовы начать?</h2>
-      <p class="cta-intro">WUI — open-source и готова стать основой вашего следующего C++ GUI проекта. Присоединяйтесь к сообществу и начните разработку сегодня.</p>
-      <div class="cta">
-        <a class="btn" href="https://github.com/intent-garden/wui" target="_blank" rel="noopener">Смотреть на GitHub</a>
-        <a class="btn" href="../doc_ru/">Документация</a>
-        <a class="btn secondary" href="https://github.com/intent-garden/wui/releases" target="_blank" rel="noopener">Скачать</a>
-      </div>
-      <p class="cta-note">Есть вопросы? Присоединяйтесь к нашему <a href="https://t.me/libwui_chat" target="_blank" rel="noopener">Telegram-сообществу</a> или пишите на <a href="mailto:info@libwui.org">info@libwui.org</a>.</p>
-    </section>
-
-    <!-- Image Modal -->
-    <div id="image-modal" class="image-modal" onclick="closeImageModal()">
-      <div class="image-modal-content" onclick="event.stopPropagation()">
-        <button class="image-modal-close" onclick="closeImageModal()">×</button>
-        <img id="image-modal-img" src="" alt="Full size image">
-      </div>
-    </div>
-
-    <footer>
-        <!-- Intent-Garden Ecosystem -->
-        <div class="ecosystem-links" style="text-align:center; padding: 20px 0; border-top: 1px solid var(--iron); margin-bottom: 20px;">
-            <p style="margin-bottom: 12px; color: var(--steel); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Intent-Garden Ecosystem</p>
-            <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
-                <a href="https://intent-garden.org" style="color: var(--copper); text-decoration: none;">🌿 Intent-Garden</a>
-                <a href="https://rulerom.com" style="color: var(--copper); text-decoration: none;">📜 RuleROM</a>
-                <a href="https://decima8.org" style="color: var(--copper); text-decoration: none;">🐉 Decima8</a>
-                <a href="https://libwui.org" style="color: var(--copper); text-decoration: none;">🎨 WUI</a>
-            </div>
-        </div>
-
-        <div class="footer-content">
-            <div>
-                <strong>WUI</strong> — Кроссплатформенная C++ библиотека для GUI.
-                <div class="note">© <span id="year"></span> 🌿 Организация "Сад Намерений". Все права защищены.</div>
-            </div>
-            <div class="footer-links">
-                <a href="https://github.com/intent-garden/wui" class="note" target="_blank" rel="noopener">GitHub</a> ·
-                <a href="https://libwui.org/doc_ru/" class="note" target="_blank" rel="noopener">Документация</a> ·
-                <a href="https://t.me/libwui_chat" class="note" target="_blank" rel="noopener">Сообщество</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
-    <script>
-        function openImageModal(src) {
-            document.getElementById('image-modal-img').src = src;
-            document.getElementById('image-modal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeImageModal() {
-            document.getElementById('image-modal').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeImageModal();
-            }
-        });
-    </script>
-
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();
-    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-    ym(95291159, "init", {
-         clickmap:true,
-         trackLinks:true,
-         accurateTrackBounce:true
-    });
- </script>
- <noscript><div><img src="https://mc.yandex.ru/watch/95291159" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
- <!-- /Yandex.Metrika counter -->
-
-</body>
-</html>
+window-&gt;add_control(button, {20, 60, 180, 100});
+window-&gt;init(<span class="str">&quot;My application&quot;</span>, {0, 0, 400, 300},
+    wui::window_style::frame);
+wui::framework::run();</code></pre><div class="code-bottom"><span>Окно. Кнопка. Ваш обработчик.</span><button data-copy-target="cpp-code">Копировать ↗</button></div></div></section>
+<div class="platforms"><div class="caption">ОДИН API.<br>ЧЕТЫРЕ ПЛАТФОРМЫ.</div><div class="platform"><span class="platform-icon" aria-hidden="true">⊞</span><div>Windows<small>WinAPI / GDI</small></div></div><div class="platform"><span class="platform-icon" aria-hidden="true">&gt;_</span><div>Linux<small>X11 / Cairo</small></div></div><div class="platform"><span class="platform-icon" aria-hidden="true">◐</span><div>macOS<small>Экспериментально</small></div></div><div class="platform"><span class="platform-icon" aria-hidden="true">◎</span><div>WebAssembly<small>Экспериментально</small></div></div></div>
+<section class="section" id="playground"><div class="section-heading"><div><div class="eyebrow">01 / ПОПРОБУЙТЕ САМИ</div><h2>Меньше скриншотов.<br>Больше действий.</h2></div><p>Это настоящие C++-приложения, собранные в WebAssembly. Вводите текст, нажимайте кнопки, двигайте окна и меняйте темы.</p></div>
+<div class="playground" data-loading="Запускаем приложение на C++…" data-failed="Не удалось загрузить пример. Повторите попытку или откройте его отдельно." data-closed="Приложение закрыто. Нажмите «Заново», чтобы запустить его.">
+<div class="play-toolbar"><div class="tabs" role="tablist" aria-label="Примеры WUI"><button role="tab" id="tab-simple" aria-selected="true" aria-controls="demo-panel" tabindex="0" data-app="simple">Контролы</button><button role="tab" id="tab-demo" aria-selected="false" aria-controls="demo-panel" tabindex="-1" data-app="demo">Возможности</button><button role="tab" id="tab-hello_world" aria-selected="false" aria-controls="demo-panel" tabindex="-1" data-app="hello_world">Hello world</button></div><div class="play-tools"><button class="tool" id="restart">↻ Заново</button><a class="tool" id="open-demo" href="../wasm/simple/?lang=ru" target="_blank" rel="noopener">Открыть отдельно ↗</a></div></div>
+<div id="demo-panel" role="tabpanel" aria-labelledby="tab-simple"><div class="stage"><div class="loading"><span class="spinner" aria-hidden="true"></span><p id="demo-status" role="status" aria-live="polite">Запускаем приложение на C++…</p><button class="button small" id="retry" hidden>Ещё раз</button></div></div></div>
+<div class="play-caption"><span class="live"><span class="dot"></span>LIVE / WEBASSEMBLY</span><span id="demo-hint">Редактируйте текст, выбирайте элементы списков, двигайте слайдеры и открывайте диалоги.</span></div></div>
+<div class="demo-note"><span>Браузерный порт экспериментальный. Изменения действуют в этой сессии; перезапуск сбрасывает пример.</span><a href="https://github.com/intent-garden/wui/blob/6d3cb0b2ab08c0f97d194a1544ebccb7e290a59a/doc/ru/docs/howto/wasm.md">Возможности и ограничения ↗</a></div>
+<p class="keyboard-note">Shift + Esc — вернуть фокус к вкладкам сайта. На небольших экранах пример уменьшен.</p>
+<noscript><div class="noscript">Для интерактивных примеров нужен JavaScript. Документация и исходники C++ доступны без него. <a href="https://github.com/intent-garden/wui/tree/main/examples">GitHub ↗</a></div></noscript>
+</section>
+<section class="section" id="approach"><div class="section-heading"><div><div class="eyebrow">02 / КАК ЭТО УСТРОЕНО</div><h2>Небольшой API.<br>Понятные основы.</h2></div><p>В основе WUI — привычные понятия C++: объекты, явное владение и функции обратного вызова.</p></div><div class="principles"><article class="principle"><span class="number">01</span><h3>Управляйте интерфейсом</h3><p>Храните окна и контролы в обычных C++-объектах. Плоская модель владения использует shared_ptr и weak_ptr с понятным временем жизни.</p></article><article class="principle"><span class="number">02</span><h3>Работайте с событиями</h3><p>Окна передают события, контролы вызывают обработчики. Подключайте логику через std::function без генератора кода и этапа MOC.</p></article><article class="principle"><span class="number">03</span><h3>Настраивайте под себя</h3><p>Используйте общие контролы, JSON-темы и локализацию. Создавайте свои контролы через те же интерфейсы рисования и событий.</p></article></div><div class="architecture"><b>Ваше приложение</b><span aria-hidden="true">→</span><b>Контролы и события</b><span aria-hidden="true">→</span><b>Бэкенд платформы</b><span>WinAPI · X11 · AppKit · Canvas 2D</span></div></section>
+</div>
+<section class="section start" id="start"><div class="wrap start-grid"><div><div class="eyebrow">03 / ВАШЕ ПЕРВОЕ ОКНО</div><h2>Начните с рабочего приложения.</h2><p>Склонируйте библиотеку и соберите примеры. В Hello world уже есть темы, локализация и основа для вашего интерфейса.</p><a class="button" href="https://libwui.org/doc_ru/howto/hello-world/">Открыть руководство ↗</a></div><div><div class="terminal"><div class="terminal-head"><span>Собрать примеры</span><button data-copy-target="build-code">Копировать ↗</button></div><pre><code id="build-code"><span># macOS / Linux · установите зависимости платформы</span>
+git clone https://github.com/intent-garden/wui.git
+cd wui
+git checkout 6d3cb0b2ab08
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel</code></pre></div><div class="start-links"><a href="https://github.com/intent-garden/wui/blob/main/wui.sln">Windows: решение Visual Studio ↗</a><a href="https://github.com/intent-garden/wui/blob/6d3cb0b2ab08c0f97d194a1544ebccb7e290a59a/doc/ru/docs/howto/macos.md">Настройка macOS ↗</a><a href="https://libwui.org/doc_ru/howto/setup/">Настройка Linux ↗</a><a href="https://github.com/intent-garden/wui/blob/6d3cb0b2ab08c0f97d194a1544ebccb7e290a59a/doc/ru/docs/howto/wasm.md">Сборка WebAssembly ↗</a></div></div></div></section>
+<div class="wrap closing"><div><h2>Открытый код. Общие возможности.</h2><p>Изучайте исходники, сообщайте об ошибках и участвуйте в развитии библиотеки.</p></div><a class="button primary" href="https://github.com/intent-garden/wui/issues">Участвовать на GitHub ↗</a></div>
+</main>
+<footer class="wrap footer"><div class="footer-left"><a class="brand" href="./">wui<span style="color:var(--orange)">.</span></a><a href="https://github.com/intent-garden/wui/blob/main/LICENSE_1_0.txt">Boost Software License 1.0</a></div><nav aria-label="Ссылки"><a href="https://libwui.org/doc_ru/">Документация</a><a href="https://github.com/intent-garden/wui/blob/6d3cb0b2ab08c0f97d194a1544ebccb7e290a59a/ROADMAP.md">Планы развития</a><a href="https://t.me/libwui_chat">Сообщество</a><a href="https://github.com/intent-garden/wui">GitHub ↗</a></nav></footer>
+<script type="application/json" id="demo-data">{"hints": {"demo": "Переключайте вкладки. Откройте Inputs и смените тему в заголовке окна.", "simple": "Редактируйте текст, выбирайте элементы списков, двигайте слайдеры и открывайте диалоги.", "hello_world": "Введите имя и нажмите кнопку. Попробуйте сменить язык или тему."}, "mobile": "На небольшом экране приложение уменьшено. Для большей рабочей области откройте его отдельно."}</script>
+</body></html>
