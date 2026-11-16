@@ -1,109 +1,81 @@
-name: Deploy website to Yandex Object Storage
+name: Deploy website to GitHub Pages
 
 on:
   push:
     branches: [master]
+  pull_request:
   workflow_dispatch:
+  # Include documentation updates from the public WUI repository.
+  schedule:
+    - cron: '23 3 * * *'
 
 permissions:
   contents: read
 
-# Finish an upload before starting another one; do not interrupt a deployment.
 concurrency:
-  group: website-production
+  group: website-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    if: github.ref == 'refs/heads/master'
+  build:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
-    defaults:
-      run:
-        shell: bash
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
-
-      - name: Set deployment directory
-        run: echo "SITE_DIR=$RUNNER_TEMP/wui-site" >> "$GITHUB_ENV"
-
-      - name: Prepare and validate static website
+      - name: Checkout documentation sources
+        uses: actions/checkout@v4
+        with:
+          repository: intent-garden/wui
+          ref: main
+          path: _wui_source
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: _wui_source/doc/requirements.txt
+      - name: Install documentation builder
+        run: python -m pip install -r _wui_source/doc/requirements.txt
+      - name: Prepare website and build both documentation languages
         run: |
-          python3 - <<'PY'
-          import json
-          import os
-          import shutil
-          from pathlib import Path
-
-          root = Path.cwd()
-          destination = Path(os.environ['SITE_DIR'])
-          # Explicit public files: never publish .git, workflows or tooling.
-          entries = [
-              'index.html', 'doc.html', 'main', 'main_ru', 'assets', 'wasm',
-              'download', 'ai-agents.json', 'llms.txt', 'site.webmanifest',
-              'favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png',
-              'apple-touch-icon.png', 'android-chrome-192x192.png',
-              'android-chrome-512x512.png',
-          ]
-          required = [
-              'main/index.html', 'main_ru/index.html',
-              'assets/css/site.css', 'assets/css/demo.css',
-              'assets/js/site.js', 'assets/js/demo-frame.js',
-          ]
-          manifest = json.loads((root / 'wasm/manifest.json').read_text())
-          for app in ('demo', 'simple', 'hello_world'):
-              required.append(f'wasm/{app}/index.html')
-              for extension in ('js', 'wasm', 'data'):
-                  file = root / f'wasm/{app}/{app}.{extension}'
-                  if file.stat().st_size != manifest[app][extension]:
-                      raise RuntimeError(f'WASM build does not match manifest: {file}')
-                  if extension == 'wasm':
-                      with file.open('rb') as stream:
-                          if stream.read(8) != b'\x00asm\x01\x00\x00\x00':
-                              raise RuntimeError(f'Invalid WASM binary: {file}')
-          for name in required:
-              if not (root / name).is_file() or (root / name).stat().st_size == 0:
-                  raise RuntimeError(f'Missing or empty website file: {name}')
-          destination.mkdir(parents=True, exist_ok=False)
-          for name in entries:
-              source = root / name
-              if source.is_dir():
-                  shutil.copytree(source, destination / name)
-              else:
-                  shutil.copy2(source, destination / name)
-          print(f'Prepared {sum(p.is_file() for p in destination.rglob("*"))} public files')
-          PY
-          aws --version
-
-      - name: Upload website
-        env:
-          BUCKET: ${{ secrets.YC_BUCKET_NAME }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ru-central1
-          AWS_EC2_METADATA_DISABLED: 'true'
-          AWS_REQUEST_CHECKSUM_CALCULATION: WHEN_REQUIRED
-          AWS_RESPONSE_CHECKSUM_VALIDATION: WHEN_REQUIRED
+          python tools/prepare_site.py site
+          python _wui_source/doc/build.py --output site
+          printf 'libwui.org\n' > site/CNAME
+          touch site/.nojekyll
+          git -C _wui_source rev-parse HEAD > site/wui-documentation-revision.txt
+      - name: Check publication contents
         run: |
-          : "${BUCKET:?YC_BUCKET_NAME is missing}"
-          : "${AWS_ACCESS_KEY_ID:?YC_ACCESS_KEY_ID is missing}"
-          : "${AWS_SECRET_ACCESS_KEY:?YC_SECRET_ACCESS_KEY is missing}"
+          test -s site/main/index.html
+          test -s site/main_ru/index.html
+          test -s site/doc/index.html
+          test -s site/doc_ru/index.html
+          test -s site/doc/search/search_index.json
+          test -s site/doc_ru/search/search_index.json
+          test ! -e site/.git
+          test ! -e site/_wui_source
+          test ! -e site/tools
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
 
-          upload() {
-            aws --endpoint-url=https://storage.yandexcloud.net s3 cp \
-              "$SITE_DIR/" "s3://$BUCKET/" \
-              --recursive --no-follow-symlinks --only-show-errors \
-              --cache-control no-cache "$@"
-          }
-
-          # Re-upload metadata too. Never delete objects: /doc and /doc_ru
-          # are published independently from the WUI library repository.
-          upload --exclude '*.html' --exclude '*.wasm' --exclude '*.data'
-          upload --exclude '*' --include '*.wasm' --content-type application/wasm
-          upload --exclude '*' --include '*.data' --content-type application/octet-stream
-          # Publish entry points after their resources have been uploaded.
-          upload --exclude '*' --include '*.html' --content-type 'text/html; charset=utf-8'
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: website-production
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Publish website
+        id: deployment
+        uses: actions/deploy-pages@v4
