@@ -993,3 +993,26 @@ html[lang=ru] .code-card pre {
 
 .skip { clip-path:inset(50%); width:1px; height:1px; overflow:hidden; top:0; }
 .skip:focus { clip-path:none; width:auto; height:auto; overflow:visible; top:12px; }
+
+/* Release news is rendered at build time and works without JavaScript. */
+.release-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+.release-card { padding:26px; border:1px solid var(--line); border-radius:16px; background:var(--white); display:flex; flex-direction:column; align-items:flex-start; }
+.release-meta { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; width:100%; font:11px/1.6 var(--mono); color:var(--muted); }
+.release-meta span { color:var(--green); }
+.release-card h3 { font-size:23px; line-height:1.2; letter-spacing:-.6px; margin:26px 0 14px; }
+.release-card p,.release-entry p { color:var(--muted); line-height:1.7; }
+.release-card p { margin:0 0 26px; }
+.release-link { color:var(--green); font-size:13px; font-weight:600; text-decoration:underline; text-underline-offset:4px; }
+.release-card .release-link { margin-top:auto; }
+.release-archive { max-width:960px; padding-top:64px; padding-bottom:64px; }
+.release-archive h1 { font-size:clamp(40px,7vw,72px); letter-spacing:-2px; margin:18px 0; }
+.release-intro { font-size:20px; color:var(--muted); line-height:1.6; }
+.archive-note { border-left:3px solid var(--orange); padding-left:20px; color:var(--muted); font-size:13px; line-height:1.7; margin:32px 0 48px; }
+.release-entry { padding:36px 0; border-top:1px solid var(--line); scroll-margin-top:32px; }
+.release-entry h2 { font-size:28px; letter-spacing:-.7px; margin:18px 0; }
+.release-entry summary { cursor:pointer; color:var(--green); padding:12px 0; }
+.release-notes { font-size:14px; line-height:1.8; overflow-wrap:anywhere; }
+.release-notes li { margin-bottom:10px; }
+.release-notes code { font-family:var(--mono); }
+.release-links { display:flex; flex-wrap:wrap; gap:22px; margin-top:24px; }
+@media(max-width:900px) { .release-grid { grid-template-columns:1fr; } .release-card h3 { margin-top:18px; } .release-card { padding:22px; } }

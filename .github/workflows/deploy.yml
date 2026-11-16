@@ -30,6 +30,7 @@ jobs:
           repository: intent-garden/wui
           ref: main
           path: _wui_source
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
@@ -42,11 +43,15 @@ jobs:
         run: |
           python tools/prepare_site.py site
           python _wui_source/doc/build.py --output site
+          python tools/build_releases.py --source _wui_source --output site
           printf 'libwui.org\n' > site/CNAME
           touch site/.nojekyll
           git -C _wui_source rev-parse HEAD > site/wui-documentation-revision.txt
       - name: Check publication contents
         run: |
+          test -s site/news/index.html
+          test -s site/news_ru/index.html
+          test -s site/releases.json
           test -s site/main/index.html
           test -s site/main_ru/index.html
           test -s site/doc/index.html
